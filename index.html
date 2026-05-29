@@ -737,6 +737,11 @@
         currency: "INR",
         name: "Real Meet",
         description: "Premium Service Access - Call Details",
+        prefill: {
+          name: "Guest User",
+          email: "guest@realmeet.in",
+          contact: "9999999999"
+        },
         handler: function(response) {
           fbq('track', 'Purchase', { value: 29, currency: 'INR' });
           if (pendingUrl) {
