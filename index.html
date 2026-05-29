@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GlowNest — Premium Skincare & Wellness</title>
+  <meta name="description" content="GlowNest offers premium skincare, beauty and wellness products. Natural ingredients, dermatologist tested. Shop now with free delivery across India."/>
+  <meta name="keywords" content="skincare, beauty, wellness, natural, organic, face cream, serum, India"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --bg:      #faf7f2;
+      --white:   #ffffff;
+      --ink:     #1a1612;
+      --mid:     #4a4540;
+      --muted:   #9a9590;
+      --border:  rgba(26,22,18,0.08);
+      --rose:    #c8624a;
+      --rose-d:  #a84e38;
+      --rose-p:  #fdf0ec;
+      --gold:    #b8965a;
+      --gold-p:  #fdf6e8;
+      --serif:   'Cormorant Garamond', Georgia, serif;
+      --sans:    'Jost', sans-serif;
+      --r:       16px;
+      --shadow:  0 2px 24px rgba(26,22,18,0.07);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--sans);background:var(--bg);color:var(--ink);overflow-x:hidden;}
+
+    /* NAV */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:100;
+      padding:14px 20px;
+      display:flex;align-items:center;justify-content:space-between;
+      background:rgba(250,247,242,0.92);
+      backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--border);
+    }
+    .logo{font-family:var(--serif);font-size:1.4rem;letter-spacing:0.02em;color:var(--ink);}
+    .logo span{color:var(--rose);}
+    .nav-right{display:flex;align-items:center;gap:12px;}
+    .nav-tag{
+      font-size:0.58rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;
+      color:var(--rose);background:var(--rose-p);
+      padding:5px 12px;border-radius:100px;
+      border:1px solid rgba(200,98,74,0.2);
+    }
+
+    /* HERO */
+    .hero{
+      min-height:100svh;
+      display:flex;flex-direction:column;
+      align-items:center;justify-content:center;
+      padding:100px 22px 60px;
+      text-align:center;
+      position:relative;overflow:hidden;
+      background:linear-gradient(180deg, #faf7f2 0%, #fff5f0 60%, #faf7f2 100%);
+    }
+    .hero-circle{
+      position:absolute;
+      width:380px;height:380px;border-radius:50%;
+      background:radial-gradient(circle,rgba(200,98,74,0.06) 0%,transparent 70%);
+      top:50%;left:50%;transform:translate(-50%,-50%);
+      pointer-events:none;
+    }
+
+    .hero-badge{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:7px 16px;border-radius:100px;
+      background:var(--gold-p);border:1px solid rgba(184,150,90,0.25);
+      font-size:0.6rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;
+      color:var(--gold);margin-bottom:24px;
+      animation:up 0.7s 0.05s both;
+    }
+    .badge-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);}
+
+    h1{
+      font-family:var(--serif);
+      font-size:clamp(3rem,12vw,5.5rem);
+      font-weight:400;line-height:1.0;letter-spacing:0.01em;
+      color:var(--ink);margin-bottom:16px;
+      animation:up 0.7s 0.1s both;
+    }
+    h1 em{font-style:italic;color:var(--rose);}
+
+    .hero-sub{
+      font-size:clamp(0.82rem,2.8vw,0.95rem);
+      font-weight:300;color:var(--mid);
+      line-height:1.75;max-width:300px;
+      margin:0 auto 36px;
+      animation:up 0.7s 0.15s both;
+    }
+
+    /* Product preview cards */
+    .product-preview{
+      display:flex;gap:10px;margin-bottom:36px;
+      animation:up 0.7s 0.2s both;
+      position:relative;z-index:1;
+    }
+    .pp-card{
+      width:80px;border-radius:16px;overflow:hidden;
+      border:2px solid rgba(255,255,255,0.8);
+      box-shadow:0 4px 18px rgba(26,22,18,0.1);
+      flex-shrink:0;
+    }
+    .pp-img{
+      height:90px;display:flex;align-items:center;justify-content:center;
+      font-size:1.8rem;
+    }
+    .pp-name{
+      padding:6px 4px;text-align:center;
+      font-size:0.48rem;font-weight:600;letter-spacing:0.06em;
+      text-transform:uppercase;color:var(--mid);
+      background:var(--white);
+    }
+    .pp1{background:linear-gradient(145deg,#fde8e0,#f9cfc3);}
+    .pp2{background:linear-gradient(145deg,#e8f5e9,#c8e6c9);}
+    .pp3{background:linear-gradient(145deg,#fff8e1,#ffecb3);}
+    .pp4{background:linear-gradient(145deg,#fce4ec,#f8bbd0);}
+
+    .btn-hero{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:16px 32px;
+      background:var(--rose);color:white;
+      border:none;border-radius:var(--r);
+      font-family:var(--sans);font-size:0.88rem;font-weight:600;
+      cursor:pointer;letter-spacing:0.02em;
+      transition:transform 0.18s,box-shadow 0.18s;
+      box-shadow:0 4px 22px rgba(200,98,74,0.32),0 1px 0 rgba(255,255,255,0.15) inset;
+      animation:up 0.7s 0.25s both;
+      position:relative;z-index:1;
+      text-decoration:none;
+    }
+    .btn-hero:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(200,98,74,0.38);}
+    .btn-hero:active{transform:scale(0.98);}
+
+    .hero-note{
+      font-size:0.6rem;color:var(--muted);
+      margin-top:12px;letter-spacing:0.05em;
+      animation:up 0.7s 0.3s both;
+    }
+
+    /* TRUST BAR */
+    .trust-bar{
+      display:flex;width:100%;max-width:380px;
+      margin:32px auto 0;
+      background:var(--white);
+      border:1px solid var(--border);border-radius:14px;
+      overflow:hidden;box-shadow:var(--shadow);
+      animation:up 0.7s 0.32s both;position:relative;z-index:1;
+    }
+    .tb-item{flex:1;padding:14px 6px;text-align:center;border-right:1px solid var(--border);}
+    .tb-item:last-child{border-right:none;}
+    .tb-n{display:block;font-family:var(--serif);font-size:1.3rem;color:var(--rose);}
+    .tb-l{display:block;font-size:0.48rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-top:3px;}
+
+    /* SECTION */
+    .section{padding:60px 22px;max-width:480px;margin:0 auto;}
+    .ey{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+    .ey-rule{width:18px;height:1px;background:rgba(200,98,74,0.4);}
+    .ey-txt{font-size:0.55rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--rose);}
+    h2{font-family:var(--serif);font-size:clamp(1.8rem,5.5vw,2.5rem);font-weight:400;line-height:1.1;color:var(--ink);margin-bottom:28px;}
+    h2 em{font-style:italic;color:var(--rose);}
+
+    /* PRODUCT CARDS */
+    .products{display:flex;flex-direction:column;gap:12px;}
+    .prod-card{
+      background:var(--white);
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:18px;
+      display:flex;align-items:center;gap:16px;
+      box-shadow:var(--shadow);
+      transition:transform 0.2s,box-shadow 0.2s;
+    }
+    .prod-card:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(26,22,18,0.1);}
+    .prod-thumb{
+      width:72px;height:72px;border-radius:16px;
+      display:grid;place-items:center;
+      font-size:2rem;flex-shrink:0;
+    }
+    .pt1{background:linear-gradient(145deg,#fde8e0,#f9cfc3);}
+    .pt2{background:linear-gradient(145deg,#e8f5e9,#c8e6c9);}
+    .pt3{background:linear-gradient(145deg,#fff8e1,#ffecb3);}
+    .pt4{background:linear-gradient(145deg,#fce4ec,#f8bbd0);}
+    .prod-name{font-size:0.9rem;font-weight:600;color:var(--ink);margin-bottom:3px;}
+    .prod-desc{font-size:0.68rem;color:var(--mid);line-height:1.5;font-weight:300;margin-bottom:8px;}
+    .prod-bottom{display:flex;align-items:center;gap:10px;}
+    .prod-price{font-family:var(--serif);font-size:1.1rem;color:var(--rose);font-weight:600;}
+    .prod-old{font-size:0.65rem;color:var(--muted);text-decoration:line-through;}
+    .prod-badge{
+      margin-left:auto;
+      font-size:0.52rem;font-weight:600;
+      background:var(--gold-p);color:var(--gold);
+      padding:3px 9px;border-radius:100px;
+      letter-spacing:0.05em;
+    }
+
+    /* BENEFITS */
+    .benefits{
+      padding:0 22px 60px;max-width:480px;margin:0 auto;
+      display:grid;grid-template-columns:1fr 1fr;gap:10px;
+    }
+    .ben-card{
+      background:var(--white);border:1px solid var(--border);
+      border-radius:var(--r);padding:18px 14px;
+      transition:transform 0.2s;
+    }
+    .ben-card:hover{transform:translateY(-2px);}
+    .ben-icon{font-size:1.3rem;margin-bottom:10px;display:block;}
+    .ben-title{font-size:0.8rem;font-weight:600;color:var(--ink);margin-bottom:4px;}
+    .ben-desc{font-size:0.64rem;color:var(--muted);line-height:1.55;font-weight:300;}
+
+    /* TESTIMONIALS */
+    .testimonials{padding:0 22px 60px;max-width:480px;margin:0 auto;}
+    .testi{
+      background:var(--white);border:1px solid var(--border);
+      border-radius:18px;padding:18px;margin-bottom:10px;
+      position:relative;
+    }
+    .testi::before{
+      content:'"';position:absolute;top:10px;right:14px;
+      font-family:var(--serif);font-size:3rem;
+      color:rgba(200,98,74,0.1);line-height:1;
+    }
+    .testi-text{font-size:0.75rem;color:var(--ink);line-height:1.7;font-weight:300;margin-bottom:12px;}
+    .testi-foot{display:flex;align-items:center;gap:10px;}
+    .testi-av{
+      width:30px;height:30px;border-radius:50%;
+      display:grid;place-items:center;
+      font-size:0.58rem;font-weight:700;color:white;flex-shrink:0;
+    }
+    .ta1{background:linear-gradient(145deg,#f9a8d4,#ec4899);}
+    .ta2{background:linear-gradient(145deg,#86efac,#16a34a);}
+    .ta3{background:linear-gradient(145deg,#fcd34d,#d97706);}
+    .testi-name{font-size:0.7rem;font-weight:600;color:var(--ink);}
+    .testi-loc{font-size:0.58rem;color:var(--muted);}
+    .stars{margin-left:auto;font-size:0.6rem;color:#f59e0b;}
+
+    /* FINAL CTA */
+    .final{
+      padding:56px 22px 80px;
+      max-width:400px;margin:0 auto;text-align:center;
+      border-top:1px solid var(--border);
+    }
+    .final h2{margin-bottom:12px;}
+    .final p{font-size:0.75rem;color:var(--mid);line-height:1.7;font-weight:300;margin-bottom:28px;}
+
+    /* FOOTER */
+    footer{border-top:1px solid var(--border);padding:24px 22px;text-align:center;}
+    .footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-bottom:14px;}
+    .footer-links a{font-size:0.58rem;color:var(--muted);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;font-weight:500;}
+    .footer-copy{font-size:0.55rem;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;}
+
+    @keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">Glow<span>Nest</span></div>
+    <div class="nav-right">
+      <div class="nav-tag">Free Delivery ₹499+</div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-circle"></div>
+    <div class="hero-badge"><span class="badge-dot"></span>Natural · Dermatologist Tested · Cruelty Free</div>
+
+    <h1>Skin That<br><em>Glows</em><br>Naturally</h1>
+    <p class="hero-sub">Premium skincare & wellness products made with natural Indian ingredients. Real results, gentle formulas.</p>
+
+    <div class="product-preview">
+      <div class="pp-card"><div class="pp-img pp1">✨</div><div class="pp-name">Glow Serum</div></div>
+      <div class="pp-card"><div class="pp-img pp2">🌿</div><div class="pp-name">Face Wash</div></div>
+      <div class="pp-card"><div class="pp-img pp3">💛</div><div class="pp-name">Night Cream</div></div>
+      <div class="pp-card"><div class="pp-img pp4">🌸</div><div class="pp-name">Rose Toner</div></div>
+    </div>
+
+    <a href="#products" class="btn-hero">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Shop Now
+    </a>
+    <p class="hero-note">Free delivery · Easy returns · COD available</p>
+
+    <div class="trust-bar">
+      <div class="tb-item"><span class="tb-n">50K+</span><span class="tb-l">Happy Customers</span></div>
+      <div class="tb-item"><span class="tb-n">100%</span><span class="tb-l">Natural</span></div>
+      <div class="tb-item"><span class="tb-n">4.8★</span><span class="tb-l">Avg Rating</span></div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="section" id="products">
+    <div class="ey"><div class="ey-rule"></div><div class="ey-txt">Bestsellers</div></div>
+    <h2>Our Most <em>Loved</em><br>Products</h2>
+    <div class="products">
+      <div class="prod-card">
+        <div class="prod-thumb pt1">✨</div>
+        <div style="flex:1">
+          <div class="prod-name">Vitamin C Glow Serum</div>
+          <div class="prod-desc">Brightening serum with 15% Vitamin C, Niacinamide & Hyaluronic Acid. Fades dark spots in 4 weeks.</div>
+          <div class="prod-bottom">
+            <span class="prod-price">₹699</span>
+            <span class="prod-old">₹999</span>
+            <span class="prod-badge">30% OFF</span>
+          </div>
+        </div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-thumb pt2">🌿</div>
+        <div style="flex:1">
+          <div class="prod-name">Neem & Tulsi Face Wash</div>
+          <div class="prod-desc">Deep cleansing gel with Neem, Tulsi & Green Tea. Controls oil, removes impurities gently.</div>
+          <div class="prod-bottom">
+            <span class="prod-price">₹349</span>
+            <span class="prod-old">₹499</span>
+            <span class="prod-badge">Best Seller</span>
+          </div>
+        </div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-thumb pt3">💛</div>
+        <div style="flex:1">
+          <div class="prod-name">Saffron Night Repair Cream</div>
+          <div class="prod-desc">Overnight repair cream with Saffron, Retinol & Shea Butter. Wake up to softer, plumper skin.</div>
+          <div class="prod-bottom">
+            <span class="prod-price">₹849</span>
+            <span class="prod-old">₹1,199</span>
+            <span class="prod-badge">Premium</span>
+          </div>
+        </div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-thumb pt4">🌸</div>
+        <div style="flex:1">
+          <div class="prod-name">Rose Water Toner</div>
+          <div class="prod-desc">Pure Bulgarian Rose Water toner. Hydrates, tightens pores & preps skin for moisturizer.</div>
+          <div class="prod-bottom">
+            <span class="prod-price">₹299</span>
+            <span class="prod-old">₹399</span>
+            <span class="prod-badge">Natural</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <div class="benefits">
+    <div class="ben-card">
+      <span class="ben-icon">🌿</span>
+      <div class="ben-title">100% Natural</div>
+      <div class="ben-desc">No parabens, no sulfates. Only clean, skin-loving ingredients.</div>
+    </div>
+    <div class="ben-card">
+      <span class="ben-icon">🧪</span>
+      <div class="ben-title">Dermatologist Tested</div>
+      <div class="ben-desc">Every formula tested and approved by certified skin experts.</div>
+    </div>
+    <div class="ben-card">
+      <span class="ben-icon">🚚</span>
+      <div class="ben-title">Free Delivery</div>
+      <div class="ben-desc">Free shipping on orders above ₹499. Pan-India delivery in 3-5 days.</div>
+    </div>
+    <div class="ben-card">
+      <span class="ben-icon">↩️</span>
+      <div class="ben-title">Easy Returns</div>
+      <div class="ben-desc">Not satisfied? Return within 7 days. No questions asked.</div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <div class="testimonials">
+    <div class="ey"><div class="ey-rule"></div><div class="ey-txt">Customer Reviews</div></div>
+    <div class="testi">
+      <p class="testi-text">The Vitamin C serum is absolutely amazing! My dark spots have reduced so much in just 3 weeks. Best skincare purchase I've made this year.</p>
+      <div class="testi-foot">
+        <div class="testi-av ta1">PG</div>
+        <div><div class="testi-name">Priya G.</div><div class="testi-loc">Mumbai</div></div>
+        <div class="stars">★★★★★</div>
+      </div>
+    </div>
+    <div class="testi">
+      <p class="testi-text">The Neem face wash is so gentle yet effective. My oily skin feels clean without that tight, dry feeling. Ordering my 3rd bottle!</p>
+      <div class="testi-foot">
+        <div class="testi-av ta2">RS</div>
+        <div><div class="testi-name">Riya S.</div><div class="testi-loc">Delhi</div></div>
+        <div class="stars">★★★★★</div>
+      </div>
+    </div>
+    <div class="testi">
+      <p class="testi-text">GlowNest products are worth every rupee. The night cream smells divine and my skin looks so much healthier and youthful now.</p>
+      <div class="testi-foot">
+        <div class="testi-av ta3">NK</div>
+        <div><div class="testi-name">Neha K.</div><div class="testi-loc">Jaipur</div></div>
+        <div class="stars">★★★★★</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <div class="final">
+    <div class="ey" style="justify-content:center;margin-bottom:16px;">
+      <div class="ey-rule"></div><div class="ey-txt">Limited Time Offer</div><div class="ey-rule"></div>
+    </div>
+    <h2>Get <em>20% Off</em><br>Your First Order</h2>
+    <p>Use code <strong>GLOW20</strong> at checkout. Free delivery on orders above ₹499. Shop premium skincare at honest prices.</p>
+    <a href="#products" class="btn-hero" style="margin:0 auto;display:inline-flex;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Shop Now — Free Delivery
+    </a>
+    <p class="hero-note" style="margin-top:10px;">COD available · Secure payment · 7-day returns</p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-links">
+      <a href="#">About Us</a>
+      <a href="#">Shop</a>
+      <a href="#">Ingredients</a>
+      <a href="#">Blog</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Refund Policy</a>
+      <a href="#">Contact Us</a>
+      <a href="#">Shipping Policy</a>
+    </div>
+    <div class="footer-copy">© 2025 GlowNest India · All Rights Reserved · Made with 🌿 in India</div>
+  </footer>
+
+</body>
+</html>
