@@ -304,6 +304,16 @@
       box-shadow: 0 2px 0 rgba(255,255,255,0.18) inset, 0 -2px 0 rgba(0,0,0,0.12) inset, 0 14px 40px rgba(44,165,214,0.42), 0 4px 12px rgba(0,0,0,0.14);
     }
 
+    
+    .btn-call {
+      background: linear-gradient(145deg, #25d366 0%, #1da851 45%, #128c3e 100%);
+      color: #fff;
+      box-shadow: 0 2px 0 rgba(255,255,255,0.18) inset, 0 8px 28px rgba(37,211,102,0.30), 0 2px 6px rgba(0,0,0,0.12);
+    }
+    .btn-call:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(37,211,102,0.42);
+    }
     .btn-note {
       font-size: 0.58rem;
       color: var(--text-muted);
@@ -529,6 +539,8 @@
       z-index: 2000;
       align-items: flex-end;
       justify-content: center;
+      align-items: flex-end;
+      justify-content: center;
     }
     .modal-content {
       background: #ffffff;
@@ -584,6 +596,70 @@
       h1 { font-size: 2.8rem; }
       .modal-content { padding: 24px 20px; }
     }
+  
+    /* ── FLOATING BUTTONS ── */
+    .float-btns {
+      position: fixed;
+      bottom: 80px;
+      right: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 999;
+    }
+    .float-btn {
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      position: relative;
+    }
+    .float-btn:hover { transform: scale(1.08); }
+    .float-btn:active { transform: scale(0.95); }
+    .float-call {
+      background: linear-gradient(145deg, #25d366, #128c3e);
+      box-shadow: 0 4px 18px rgba(37,211,102,0.5);
+    }
+    .float-tg {
+      background: linear-gradient(145deg, #40b3e0, #1a8fbd);
+      box-shadow: 0 4px 18px rgba(44,165,214,0.5);
+    }
+    .float-btn svg { width: 22px; height: 22px; }
+    .float-btn::after {
+      content: '';
+      position: absolute; inset: -3px;
+      border-radius: 50%;
+      border: 2px solid currentColor;
+      opacity: 0;
+      animation: floatPulse 2.5s ease-in-out infinite;
+    }
+    .float-call::after { color: #25d366; }
+    .float-tg::after { color: #40b3e0; }
+    @keyframes floatPulse {
+      0% { opacity: 0.5; transform: scale(1); }
+      100% { opacity: 0; transform: scale(1.6); }
+    }
+    .float-label {
+      position: absolute;
+      right: 54px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(20,20,20,0.82);
+      color: white;
+      font-size: 0.58rem;
+      font-weight: 600;
+      padding: 5px 11px;
+      border-radius: 100px;
+      white-space: nowrap;
+      letter-spacing: 0.05em;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .float-btn:hover .float-label { opacity: 1; }
   </style>
 </head>
 
@@ -616,14 +692,24 @@
       <span class="pill">24 / 7</span>
     </div>
     <div class="btn-stack">
+      <!-- 1. Call — PAID TOP -->
+      <button class="btn btn-call" id="mainCallCTA">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" style="flex-shrink:0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6.09 6.09l1.13-.93a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Book via Call
+      </button>
+
+      <!-- 2. Telegram — FREE -->
+      <a href="#" onclick="handleTgClick(event);return false;" class="btn btn-tg">
+        <svg viewBox="0 0 24 24" fill="white" width="20" height="20" style="flex-shrink:0"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        Book via Telegram
+      </a>
+
+      <!-- 3. WhatsApp — PAID BOTTOM -->
       <button class="btn btn-wa" id="mainCTA">
         <svg viewBox="0 0 24 24" fill="white" width="20" height="20" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Book via WhatsApp
       </button>
-      <a href="https://t.me/xkhushii" target="_blank" class="btn btn-tg">
-        <svg viewBox="0 0 24 24" fill="white" width="20" height="20" style="flex-shrink:0"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-        Book via Telegram
-      </a>
+
       <p class="btn-note">Free consultation &nbsp;·&nbsp; Instant reply &nbsp;·&nbsp; Fully discreet</p>
     </div>
     <div class="stats-row">
@@ -656,14 +742,23 @@
       <h2>Book Your<br><em>Session Now</em></h2>
       <p>Ek message bhejo — hum turant reply karenge aur aapki booking confirm karenge. No waiting, no hassle.</p>
       <div class="btn-stack">
+        <!-- 1. Call — PAID TOP -->
+        <button class="btn btn-call" id="bottomCallCTA">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" style="flex-shrink:0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6.09 6.09l1.13-.93a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Book via Call
+        </button>
+
+        <!-- 2. Telegram — FREE -->
+        <a href="#" onclick="handleTgClick(event);return false;" class="btn btn-tg">
+          <svg viewBox="0 0 24 24" fill="white" width="20" height="20" style="flex-shrink:0"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          Book via Telegram
+        </a>
+
+        <!-- 3. WhatsApp — PAID BOTTOM -->
         <button class="btn btn-wa" id="bottomCTA">
           <svg viewBox="0 0 24 24" fill="white" width="20" height="20" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           Book via WhatsApp
         </button>
-        <a href="https://t.me/xkhushii" target="_blank" class="btn btn-tg">
-          <svg viewBox="0 0 24 24" fill="white" width="20" height="20" style="flex-shrink:0"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-          Book via Telegram
-        </a>
       </div>
     </section>
   </div>
@@ -686,7 +781,7 @@
         <div class="modal-divider"></div>
         <div class="modal-price-row">
           <span class="modal-sym">₹</span>
-          <span class="modal-amt">29</span>
+          <span class="modal-amt">49</span>
           <span class="modal-lbl">one-time only</span>
         </div>
         <div class="modal-subdesc">Pay once and get direct access — instant reply, no waiting.</div>
@@ -703,7 +798,7 @@
         <div class="modal-actions">
           <button class="btn-pay-modal" id="confirmPayBtn">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-            Pay ₹29 & Get Access
+            Pay ₹49 & Get Access
           </button>
           <button class="btn-cancel-modal" id="cancelPayBtn">Not now</button>
         </div>
@@ -731,8 +826,8 @@
     }
     
     function initiatePayment() {
-      if (!RAZORPAY_KEY_ID || RAZORPAY_KEY_ID === '' || RAZORPAY_KEY_ID === '{{process.env.RAZORPAY_KEY_ID}}') {
-        alert('Payment system is initializing. Please try again.');
+      if (!RAZORPAY_KEY_ID || RAZORPAY_KEY_ID === '') {
+        alert('Payment system error. Please try again.');
         return;
       }
       
@@ -741,7 +836,7 @@
       
       const options = {
         key: RAZORPAY_KEY_ID,
-        amount: 2900,
+        amount: 4900,
         currency: "INR",
         name: "Real Meet",
         description: "Premium Service Access - Call Details",
@@ -751,9 +846,13 @@
           contact: "9999999999"
         },
         handler: function(response) {
-          fbq('track', 'Purchase', { value: 29, currency: 'INR' });
+          fbq('track', 'Purchase', { value: 49, currency: 'INR' });
           if (pendingUrl) {
-            window.location.href = pendingUrl;
+            if (pendingUrl.startsWith('tel:')) {
+              window.location.href = pendingUrl;
+            } else {
+              window.open(pendingUrl, '_blank');
+            }
           }
           document.getElementById('paymentModal').style.display = 'none';
         },
@@ -782,10 +881,15 @@
       openPaymentModal('whatsapp', waUrl);
     }
     
+        function handleCallClick(e) {
+      if(e) e.preventDefault();
+      openPaymentModal('call', 'tel:+919217507608');
+    }
+    
     function handleTgClick(e) {
-      e.preventDefault();
-      const tgUrl = `https://t.me/xkhushii?text=${encodeURIComponent('*REAL MEET SERVICE* - I need real meeting details on call')}`;
-      openPaymentModal('telegram', tgUrl);
+      if(e) e.preventDefault();
+      try { fbq('track','Lead',{content_name:'Telegram Free'}); } catch(err){}
+      window.open('https://t.me/xkhushii', '_blank');
     }
     
     document.getElementById('mainCTA').addEventListener('click', handleWAClick);
@@ -796,6 +900,10 @@
     });
     
     document.getElementById('confirmPayBtn').addEventListener('click', initiatePayment);
+    document.getElementById('mainCallCTA').addEventListener('click', handleCallClick);
+    document.getElementById('bottomCallCTA').addEventListener('click', handleCallClick);
+    document.getElementById('floatCallBtn').addEventListener('click', handleCallClick);
+    document.getElementById('floatTgBtn').addEventListener('click', handleTgClick);
     document.getElementById('cancelPayBtn').addEventListener('click', () => {
       document.getElementById('paymentModal').style.display = 'none';
       pendingUrl = '';
@@ -818,5 +926,17 @@
       card.addEventListener('mouseleave', () => { card.style.transform = ''; });
     });
   </script>
+
+  <!-- FLOATING BUTTONS -->
+  <div class="float-btns">
+    <button class="float-btn float-call" id="floatCallBtn">
+      <span class="float-label">Call — ₹49</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6.09 6.09l1.13-.93a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    </button>
+    <button class="float-btn float-tg" id="floatTgBtn">
+      <span class="float-label">Telegram Free</span>
+      <svg viewBox="0 0 24 24" fill="white"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+    </button>
+  </div>
 </body>
 </html>
