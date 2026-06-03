@@ -858,7 +858,10 @@
           contact: "9999999999"
         },
         handler: function(response) {
-          fbq('track', 'Purchase', { value: 49, currency: 'INR' });
+          try {
+            fbq('track', 'Purchase', { value: 49, currency: 'INR', content_name: 'Real Meet Access' });
+            fbq('track', 'Lead', { content_name: 'Real Meet Paid', content_category: 'Payment Success', currency: 'INR', value: 49 });
+          } catch(err) {}
           if (pendingUrl) {
             if (pendingUrl.startsWith('tel:')) {
               window.location.href = pendingUrl;
@@ -900,7 +903,6 @@
     
     function handleTgClick(e) {
       if(e) e.preventDefault();
-      try { fbq('track','Lead',{content_name:'Telegram Free'}); } catch(err){}
       window.open('https://t.me/xkhushii', '_blank');
     }
     
