@@ -660,6 +660,131 @@
       transition: opacity 0.2s;
     }
     .float-btn:hover .float-label { opacity: 1; }
+  
+    /* ── VIDEO SECTION ── */
+    .video-section {
+      position: relative; z-index: 1;
+      padding: 0 0 0 0;
+      width: 100%;
+      background: #000;
+    }
+    .video-wrap {
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      max-height: 260px;
+    }
+    .video-wrap video {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+    }
+    .video-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.5) 100%);
+      pointer-events: none;
+    }
+    .video-label {
+      position: absolute;
+      bottom: 14px; left: 50%;
+      transform: translateX(-50%);
+      background: rgba(233,30,140,0.85);
+      color: white;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 100px;
+      pointer-events: none;
+      backdrop-filter: blur(6px);
+    }
+
+    /* ── SUCCESS PAGE ── */
+    #successPage {
+      display: none;
+      position: fixed; inset: 0;
+      background: var(--white);
+      z-index: 5000;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px;
+      text-align: center;
+    }
+    .success-check-big {
+      width: 70px; height: 70px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #25d366, #128c3e);
+      display: grid; place-items: center;
+      margin: 0 auto 20px;
+      font-size: 1.8rem;
+      box-shadow: 0 8px 28px rgba(37,211,102,0.35);
+    }
+    .success-title {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+    .success-title em { font-style: italic; color: var(--pink); }
+    .success-sub {
+      font-size: 0.78rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .success-number-box {
+      background: var(--pink-pale);
+      border: 1px solid rgba(233,30,140,0.2);
+      border-radius: 16px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+    .success-number-label {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 6px;
+    }
+    .success-number {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+    .success-btns { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+    .btn-success-wa {
+      width: 100%; padding: 15px;
+      background: linear-gradient(145deg, #25d366, #128c3e);
+      color: white; border: none; border-radius: 14px;
+      font-family: var(--sans); font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+      box-shadow: 0 4px 16px rgba(37,211,102,0.3);
+      text-decoration: none;
+    }
+    .btn-success-call {
+      width: 100%; padding: 15px;
+      background: linear-gradient(145deg, #25d366, #128c3e);
+      color: white; border: none; border-radius: 14px;
+      font-family: var(--sans); font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+      box-shadow: 0 4px 16px rgba(37,211,102,0.3);
+      text-decoration: none;
+    }
+    .btn-success-tg {
+      width: 100%; padding: 15px;
+      background: linear-gradient(145deg, #40b3e0, #1a8fbd);
+      color: white; border: none; border-radius: 14px;
+      font-family: var(--sans); font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+      box-shadow: 0 4px 16px rgba(44,165,214,0.25);
+      text-decoration: none;
+    }
   </style>
 </head>
 
@@ -675,6 +800,18 @@
       Available Now
     </div>
   </header>
+
+  <!-- VIDEO SECTION -->
+  <div class="video-section" style="margin-top:52px;">
+    <div class="video-wrap">
+      <video autoplay muted loop playsinline preload="auto" id="heroVideo">
+        <source src="video1.mp4" type="video/mp4">
+      </video>
+      <div class="video-overlay"></div>
+      <div class="video-label">▶ Real Meet — Watch Our Service</div>
+    </div>
+  </div>
+
 
   <section class="hero">
     <div class="hero-ring"></div>
@@ -810,6 +947,31 @@
     </div>
   </div>
 
+  <!-- SUCCESS PAGE -->
+  <div id="successPage">
+    <div class="success-check-big">✓</div>
+    <div class="success-title">Payment <em>Done!</em></div>
+    <p class="success-sub">Thank you! Your access is confirmed.<br>Call karen ya WhatsApp pe message karen — hum turant reply karenge.</p>
+    <div class="success-number-box">
+      <div class="success-number-label">Our Number</div>
+      <div class="success-number">+91 92175 07608</div>
+    </div>
+    <div class="success-btns">
+      <a class="btn-success-call" href="tel:+919217507608">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6.09 6.09l1.13-.93a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Call Now — +91 92175 07608
+      </a>
+      <a class="btn-success-wa" href="https://wa.me/919217507608?text=%2AREAL%20MEET%20SERVICE%2A%20-%20Payment%20Successful%20%E2%9C%85%20Please%20connect%20me" target="_blank">
+        <svg viewBox="0 0 24 24" fill="white" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp — Payment Successful ✅
+      </a>
+      <a class="btn-success-tg" href="https://t.me/xkhushii" target="_blank">
+        <svg viewBox="0 0 24 24" fill="white" width="18" height="18"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        Telegram — Connect Now
+      </a>
+    </div>
+  </div>
+
   <!-- FLOATING BUTTONS -->
   <div class="float-btns">
     <button class="float-btn float-call" id="floatCallBtn">
@@ -823,6 +985,23 @@
   </div>
 
   <script>
+    // Check if already paid
+    const PAID_KEY = 'rm_paid_v1';
+    function checkAlreadyPaid() {
+      try {
+        if (localStorage.getItem(PAID_KEY) === 'yes') {
+          showSuccessPage();
+        }
+      } catch(e) {}
+    }
+    function markAsPaid() {
+      try { localStorage.setItem(PAID_KEY, 'yes'); } catch(e) {}
+    }
+    function showSuccessPage() {
+      document.getElementById('successPage').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
     let pendingPlatform = '';
     let pendingUrl = '';
     
@@ -862,14 +1041,9 @@
             fbq('track', 'Purchase', { value: 49, currency: 'INR', content_name: 'Real Meet Access' });
             fbq('track', 'Lead', { content_name: 'Real Meet Paid', content_category: 'Payment Success', currency: 'INR', value: 49 });
           } catch(err) {}
-          if (pendingUrl) {
-            if (pendingUrl.startsWith('tel:')) {
-              window.location.href = pendingUrl;
-            } else {
-              window.open(pendingUrl, '_blank');
-            }
-          }
+          markAsPaid();
           document.getElementById('paymentModal').style.display = 'none';
+          showSuccessPage();
         },
         modal: {
           ondismiss: function() {
