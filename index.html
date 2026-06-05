@@ -142,10 +142,9 @@
 
     .hero {
       position: relative; z-index:1;
-      min-height: 100svh;
+      padding: 48px 24px 56px;  /* tighter padding — no more huge empty space */
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      padding: 100px 24px 72px;
       text-align: center;
     }
 
@@ -664,7 +663,7 @@
     /* ── VIDEO SECTION ── */
     .video-section {
       position: relative; z-index: 1;
-      padding: 0 0 0 0;
+      padding: 0;
       width: 100%;
       background: #000;
     }
@@ -672,17 +671,22 @@
       width: 100%;
       position: relative;
       overflow: hidden;
-      max-height: 260px;
+      /* No fixed height — video determines its own height naturally */
+      line-height: 0; /* removes bottom gap under video */
     }
     .video-wrap video {
       width: 100%;
-      height: 260px;
-      object-fit: cover;
+      height: auto;        /* any ratio video — 9:16, 16:9, 4:3, square — all fit */
+      max-height: 92vh;    /* never taller than screen */
+      object-fit: contain; /* show full video, no crop, no black bars cut */
       display: block;
+      background: #000;
+      /* Ensure no sound even if browser ignores muted attribute */
+      -webkit-muted: true;
     }
     .video-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.5) 100%);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.38) 100%);
       pointer-events: none;
     }
     .video-label {
@@ -699,6 +703,7 @@
       border-radius: 100px;
       pointer-events: none;
       backdrop-filter: blur(6px);
+      white-space: nowrap;
     }
 
     /* ── SUCCESS PAGE ── */
@@ -804,7 +809,7 @@
   <!-- VIDEO SECTION -->
   <div class="video-section" style="margin-top:52px;">
     <div class="video-wrap">
-      <video autoplay muted loop playsinline preload="auto" id="heroVideo">
+      <video loop playsinline preload="auto" id="heroVideo">
         <source src="video1.mp4" type="video/mp4">
       </video>
       <div class="video-overlay"></div>
@@ -985,7 +990,39 @@
   </div>
 
   <script>
-    // Check if already paid
+    // Video with sound — mobile browsers block autoplay with sound
+    // So we show a tap-to-play button, then play with audio
+    (function() {
+      var v = document.getElementById('heroVideo');
+      var label = document.querySelector('.video-label');
+      if (!v) return;
+
+      // Try autoplay with sound first (works on desktop)
+      v.play().then(function() {
+        // Played successfully with sound
+      }).catch(function() {
+        // Mobile blocked autoplay — show tap to play
+        if (label) {
+          label.innerHTML = '🔊 Tap to Play with Sound';
+          label.style.cursor = 'pointer';
+          label.style.pointerEvents = 'auto';
+        }
+        var wrap = document.querySelector('.video-wrap');
+        if (wrap) {
+          wrap.style.cursor = 'pointer';
+          wrap.addEventListener('click', function playOnTap() {
+            v.play().catch(function(){});
+            if (label) {
+              label.innerHTML = '▶ Real Meet — Watch Our Service';
+              label.style.cursor = 'default';
+              label.style.pointerEvents = 'none';
+            }
+            wrap.style.cursor = 'default';
+            wrap.removeEventListener('click', playOnTap);
+          });
+        }
+      });
+    })();
     const PAID_KEY = 'rm_paid_v1';
     function checkAlreadyPaid() {
       try {
