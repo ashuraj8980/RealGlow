@@ -145,6 +145,7 @@
       padding: 48px 24px 56px;  /* tighter padding — no more huge empty space */
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
+      padding: 0;
       text-align: center;
     }
 
@@ -206,7 +207,8 @@
     }
 
     .pill-row {
-      display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+      display: flex; flex-wrap: wrap; justify-content: center;
+      padding: 0; gap: 8px;
       margin-bottom: 36px;
       animation: rise 0.8s 0.2s cubic-bezier(0.22,1,0.36,1) both;
     }
@@ -229,7 +231,8 @@
     }
 
     .btn {
-      display: flex; align-items: center; justify-content: center; gap: 11px;
+      display: flex; align-items: center; justify-content: center;
+      padding: 0; gap: 11px;
       width: 100%; padding: 16px 24px;
       border-radius: 14px;
       border: none;
@@ -536,10 +539,12 @@
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       z-index: 2000;
-      align-items: flex-end;
+      align-items: stretch;
       justify-content: center;
-      align-items: flex-end;
+      padding: 0;
+      align-items: stretch;
       justify-content: center;
+      padding: 0;
     }
     .modal-content {
       background: #ffffff;
@@ -611,6 +616,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 0;
       box-shadow: 0 4px 20px rgba(233,24,140,0.45), 0 2px 8px rgba(0,0,0,0.15);
       transition: transform 0.2s, box-shadow 0.2s;
       position: fixed;
@@ -689,6 +695,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 0;
       cursor: pointer;
       transition: background 0.2s, transform 0.15s, border-color 0.2s;
       box-shadow: 0 4px 16px rgba(0,0,0,0.3);
@@ -708,6 +715,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      padding: 0;
       gap: 24px;
       z-index: 10;
       cursor: pointer;
@@ -736,6 +744,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 0;
       z-index: 2;
       cursor: pointer;
       transition: transform 0.2s ease;
@@ -750,6 +759,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 0;
       box-shadow:
         0 0 0 3px rgba(255,255,255,0.25),
         0 8px 40px rgba(233,30,140,0.55),
@@ -799,7 +809,8 @@
     /* Free Chat button — premium look */
     .btn-free-chat {
       width: 100%;
-      display: flex; align-items: center; justify-content: center; gap: 10px;
+      display: flex; align-items: center; justify-content: center;
+      padding: 0; gap: 10px;
       padding: 16px 20px;
       border-radius: 14px;
       border: none;
@@ -846,8 +857,9 @@
       background: rgba(0,0,0,0.45);
       z-index: 9000;
       display: none;
-      align-items: flex-end;
+      align-items: stretch;
       justify-content: center;
+      padding: 0;
       backdrop-filter: blur(3px);
     }
     .chat-widget-overlay.open { display: flex; }
@@ -855,13 +867,16 @@
       width: 100%;
       max-width: 440px;
       background: #fff;
-      border-radius: 24px 24px 0 0;
+      border-radius: 0;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      max-height: 88vh;
-      animation: slideUp 0.3s cubic-bezier(0.34,1.56,0.64,1);
+      max-height: 100vh;
+      height: 100vh;
+      border-radius: 0;
+      animation: chatFadeIn 0.25s ease;
     }
+    @keyframes chatFadeIn { from{opacity:0} to{opacity:1} }
     @keyframes slideUp {
       from { transform: translateY(100%); opacity: 0; }
       to   { transform: translateY(0);    opacity: 1; }
@@ -879,6 +894,7 @@
       border-radius: 50%;
       background: rgba(255,255,255,0.25);
       display: flex; align-items: center; justify-content: center;
+      padding: 0;
       font-size: 1.3rem;
       flex-shrink: 0;
     }
@@ -903,6 +919,7 @@
       color: #fff; font-size: 1rem;
       cursor: pointer; display: flex;
       align-items: center; justify-content: center;
+      padding: 0;
     }
     .chat-messages {
       flex: 1; overflow-y: auto;
@@ -985,6 +1002,7 @@
       font-size: 1.1rem;
       cursor: pointer;
       display: flex; align-items: center; justify-content: center;
+      padding: 0;
       flex-shrink: 0;
       transition: transform 0.15s;
     }
@@ -1006,6 +1024,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      padding: 0;
       padding: 32px 24px;
       text-align: center;
     }
@@ -1059,7 +1078,8 @@
       background: linear-gradient(145deg, #25d366, #128c3e);
       color: white; border: none; border-radius: 14px;
       font-family: var(--sans); font-size: 0.85rem; font-weight: 600;
-      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      padding: 0; gap: 10px;
       box-shadow: 0 4px 16px rgba(37,211,102,0.3);
       text-decoration: none;
     }
@@ -1068,7 +1088,8 @@
       background: linear-gradient(145deg, #25d366, #128c3e);
       color: white; border: none; border-radius: 14px;
       font-family: var(--sans); font-size: 0.85rem; font-weight: 600;
-      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      padding: 0; gap: 10px;
       box-shadow: 0 4px 16px rgba(37,211,102,0.3);
       text-decoration: none;
     }
@@ -1077,7 +1098,8 @@
       background: linear-gradient(145deg, #40b3e0, #1a8fbd);
       color: white; border: none; border-radius: 14px;
       font-family: var(--sans); font-size: 0.85rem; font-weight: 600;
-      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      padding: 0; gap: 10px;
       box-shadow: 0 4px 16px rgba(44,165,214,0.25);
       text-decoration: none;
     }
@@ -1450,19 +1472,21 @@
       window.open('https://t.me/xkhushii', '_blank');
     }
     
-    document.getElementById('mainCTA').addEventListener('click', handleWAClick);
-    document.getElementById('bottomCTA').addEventListener('click', handleWAClick);
+    safeOn('mainCTA',   'click', handleWAClick);
+    safeOn('bottomCTA', 'click', handleWAClick);
     
     document.querySelectorAll('.btn-tg').forEach(btn => {
       btn.addEventListener('click', handleTgClick);
     });
     
-    document.getElementById('confirmPayBtn').addEventListener('click', initiatePayment);
-    document.getElementById('mainCallCTA').addEventListener('click', handleCallClick);
-    document.getElementById('bottomCallCTA').addEventListener('click', handleCallClick);
-    document.getElementById('floatCallBtn').addEventListener('click', handleCallClick);
-    document.getElementById('floatTgBtn').addEventListener('click', handleTgClick);
-    document.getElementById('cancelPayBtn').addEventListener('click', () => {
+    // Safe addEventListener — null check prevents crash if element missing
+    function safeOn(id, evt, fn){ var el=document.getElementById(id); if(el) el.addEventListener(evt,fn); }
+    safeOn('confirmPayBtn','click', initiatePayment);
+    safeOn('mainCallCTA',  'click', handleCallClick);
+    safeOn('bottomCallCTA','click', handleCallClick);
+    safeOn('floatCallBtn', 'click', handleCallClick);
+    safeOn('floatTgBtn',   'click', handleTgClick);
+    safeOn('cancelPayBtn', 'click', function(){
       document.getElementById('paymentModal').style.display = 'none';
       pendingUrl = '';
     });
@@ -1588,8 +1612,9 @@
 var WA = '919217507608';
 var msgBox, inputEl;
 var lead = { name: '', city: '', outcome: '', lines: [] };
+var hasPaid = false;
 
-// ─── Reply rotation tracker ────────────────────
+// ─── Reply rotation ──────────────────────────
 var rotIdx = {};
 function pick(key, arr) {
   if (!rotIdx[key]) rotIdx[key] = 0;
@@ -1598,25 +1623,25 @@ function pick(key, arr) {
   return arr[i];
 }
 
-// ─── UI helpers ───────────────────────────────
+// ─── UI Helpers ──────────────────────────────
 function ftime() {
   var d = new Date();
-  return ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2);
+  return ('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);
 }
 function scrollBottom() { if (msgBox) msgBox.scrollTop = 9999; }
 
 function escHtml(t) {
-  return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
 function appendUser(text) {
   var w = document.createElement('div');
   w.style.cssText = 'display:flex;flex-direction:column;align-items:flex-end;margin-bottom:4px';
-  w.innerHTML = '<div class="chat-msg user">' + escHtml(text) + '</div>'
-    + '<div class="chat-msg-time">' + ftime() + '</div>';
+  w.innerHTML = '<div class="chat-msg user">'+escHtml(text)+'</div>'
+    +'<div class="chat-msg-time">'+ftime()+'</div>';
   msgBox.appendChild(w);
   scrollBottom();
-  lead.lines.push('User: ' + text.substring(0, 140));
+  lead.lines.push('User: '+text.substring(0,140));
 }
 
 function showTyping(cb, delay) {
@@ -1625,283 +1650,389 @@ function showTyping(cb, delay) {
   ti.innerHTML = '<span></span><span></span><span></span>';
   msgBox.appendChild(ti);
   scrollBottom();
-  setTimeout(function () {
+  setTimeout(function() {
     if (ti.parentNode) ti.parentNode.removeChild(ti);
     cb();
+    scrollBottom();
   }, delay || 1200);
 }
 
 function appendBot(html) {
   var w = document.createElement('div');
   w.style.cssText = 'display:flex;flex-direction:column;align-items:flex-start;margin-bottom:4px';
-  w.innerHTML = '<div class="chat-msg bot">' + html + '</div>'
-    + '<div class="chat-msg-time">' + ftime() + '</div>';
+  w.innerHTML = '<div class="chat-msg bot">'+html+'</div>'
+    +'<div class="chat-msg-time">'+ftime()+'</div>';
   msgBox.appendChild(w);
   scrollBottom();
-  lead.lines.push('Priya: ' + html.replace(/<[^>]+>/g, '').substring(0, 140));
+  lead.lines.push('Priya: '+html.replace(/<[^>]+>/g,'').substring(0,140));
 }
 
+// Pay card shown AFTER 2.5s delay so user reads message first
 function appendBotWithPay(html) {
   appendBot(html);
   if (!hasPaid) {
-    var w = document.createElement('div');
-    w.style.cssText = 'display:flex;flex-direction:column;align-items:flex-start;margin-bottom:4px';
-    w.innerHTML = payCard();
-    msgBox.appendChild(w);
-    scrollBottom();
+    setTimeout(function() {
+      var w = document.createElement('div');
+      w.style.cssText = 'display:flex;flex-direction:column;align-items:flex-start;margin-bottom:4px';
+      w.innerHTML = payCard();
+      msgBox.appendChild(w);
+      scrollBottom();
+    }, 2500);
   }
 }
 
-// ─── Pay Card ─────────────────────────────────
-var hasPaid = false;
+// ─── Pay Card ────────────────────────────────
 function payCard() {
   return '<div class="rm-pay-card">'
-    + '<div class="rm-pay-tag">✨ Instant Call Access</div>'
-    + '<div class="rm-pay-price-row">'
-    +   '<span class="rm-pay-amount">₹49</span>'
-    +   '<span class="rm-pay-old">₹199</span>'
-    +   '<span class="rm-pay-off">75% OFF</span>'
-    + '</div>'
-    + '<div class="rm-pay-perks">'
-    +   '📞 Mam se live connect karaun dungi<br>'
-    +   '📸 Profile photos seedha WhatsApp pe<br>'
-    +   '📍 Timing &amp; location — aap decide karenge<br>'
-    +   '💵 Baaki payment service pe cash — koi advance nahi<br>'
-    +   '🔒 Aapki identity 100% private rahegi'
-    + '</div>'
-    + '<button class="rm-pay-btn" onclick="RMBot.pay()">💳 &nbsp;Sirf ₹49 — Call Connect Karein</button>'
-    + '<div class="rm-pay-note">UPI · Card · Net Banking — 100% Secure</div>'
-    + '</div>';
+    +'<div class="rm-pay-tag">✨ Instant Call Access</div>'
+    +'<div class="rm-pay-price-row">'
+    +'<span class="rm-pay-amount">&#8377;49</span>'
+    +'<span class="rm-pay-old">&#8377;199</span>'
+    +'<span class="rm-pay-off">75% OFF</span>'
+    +'</div>'
+    +'<div class="rm-pay-perks">'
+    +'&#128222; Mam se live connect karaun dungi<br>'
+    +'&#128248; Profile photos seedha WhatsApp pe<br>'
+    +'&#128205; Timing &amp; location — aap decide karenge<br>'
+    +'&#128181; Baaki payment service pe cash — koi advance nahi<br>'
+    +'&#128274; Aapki identity 100% private rahegi'
+    +'</div>'
+    +'<button class="rm-pay-btn" onclick="RMBot.pay()">&#128179; &nbsp;Sirf &#8377;49 — Call Connect Karein</button>'
+    +'<div class="rm-pay-note">UPI &middot; Card &middot; Net Banking — 100% Secure</div>'
+    +'</div>';
 }
 
-// ─── Intent Detection ─────────────────────────
-// Detects what user is asking — supports Hindi + English mixed messages
+// ─── Intent Detection ────────────────────────
 var intents = [
-  { key: 'greet',    rx: /^(hi|hello|hii|hey|namaste|hlo|hlw|hye|hy|sup|namsate|salam|namaskar|good\s*(morning|evening|afternoon)|kaise\s*ho|kya\s*chal|bhai|yaar|yrr|bro|helo|hii+)\b/i },
-  { key: 'number',   rx: /number|no\.|contact|phone|mobile|direct.*number|personal.*number|madam.*number|mam.*number|number.*do|apna.*number|number.*share|direct.*contact|personal.*contact/i },
-  { key: 'whatsapp', rx: /whatsapp|wa\b|wp\b/i },
-  { key: 'profile',  rx: /profile|girl|ladki|photo|pic|dikh|russian|indian|model|staff|aunty|bhabhi|kaisi.*profile|kaun\s*si|konsi|college.*girl|office.*girl|widow|corporate|single.*girl|unsatisfied|job.*girl|mature|age.*kitni|20.*40|staff.*kaisi/i },
-  { key: 'service',  rx: /servi|kya\s*milega|kya\s*karte|kya\s*dete|kya\s*offer|bata|batao|detail|explain|samjhao|spa|massage|home.*visit|hotel|meeting|private.*meeting|real.*meeting|kya\s*hai|kaise\s*kaam/i },
-  { key: 'price',    rx: /price|rate|kitna|cost|charge|fees?|paisa|paise|kitne|amount|budget|rupee|\brs\.?\b|₹|kitni.*fees|rate.*kya|kya.*rate|charges|kitna.*lagega/i },
-  { key: 'city',     rx: /city|kahan|where|locat|delhi|jaipur|surat|mumbai|noida|gurgaon|agra|lucknow|chandigarh|hyderabad|bangalore|bengaluru|pune|kolkata|ahmedabad|faridabad|avail.*hai|aata.*hai|service.*kahan|all.*india|poore.*india|cover.*karte/i },
-  { key: 'safety',   rx: /safe|real\s*hai|genuine|trust|sach\s*hai|pakka|fraud|fake|scam|guarant|sahi\s*hai|original|verified|real\s*service|legit|bharosa|real\s*log/i },
-  { key: 'cash',     rx: /cash|cod|advance|bina.*payment|udhaar|pehle.*pay|cash.*on|sirf.*cash|kya.*cash|cash.*de/i },
-  { key: 'booking',  rx: /book|connect|milna\s*hai|milwa|set\s*karo|ready\s*hoon|haan\s*karo|ok\s*book|okay\s*book|kab\s*milega|timing|time.*kya|slot|kaise\s*milega|confirm\s*karo|date.*fix|appointment/i },
-  { key: 'negative', rx: /\bnahi\b|\bnai\b|\bnhi\b|\bno\b|mahanga|bahut\s*zyada|expensive|baad\s*mein|later|sochta\s*hoon|band\s*karo|jane\s*do|rehne\s*do|chhod|nahi\s*chahiye|mat\s*karo|nope/i },
-  { key: 'name_give',rx: /(?:naam|name)\s*(?:hai|is|hoon)?\s*[a-z]{2,}/i },
-  { key: 'thanks',   rx: /thanks|thank\s*you|shukriya|dhanyawad|thx|ty\b/i },
-  { key: 'outscope', rx: /weather|cricket|movie|film|khana|food|politics|news|technology|health|doctor|hospital|relationship|pyaar|love|gf|boyfriend|girlfriend|share\s*market|stock|crypto|bitcoin/i },
+  { key:'greet',    rx:/^(hi|hello|hii+|hey|namaste|hlo|hlw|hye|hy|sup|namsate|salam|namaskar|good\s*(morning|evening|afternoon)|kaise\s*ho|kya\s*chal|bhai|yaar|yrr|bro|helo)\b/i },
+  { key:'number',   rx:/number|contact|phone|mobile|direct.*number|personal.*number|madam.*number|mam.*number|number.*do|apna.*number|number.*share/i },
+  { key:'whatsapp', rx:/\bwhatsapp\b|\bwa\b|\bwp\b/i },
+  { key:'profile',  rx:/profile|girl|ladki|photo|pic|dikh|russian|indian|model|staff|aunty|bhabhi|kaisi|kaun\s*si|konsi|college.*girl|office.*girl|widow|corporate|single.*girl|unsatisfied|job.*girl|mature|age.*kitni/i },
+  { key:'service',  rx:/servi|kya\s*milega|kya\s*karte|kya\s*dete|kya\s*offer|bata|batao|detail|explain|samjhao|spa|massage|home.*visit|hotel|meeting|private|real.*meeting|kya\s*hai|kaise\s*kaam/i },
+  { key:'price',    rx:/price|rate|kitna|cost|charge|fees?|paisa|paise|kitne|amount|budget|rupee|\brs\.?\b|kitni.*fees|rate.*kya|charges|kitna.*lagega/i },
+  { key:'city',     rx:/city|kahan|where|locat|avail.*hai|service.*kahan|all.*india|poore.*india|cover|delhi|noida|gurgaon|gurugram|faridabad|meerut|jaipur|jodhpur|udaipur|kota|ajmer|bikaner|alwar|surat|ahmedabad|vadodara|rajkot|gandhinagar|anand|mumbai|pune|nagpur|nashik|thane|aurangabad|navi mumbai|kolhapur|bangalore|bengaluru|mysore|hubli|mangalore|belgaum|hyderabad|secunderabad|warangal|visakhapatnam|vijayawada|tirupati|chennai|coimbatore|madurai|salem|trichy|tiruchirappalli|kolkata|howrah|durgapur|siliguri|asansol|lucknow|kanpur|agra|varanasi|allahabad|prayagraj|meerut|ghaziabad|mathura|aligarh|chandigarh|amritsar|ludhiana|jalandhar|patiala|pathankot|bhopal|indore|gwalior|jabalpur|ujjain|patna|gaya|muzaffarpur|bhagalpur|ranchi|jamshedpur|dhanbad|raipur|bilaspur|bhilai|bhubaneswar|cuttack|puri|dehradun|haridwar|rishikesh|roorkee|guwahati|silchar|dibrugarh|shimla|manali|srinagar|jammu|kerala|kochi|thiruvananthapuram|kozhikode|thrissur|rajasthan|gujarat|maharashtra|karnataka|tamilnadu|tamil.*nadu|andhra|telangana|bengal|up|uttar.*pradesh|madhya.*pradesh|bihar|jharkhand|odisha|uttarakhand|assam|himachal|punjab|haryana|goa/i },
+  { key:'safety',   rx:/safe|real\s*hai|genuine|trust|sach|pakka|fraud|fake|scam|guarant|sahi\s*hai|original|verified|real\s*service|legit|bharosa/i },
+  { key:'cash',     rx:/cash|cod|advance|bina.*payment|udhaar|pehle.*pay|cash.*on|sirf.*cash/i },
+  { key:'booking',  rx:/book|connect|milna\s*hai|milwa|set\s*karo|ready\s*hoon|\bhaan\b|\bok\b|\bokay\b|chalega|timing|slot|kaise\s*milega|confirm|date.*fix|appointment/i },
+  { key:'negative', rx:/\bnahi\b|\bnai\b|\bnhi\b|\bno\b|mahanga|zyada|expensive|baad\s*mein|later|sochta|band\s*karo|jane\s*do|rehne\s*do|chhod|nahi\s*chahiye/i },
+  { key:'thanks',   rx:/thanks|thank\s*you|shukriya|dhanyawad|\bthx\b|\bty\b/i },
+  { key:'outscope', rx:/weather|cricket|movie|film|khana|food|politics|news|technology|health|doctor|hospital|relationship|pyaar|\blove\b|share\s*market|stock|crypto|bitcoin/i },
 ];
 
 function detect(t) {
-  for (var i = 0; i < intents.length; i++) {
-    if (intents[i].rx.test(t)) return intents[i].key;
-  }
+  for (var i=0;i<intents.length;i++) { if(intents[i].rx.test(t)) return intents[i].key; }
   return 'default';
 }
 
-// Passive extraction — grab name/city from any message
 function tryExtractName(t) {
   var m = t.match(/(?:naam|name)\s*(?:hai|is|hoon)?\s*([a-zA-Z]{2,15})/i)
-        || t.match(/(?:main|mera naam|I am|I'm|mujhe)\s+([a-zA-Z]{2,15})\s*(?:hoon|hun|bolte|kehte|$)/i);
+        || t.match(/(?:main|mera naam|I am|I'm)\s+([a-zA-Z]{2,15})\s*(?:hoon|hun|$)/i);
   if (!m) return '';
-  var bad = 'kya hai hoon hun nahi price rate city delhi jaipur surat service book call meet real help haan okay ok yes no aap main mai agar kaise bhai yaar hi hello hey mam madam'.split(' ');
+  var bad = 'kya hai hoon hun nahi price rate city delhi service book call meet real help haan okay ok yes no aap main mai agar kaise bhai yaar hi hello hey mam madam'.split(' ');
   var n = m[1].toLowerCase();
-  return bad.indexOf(n) === -1 ? m[1].charAt(0).toUpperCase() + m[1].slice(1) : '';
+  return bad.indexOf(n)===-1 ? m[1].charAt(0).toUpperCase()+m[1].slice(1) : '';
 }
-
 function tryExtractCity(t) {
-  var cities = ['delhi','noida','gurgaon','gurugram','jaipur','surat','mumbai','pune','bangalore','bengaluru','hyderabad','lucknow','chandigarh','kolkata','agra','ahmedabad','indore','bhopal','nagpur','faridabad','meerut','varanasi','patna'];
-  var tl = t.toLowerCase();
-  for (var i = 0; i < cities.length; i++) {
-    if (tl.indexOf(cities[i]) > -1) return cities[i].charAt(0).toUpperCase() + cities[i].slice(1);
-  }
+  var places=['delhi','noida','gurgaon','gurugram','faridabad','meerut','ghaziabad','jaipur','jodhpur','udaipur','kota','ajmer','bikaner','alwar','surat','ahmedabad','vadodara','rajkot','gandhinagar','mumbai','pune','nagpur','nashik','thane','aurangabad','kolhapur','bangalore','bengaluru','mysore','hubli','mangalore','hyderabad','secunderabad','warangal','visakhapatnam','vijayawada','tirupati','chennai','coimbatore','madurai','salem','trichy','kolkata','howrah','durgapur','siliguri','asansol','lucknow','kanpur','agra','varanasi','allahabad','prayagraj','aligarh','mathura','chandigarh','amritsar','ludhiana','jalandhar','patiala','bhopal','indore','gwalior','jabalpur','ujjain','patna','gaya','muzaffarpur','ranchi','jamshedpur','dhanbad','raipur','bilaspur','bhilai','bhubaneswar','cuttack','puri','dehradun','haridwar','rishikesh','roorkee','guwahati','silchar','shimla','manali','srinagar','jammu','kochi','thiruvananthapuram','kozhikode','thrissur'];
+  var stateMap={'rajasthan':'Rajasthan','gujarat':'Gujarat','maharashtra':'Maharashtra','karnataka':'Karnataka','tamilnadu':'Tamil Nadu','tamil nadu':'Tamil Nadu','andhra':'Andhra Pradesh','telangana':'Telangana','bengal':'West Bengal','uttar pradesh':'Uttar Pradesh','madhya pradesh':'Madhya Pradesh','bihar':'Bihar','jharkhand':'Jharkhand','odisha':'Odisha','uttarakhand':'Uttarakhand','assam':'Assam','himachal':'Himachal Pradesh','punjab':'Punjab','haryana':'Haryana','goa':'Goa','kerala':'Kerala'};
+  var tl=t.toLowerCase();
+  for(var s in stateMap){if(tl.indexOf(s)>-1)return stateMap[s];}
+  for(var i=0;i<places.length;i++){if(tl.indexOf(places[i])>-1)return places[i].charAt(0).toUpperCase()+places[i].slice(1);}
   return '';
 }
 
-// ─── Smart Replies (no API, fully local) ──────
+// ─── Replies ─────────────────────────────────
 var R = {
-
-  greet: [
-    'Namaste! 🌸 Kaise hain aap?<br><br>Main Priya hoon — Real Meet se. Jo bhi sawaal ho, freely poochhen — sab private hai yahan. 😊<br><br><small style="color:#999;">College girl · Office girl · Corporate · Widow · Mature · Russian — All India available!</small>',
-    'Hi! 😊 Aapka swagat hai!<br><br>Main Priya — Real Meet ki taraf se. Service, profiles, rates ya booking — kuch bhi poochho, main hoon na! 🌸',
-    'Namaste ji! 🌸<br><br>Main Priya hoon — aapki help ke liye yahan hoon. Real Meet India ki premium personal meeting service hai. Kya jaanna chahte hain?',
+  greet:[
+    'Namaste! &#127800; Kaise hain aap?<br><br>Main Priya hoon — Real Meet se. Jo bhi poochhna ho freely poochhen, yahan sab private hai &#128522;<br><br><small style="color:#aaa;">College girl &middot; Office girl &middot; Corporate &middot; Widow &middot; Mature &middot; Russian — All India available!</small>',
+    'Hi! &#128522; Aapka Real Meet mein swagat hai!<br><br>Main Priya — aapki help ke liye yahan hoon. Service ke baare mein, profiles ke baare mein, ya booking — kuch bhi poochho!<br><br>Batao, kya jaanna chahte hain? &#127800;',
+    'Hey! &#128522; Aaye aap?<br><br>Main Priya hoon. Yahan bilkul freely baat kar sakte hain — sab 100% private rahega. Kya help kar sakti hoon aapki? &#127800;',
   ],
-
-  number: [
-    'Haan bilkul samajh sakti hoon — seedha number chahiye aapko! 😊<br><br>Dekho — mere paas roz <b>bahut saare messages</b> aate hain, sab ko personal number share karna safe nahi hota. Isliye ek simple system hai:<br><br>✅ ₹49 pay karo<br>✅ Main confirm karti hoon<br>✅ <b>Mam ka direct number turant milega</b> 📲<br><br>Bas 2 minute ka kaam — phir seedha personal baat!',
-    'Number ki baat karte hain! 😊<br><br>Personal number sirf ₹49 booking ke baad share hota hai — kyunki Mam sirf <b>genuine clients</b> se directly baat karti hain.<br><br>Pay karo aur <b>turant number aapke paas</b> hoga — phir kabhi bhi directly contact kar sakte hain! 📱',
-    'Seedha number toh main dena chahti bhi hoon — lekin Mam ne strictly kaha hai bina booking ke share nahi karna. 😊<br><br>Wajah simple hai — <b>aapki privacy bhi isi mein hai</b>. Har kisi ko number nahi milta — sirf verified clients ko.<br><br>₹49 pay karo → number turant! 📲',
+  number:[
+    'Haan bilkul — main bhi chahti hoon seedha connect ho! &#128522;<br><br>Lekin seedha number isliye nahi de sakti kyunki roz <b>bahut saare log message karte hain</b> — serious clients ko filter karna padta hai.<br><br>&#8377;49 pay karo — aur <b>Mam ka direct number turant milega</b>. Phir seedha baat karo jab chahein! &#128242;',
+    'Number toh dena chahti hoon — genuinely! &#128522;<br><br>Lekin Mam ne system banaya hai:<br>&#8377;49 pay karo → number aur WhatsApp access milega → phir seedha personal baat.<br><br>Sirf ek step aur — aur seedha connect! &#128242;',
+    'Personal number sirf booking ke baad milta hai &#128522;<br><br>Iska fayda aapko bhi hai — <b>Mam sirf genuine clients ko number deti hain</b>. Toh jab aapko milega, full attention milegi directly.<br><br>&#8377;49 → number → seedha baat! &#128242;',
   ],
-
-  whatsapp: [
-    'WhatsApp pe connect karna chahte hain? Perfect choice! 😊<br><br>₹49 pay karo aur main directly <b>WhatsApp pe add</b> kar leti hoon. Wahan milega:<br>📸 Saari profiles ki real photos<br>📅 Date aur timing set hogi<br>💬 Seedha personal baat<br><br>Pay karo — turant WhatsApp access! 🟢',
-    'WhatsApp pe sab kuch easy ho jaata hai! 😄<br><br>₹49 booking ke baad <b>Mam ka WhatsApp number</b> seedha aapke paas aayega. Photos, details, booking — sab wahan ho jaayega privately. 🔒',
+  whatsapp:[
+    'WhatsApp pe best hai! &#128522;<br><br>&#8377;49 pay karo → Mam aapko WhatsApp pe directly contact karengi:<br>&#128248; Real profile photos milenge<br>&#128197; Timing aur location set hogi<br>&#128172; Seedha personal chat<br><br>Pay karo — turant WhatsApp access! &#128154;',
+    'Haan WhatsApp pe zyada easy hota hai baat karna &#128522;<br><br>&#8377;49 ke baad Mam ka WhatsApp number seedha milega — photos, details, booking sab wahan comfortably ho jaata hai. &#128154;',
   ],
-
-  profile: [
-    'Profile ke baare mein poochha! Sabse interesting part yahi hai 😄<br><br>👩‍🎓 <b>College Girl</b> — Age 20-24, young, fun<br>💼 <b>Office / Job Girl</b> — Age 24-30, smart<br>🏢 <b>Corporate Lady</b> — Age 26-35, premium<br>🕊️ <b>Widow / Unsatisfied</b> — Age 28-40, experienced<br>💍 <b>Single Girl</b> — Age 22-32, independent<br>🌟 <b>Mature / Aunty</b> — Age 35-45<br>🌏 <b>Russian / Exotic</b> — Premium category<br><br>Sab <b>100% verified aur real</b> hain — koi fake photo nahi! ✅<br><br>Photos ₹49 ke baad WhatsApp pe milti hain — aap khud choose karo! 📸',
-    'Profiles genuinely bahut variety hai! 😊<br><br>• <b>Young & Fun</b> — College/Office girl (20-28)<br>• <b>Professional</b> — Corporate lady (25-35)<br>• <b>Mature</b> — Widow/Aunty (30-45)<br>• <b>Premium Exotic</b> — Russian staff<br><br>Sab ki alag rates — aur sab <b>genuine, verified</b> hain. Ek baar photos dekho — aap khud choose karoge! 📸<br><br>₹49 pay karo → photos turant WhatsApp pe!',
+  profile:[
+    'Profiles mein genuinely bahut options hain! &#128522;<br><br>&#127891; <b>College Girl</b> — Age 20-24, fun &amp; young<br>&#128188; <b>Office/Job Girl</b> — Age 24-30, smart &amp; professional<br>&#127970; <b>Corporate Lady</b> — Age 26-35, premium class<br>&#128146; <b>Widow / Unsatisfied</b> — Age 28-40, experienced<br>&#128157; <b>Single Girl</b> — Age 22-32, independent<br>&#127775; <b>Mature / Aunty</b> — Age 35-45<br>&#127760; <b>Russian / Exotic</b> — Premium, very popular<br><br>Sab <b>real, verified, genuine</b> hain &#10003;<br><br>Photos WhatsApp pe milti hain &#8377;49 ke baad — aap dekh ke decide karo!',
+    'Kaunsi type pasand hai aapko? &#128522;<br><br>Hamare paas sab hai:<br>&bull; <b>Young &amp; Fun</b> — College/Office girl (20-28)<br>&bull; <b>Professional</b> — Corporate lady (25-35)<br>&bull; <b>Mature &amp; Experienced</b> — Widow/Aunty (30-45)<br>&bull; <b>Premium Exotic</b> — Russian staff<br><br>Aap choose karo — photos WhatsApp pe milenge &#8377;49 ke baad! &#128248;',
   ],
-
-  service: [
-    'Bilkul! Real Meet ek <b>premium personal meeting service</b> hai 🌺<br><br>🏠 <b>Home Visit</b> — Aapke ghar/PG pe<br>🏨 <b>Hotel Room</b> — Kisi bhi hotel mein<br>💆 <b>Spa & Massage</b> — Professional relaxation<br>🤝 <b>Private Real Meeting</b> — Fully discreet<br><br><b>All India available — 24/7</b><br>Delhi NCR · Jaipur · Surat · Mumbai · Bangalore aur bahut cities!<br><br>Profiles: College girl, Office girl, Corporate, Widow, Single, Mature, Russian — age 20-40. Sab verified! ✅',
-    'Hum <b>premium personal meeting service</b> provide karte hain — discreet, safe, professional! 🌸<br><br>✅ Female staff age 20-40, verified<br>✅ College girl · Office girl · Corporate · Widow · Mature · Russian<br>✅ Home visit ya Hotel — aap decide karo<br>✅ All India coverage, 24/7 available<br>✅ Baaki payment <b>cash on service</b> — koi bada advance nahi<br><br>Profiles ki photos ₹49 ke baad WhatsApp pe milti hain! 📸',
-    'Real Meet India ki trusted premium service hai 🌸<br><br>Kya milega:<br>• Home Visit, Hotel, Spa, Private Meeting<br>• Har tarah ki profiles — 7 categories, age 20-40<br>• All India service — same day booking possible ⚡<br>• Photos WhatsApp pe, cash on service, 100% private<br><br>2+ saal se chal rahi hai service, hazaron satisfied clients! 😊',
+  service:[
+    'Real Meet ek <b>premium personal meeting service</b> hai &#127802;<br><br>&#127968; <b>Home Visit</b> — Aapke ghar/PG/apartment pe<br>&#127968; <b>Hotel Visit</b> — Kisi bhi hotel room mein<br>&#128134; <b>Spa &amp; Massage</b> — Professional relaxation<br>&#129309; <b>Private Real Meeting</b> — One-to-one, fully discreet<br><br><b>All India available — 24/7, har state mein!</b><br><br>Har profile ka rate alag — call pe clearly bata diya jaata hai. Koi hidden charge nahi! &#10003;',
+    'Kya provide karte hain hum:<br><br>&#10003; Home visit ya Hotel — aap decide karo<br>&#10003; Staff profiles: College, Office, Corporate, Widow, Mature, Russian<br>&#10003; Age 20 se 40 tak, sab verified<br>&#10003; All India coverage — metro se chhote shehar tak<br>&#10003; Baaki payment <b>cash on service</b><br>&#10003; Identity 100% private &#128274;<br><br>Booking process sirf 5 minute! &#8377;49 pay karo aur sab details seedha mil jaayenge &#128522;',
   ],
-
-  price: [
-    'Rate ki baat karte hain! 💰<br><br>Exact price depend karti hai:<br>• City aur location<br>• Profile type — College, Corporate, Russian<br>• Duration — 1hr, 2hr, full evening<br><br>Roughly: <b>₹3,000 se ₹15,000+</b> — har budget ke liye kuch na kuch hai!<br><br>💡 Baaki payment <b>cash on service</b> — sirf ₹49 abhi access ke liye!',
-    'Price flexible hai — aur yeh actually aapke fayde mein hai! 😊<br><br>Jo banda seedha call karta hai, usse <b>personalized best deal</b> milti hai. College/Job girls affordable hain, Russian/VIP thodi premium.<br><br>Budget bataoge toh best option suggest karenge — <b>koi disappoint nahi hoga!</b> 😄<br><br>Sirf ₹49 pay karo — Mam call pe sab clearly batayengi!',
-    '₹49 sirf <b>call + WhatsApp access</b> ke liye hai — baaki poori service payment <b>cash in hand</b> hoti hai service ke time! Koi bada advance nahi. 😊<br><br>Service rates:<br>• Basic: ₹3,000-5,000<br>• Premium: ₹5,000-10,000<br>• VIP/Russian: ₹10,000+<br><br>Sab call pe clearly bataya jaata hai — koi hidden charge nahi!',
+  price:[
+    'Rate ke baare mein bata deti hoon! &#128176;<br><br>Exact price depend karta hai:<br>&bull; Aapki city<br>&bull; Profile type — College, Corporate, Russian<br>&bull; Duration — 1hr, 2hr, ya full evening<br><br>Roughly range:<br>&#8226; Basic: <b>&#8377;3,000–5,000</b><br>&#8226; Premium: <b>&#8377;5,000–10,000</b><br>&#8226; VIP/Russian: <b>&#8377;10,000+</b><br><br>Baaki sab <b>cash on service</b> — sirf &#8377;49 abhi! &#128522;',
+    '&#8377;49 sirf <b>access fee</b> hai — call aur WhatsApp ke liye.<br><br>Baaki poori service payment <b>cash in hand</b> hoti hai — service ke waqt directly. Koi bada advance nahi, koi risk nahi! &#128522;<br><br>Budget bataoge toh best option suggest kar sakti hoon!',
   ],
-
-  city: [
-    '<b>All India service hai hamari!</b> 🗺️<br><br>✅ Delhi NCR (Delhi, Noida, Gurgaon, Faridabad)<br>✅ Jaipur · Surat · Mumbai · Pune<br>✅ Bangalore · Hyderabad · Lucknow<br>✅ Chandigarh · Kolkata · Ahmedabad<br>✅ Aur bhi bahut cities!<br><br>Aap kahan se hain? Main availability confirm kar sakti hoon! 📍',
-    'Same-day service available hai most cities mein! ⚡<br><br>Delhi NCR, Jaipur, Surat, Mumbai — yeh main zones hain. Baaki cities mein bhi coverage hai.<br><br><b>Aapko kahin jaana nahi</b> — hum aate hain aapke paas! 🏠<br><br>City batao — main confirm karti hoon turant!',
+  city:[
+    '<b>Haan, aapki city mein available hai!</b> &#128205;<br><br>Real Meet puri India mein available hai:<br><br>&#127981; <b>North India</b> — Delhi, Noida, Gurgaon, Agra, Lucknow, Kanpur, Varanasi, Chandigarh, Amritsar, Dehradun, Meerut<br>&#127981; <b>West India</b> — Mumbai, Pune, Surat, Ahmedabad, Vadodara, Rajkot, Nagpur, Goa<br>&#127981; <b>South India</b> — Bangalore, Hyderabad, Chennai, Coimbatore, Kochi, Visakhapatnam<br>&#127981; <b>East India</b> — Kolkata, Bhubaneswar, Patna, Ranchi, Guwahati<br>&#127981; <b>Central India</b> — Bhopal, Indore, Raipur, Jaipur, Jodhpur<br><br>Jo bhi state ya city ho — <b>hum wahan hain!</b> &#128522;<br>Ek baar call pe confirm kar lete hain — &#8377;49 pay karo!',
+    'Aapki city pakka cover hoti hai! &#128522;<br><br>Hum <b>har state mein</b> available hain — Metro cities se lekar tier-2 cities tak. Same-day service bhi possible hai most cities mein! &#9889;<br><br>Exact availability &#8377;49 ke baad call pe <b>2 minute mein confirm</b> ho jaati hai. Aap city batao — main check karti hoon! &#128205;',
   ],
-
-  safety: [
-    'Bahut sahi sawaal kiya — safety sabse important hai! 🙏<br><br>🔒 Aapki identity — zero record, zero trace<br>📍 Location — aap decide karte ho<br>❌ Koi pressure nahi — pasand na aaye, cancel<br>💵 Cash on service — koi bada advance nahi<br><br><b>2+ saal se chal rahi hai service, 10,000+ satisfied clients</b> — baar baar aate hain wahi log! 😄',
-    'Trust concern bilkul samajhti hoon! 😊<br><br>Notice karo — hum website chalate hain, direct baat hoti hai, Mam personally call karti hain. <b>Fraud log yeh sab nahi karte.</b><br><br>₹49 sirf access ke liye — baaki <b>sab cash on service</b>. Koi bada risk hi nahi! ✅<br><br>Ek baar baat karo — sab doubts door ho jaayenge!',
+  safety:[
+    'Bilkul sahi poochha — safety sabse zaroori hai! &#128591;<br><br>&#128274; Aapki identity — koi record nahi, koi trace nahi<br>&#128205; Location — aap decide karte ho, hum aate hain<br>&#10060; Koi pressure nahi — profile pasand na aaye, cancel<br>&#128181; Cash on service — koi bada advance nahi<br>&#128526; 100% discreet service<br><br><b>2+ saal ki trusted service, 10,000+ satisfied clients</b> — baar baar aate hain wahi log. Yahi sabse badi guarantee hai! &#128522;',
+    'Trust karna bilkul sahi concern hai &#128522;<br><br>Ek simple cheez notice karo — hum website chalate hain, openly baat karte hain. Fraud log yeh sab nahi karte.<br><br>Aur &#8377;49 ke baad jo bhi baat ho — woh seedha Mam se hogi, personally. <b>Koi bada advance nahi</b> — sirf &#8377;49 access ke liye. Risk almost zero! &#10003;',
   ],
-
-  cash: [
-    '<b>Baaki sab cash hai — bilkul!</b> 😊<br><br>1️⃣ ₹49 online — sirf call + WhatsApp access ke liye<br>2️⃣ Mam se baat — profile, timing, location sab fix<br>3️⃣ <b>Poori service payment — cash in hand, service ke time!</b><br><br>Koi bada advance nahi, koi risk nahi. ₹49 toh ek cup chai se thoda zyada hai! ☕',
-    'Sirf ₹49 online — baaki sab <b>cash on service</b>! 😊<br><br>Service ke time directly Mam ko cash dena hota hai — koi online payment nahi, koi bank transfer nahi.<br><br>100% safe aur transparent process! ✅',
+  cash:[
+    'Poora process clear kar deti hoon! &#128522;<br><br>1&#65039;&#8419; <b>&#8377;49 abhi</b> — sirf call + WhatsApp access ke liye<br>2&#65039;&#8419; <b>Mam se baat</b> — profile choose karo, timing fix karo<br>3&#65039;&#8419; <b>Service ke waqt</b> — poori payment <b>cash in hand!</b><br><br>Koi bada advance nahi, koi bank transfer nahi, koi risk nahi! &#10003;<br>&#8377;49 ek cup coffee se bhi kam! &#9749;',
   ],
-
-  booking: [
-    'Wah! Book karna chahte hain — perfect decision! 🌸<br><br>✅ ₹49 pay karo<br>✅ Mam ka call/WhatsApp 2 min mein aayega<br>✅ Profile photos milenge — aap choose karo<br>✅ Timing, location sab set<br>✅ Same-day booking possible! ⚡<br><br><b>5 minute mein sab confirm!</b>',
-    'Booking karna hai? Sirf ek step hai! 😊<br><br>₹49 pay karo → Mam ka direct number milega → wahan sab decide ho jaayega — profile, time, location. Baaki payment cash on service.<br><br>Ekdum simple, ekdum safe! ✅',
+  booking:[
+    'Book karna chahte hain? Sahi decision! &#127800;<br><br>Sirf itna karo:<br>&#10003; &#8377;49 pay karo (UPI/Card)<br>&#10003; Mam ka call ya WhatsApp <b>2 minute mein</b> aayega<br>&#10003; Profiles ki photos WhatsApp pe milenge<br>&#10003; Aap apni pasand bataenge<br>&#10003; Timing aur location confirm<br>&#10003; <b>Same-day service possible!</b> &#9889;<br><br>Total time: 5-10 minute. Itna aasan! &#128522;',
+    'Ek step mein booking ho jaati hai! &#128522;<br><br>&#8377;49 pay karo → Mam directly contact karengi → sab set ho jaayega. Baaki payment cash on service.<br><br>Ready ho? Neeche button dabao! &#127800;',
   ],
-
-  negative: [
-    'Koi baat nahi ji! 😊 Main force nahi karti — aapka decision.<br><br>Bas ek baat — jo log hesitate karte hain, woh baad mein kehte hain "pehle kyun nahi kiya!" 😄<br><br>Jab bhi ready ho — main yahan hoon 24/7. Koi bhi sawaal ho toh poochh lena! 🌸',
-    'Bilkul samajhti hoon 😊<br><br>Sirf sochiye — ₹49 mein aapko kya milega:<br>→ Mam ka personal number<br>→ Real profile photos<br>→ Sab detail call pe<br>→ Baaki cash on service — koi risk nahi!<br><br>Ek chai ki kimat mein itna sab? 😄 Jab mann bade — main hoon! 🌸',
+  negative:[
+    'Koi baat nahi, main samajhti hoon &#128522;<br><br>Bas ek cheez bolunga — jo log pehle hesitate karte hain, woh baad mein kehte hain "yaar pehle kyun nahi kiya!" &#128516;<br><br>Jab bhi mann kare — main 24/7 yahan hoon. Koi sawaal ho toh poochhna! &#127800;',
+    'Bilkul theek hai, koi pressure nahi &#128522;<br><br>Sirf yaad rakhna — &#8377;49 mein kya milta hai:<br>&#8594; Mam ka personal number<br>&#8594; Real profile photos<br>&#8594; Baaki sab cash on service<br><br>Ek chai ki kimat mein itna sab! &#9749; Jab ready ho — main hoon &#127800;',
   ],
-
-  thanks: [
-    'Arey, koi baat nahi ji! 😊 Yahi kaam hai mera. Koi aur sawaal ho toh zaroor poochhen! 🌸',
-    'Khushi hui help karke! 😊 Booking ke liye kabhi bhi aayein — main hoon na! 🌸',
+  thanks:[
+    'Arey koi baat nahi! &#128522; Koi bhi sawaal ho toh poochhna — main hoon yahan! &#127800;',
+    'Khushi hui help karke! &#128522; Booking ke liye kabhi bhi — main 24/7 available hoon! &#127800;',
   ],
-
-  name_give: [
-    'Nice to meet you! 😊 Koi bhi sawaal ho — freely poochhen, main hoon yahan! 🌸',
+  outscope:[
+    'Haha yeh toh mere area se bahar hai &#128522;<br><br>Lekin aap Mam se call pe kuch bhi poochh sakte hain — woh bahut friendly hain aur helpful bhi! &#8377;49 pay karo → number milega → phir koi bhi baat karo! &#127800;',
   ],
-
-  outscope: [
-    'Yeh topic mere area se bahar hai 😊<br><br>Lekin aap chahein toh Mam se call pe seedha poochh sakte hain — woh bahut friendly hain aur sab baatein karti hain! 😄<br><br>₹49 pay karo → Mam ka personal number → phir koi bhi baat karo call pe!',
-  ],
-
-  default: [
-    'Samajh gayi! 😊<br><br>Yeh detail Mam aapko personally call pe zyada better samjha sakti hain — wahan sab crystal clear ho jaata hai. Text mein kuch cheezein convey nahi ho paatiin!<br><br>Ek baar call pe baat karo — <b>5 min mein sab clear</b>! 🌸',
-    'Achha yeh poochha aapne! 🤔<br><br>Honestly — <b>call pe zyada better explain hota hai</b>. Mam aapki exact situation ke hisaab se personally guide karengi. Woh bahut friendly hain — koi awkwardness nahi! 😊',
-    'Haan haan! 😊<br><br>Main jo bata sakti hoon woh bata deti hoon — lekin <b>Mam is topic par mujhse zyada jaanti hain</b>. Ek baar call pe poochho — guaranteed satisfaction! 🌸',
-    'Interesting sawaal hai! 😊<br><br>Yeh seedha Mam se poochho — woh personally sab explain karengi aapke hisaab se. ₹49 pay karo aur 2 min mein Mam ka number mil jaayega! 📞',
+  default:[
+    'Samajh gayi! &#128522;<br><br>Honestly — <b>call pe sab zyada clearly ho jaata hai</b>. Text mein kuch baatein theek se convey nahi ho paatin.<br><br>Ek baar Mam se seedha baat karo — 5 minute mein sab clear ho jaayega! &#127800;',
+    'Yeh thoda specific sawaal hai &#128522;<br><br>Mam personally aapke hisaab se guide karengi — woh bahut experienced hain aur sab clearly samjhati hain!<br><br>&#8377;49 pay karo → 2 min mein number → seedha baat! &#128222;',
+    'Acha poochha! &#128522;<br><br>Yeh detail call pe best explain hoti hai — Mam aapki situation ke hisaab se perfectly guide karengi. Ek baar try karo! &#127800;',
   ],
 };
 
-// ─── Main respond function ─────────────────────
+// ─── Main respond ────────────────────────────
+// Track conversation depth — payment card only after natural engagement
+var msgCount = 0;
+var askedCity = false;
+var askedProfile = false;
+var shownPay = false;
+
 function respond(text) {
-  // Passive extraction
-  var n = tryExtractName(text); if (n && !lead.name) lead.name = n;
-  var c = tryExtractCity(text); if (c && !lead.city) lead.city = c;
+  var n=tryExtractName(text); if(n&&!lead.name) lead.name=n;
+  var c=tryExtractCity(text); if(c&&!lead.city) lead.city=c;
+  msgCount++;
 
-  var intent = detect(text);
-  var pool   = R[intent] || R['default'];
-  var reply  = pick(intent, pool);
+  var intent=detect(text);
+  var pool=R[intent]||R['default'];
+  var reply=pick(intent,pool);
+  var delay=text.length<8?900:1300;
 
-  showTyping(function () {
-    if (intent === 'negative' || intent === 'thanks' || intent === 'outscope' || intent === 'name_give') {
-      appendBot(reply);
-    } else {
-      appendBotWithPay(reply);
+  // Intents where payment is NEVER shown
+  var neverPay=['negative','thanks','outscope','greet'];
+
+  // Intents where payment shows only if conversation is warm (3+ msgs)
+  var softPay=['service','city','safety','default','price'];
+
+  // Intents where payment always shows (user is clearly interested)
+  var readyPay=['number','whatsapp','booking','cash','profile'];
+
+  showTyping(function(){
+    appendBot(reply);
+
+    // After bot reply, decide next move
+    if(neverPay.indexOf(intent)>-1){
+      // Just reply, then ask a follow-up question naturally
+      if(intent==='greet'){
+        setTimeout(function(){
+          if(!lead.city && !askedCity){
+            askedCity=true;
+            showTyping(function(){
+              appendBot('Waise — aap kis city se hain? &#128205; Taaki main availability confirm kar sakun!');
+            },1000);
+          }
+        },3500);
+      }
+      return;
     }
-  }, text.length < 10 ? 900 : 1300);
+
+    if(readyPay.indexOf(intent)>-1){
+      // User clearly wants to book — show payment after short delay
+      if(!shownPay){
+        shownPay=true;
+        setTimeout(function(){ showPayCard(); },2800);
+      }
+      return;
+    }
+
+    // softPay — build conversation first
+    if(softPay.indexOf(intent)>-1){
+      if(msgCount >= 3 && !shownPay){
+        // 3+ messages — they're engaged, show payment
+        shownPay=true;
+        setTimeout(function(){ showPayCard(); },3000);
+      } else if(!shownPay){
+        // Still early — ask a natural follow-up instead
+        setTimeout(function(){
+          if(!lead.city && !askedCity && intent!=='city'){
+            askedCity=true;
+            showTyping(function(){
+              appendBot('Aur aap kahan se hain? &#128205; Taaki best option suggest kar sakun!');
+            },1000);
+          } else if(!askedProfile && intent!=='profile'){
+            askedProfile=true;
+            showTyping(function(){
+              appendBot('Waise — kaunsi profile type prefer karenge? College girl, Mature, Russian? &#128522; Taaki seedha relevant bata sakun!');
+            },1000);
+          }
+        },3200);
+      }
+    }
+
+  }, delay);
 }
 
-// ─── Public API ───────────────────────────────
-window.RMBot = {
+function showPayCard(){
+  var w=document.createElement('div');
+  w.style.cssText='display:flex;flex-direction:column;align-items:flex-start;margin-bottom:4px';
+  w.innerHTML=payCard();
+  if(msgBox){ msgBox.appendChild(w); msgBox.scrollTop=9999; }
+}
 
-  send: function () {
-    var text = inputEl.value.trim();
-    if (!text) return;
-    inputEl.value = '';
-    appendUser(text);
-    respond(text);
-  },
-
-  pay: function () {
-    hasPaid = false; // keep card hidden only after actual payment confirmed
-    lead.outcome = 'Clicked Pay ₹49';
-    submitLead();
-    closeFreeChat();
-    var msg = 'Hi! Maine ₹49 pay kar diya ✅ — Mam se connect karna hai 🌸'
-      + (lead.name ? '\nNaam: ' + lead.name : '')
-      + (lead.city ? '\nCity: ' + lead.city : '');
-    openPaymentModal('whatsapp', 'https://wa.me/' + WA + '?text=' + encodeURIComponent(msg));
-  }
-};
-
-// ─── Lead submit ──────────────────────────────
-function submitLead() {
+// ─── Submit lead (chat) ──────────────────────
+function submitLead(outcome) {
   try {
-    document.getElementById('lf_name').value    = lead.name || 'Unknown';
-    document.getElementById('lf_city').value    = lead.city || '—';
-    document.getElementById('lf_outcome').value = lead.outcome || 'Chat in progress';
+    lead.outcome = outcome || lead.outcome || 'Chat in progress';
+    document.getElementById('lf_name').value    = lead.name||'Unknown';
+    document.getElementById('lf_city').value    = lead.city||'—';
+    document.getElementById('lf_outcome').value = lead.outcome;
     document.getElementById('lf_chat').value    = lead.lines.slice(-20).join('\n');
     document.getElementById('lf_time').value    = new Date().toLocaleString('en-IN');
     document.getElementById('leadForm').submit();
-  } catch (e) {}
+  } catch(e){}
 }
 
-// ─── Open / Close ─────────────────────────────
-var opened = false;
+// ─── Submit lead for homepage call/WA click ──
+function submitCallLead(source) {
+  try {
+    document.getElementById('lf_name').value    = 'Homepage Visitor';
+    document.getElementById('lf_city').value    = '—';
+    document.getElementById('lf_outcome').value = 'Clicked '+source+' on Homepage';
+    document.getElementById('lf_chat').value    = 'Direct button click — '+source;
+    document.getElementById('lf_time').value    = new Date().toLocaleString('en-IN');
+    document.getElementById('leadForm').submit();
+  } catch(e){}
+}
 
-window.openFreeChat = function () {
-  document.getElementById('chatWidgetOverlay').classList.add('open');
-  if (!opened) {
-    opened = true;
-    msgBox  = document.getElementById('chatMessages');
-    inputEl = document.getElementById('chatInput');
-    // Greeting
-    setTimeout(function () {
-      showTyping(function () {
-        appendBot('Namaste! 🌸 Main Priya hoon — Real Meet se.<br><br>Jo bhi poochhna ho, freely poochhen — yahan sab private hai 😊<br><br><small style="color:#999;">College girl · Office girl · Corporate · Widow · Mature · Russian — All India available!</small>');
-      }, 800);
-    }, 400);
+// ─── Public API ──────────────────────────────
+window.RMBot = {
+  send: function() {
+    var text=inputEl.value.trim();
+    if(!text) return;
+    inputEl.value='';
+    appendUser(text);
+    respond(text);
+  },
+  pay: function() {
+    lead.outcome='Clicked Pay Rs49 (chat)';
+    submitLead('Clicked Pay Rs49 (chat)');
+    closeFreeChat();
+    var msg='Hi! Maine Rs49 pay kar diya — Mam se connect karna hai!'
+      +(lead.name?'\nNaam: '+lead.name:'')
+      +(lead.city?'\nCity: '+lead.city:'');
+    if(typeof openPaymentModal==='function'){
+      openPaymentModal('whatsapp','https://wa.me/'+WA+'?text='+encodeURIComponent(msg));
+    }
   }
 };
 
-window.closeFreeChat = function () {
-  document.getElementById('chatWidgetOverlay').classList.remove('open');
-  if (lead.lines.length > 2 && !lead.outcome) {
-    lead.outcome = 'Chat without booking';
-    submitLead();
+// ─── Open / Close chat ───────────────────────
+var opened=false;
+
+window.openFreeChat=function(){
+  shownPay=false; msgCount=0; askedCity=false; askedProfile=false;
+  var overlay=document.getElementById('chatWidgetOverlay');
+  overlay.classList.add('open');
+  // Full screen on mobile
+  var widget=document.getElementById('chatWidget');
+  if(widget){
+    widget.style.height='100%';
+    widget.style.maxHeight='100%';
+    widget.style.borderRadius='0';
+  }
+  if(!opened){
+    opened=true;
+    msgBox=document.getElementById('chatMessages');
+    inputEl=document.getElementById('chatInput');
+    setTimeout(function(){
+      showTyping(function(){
+        appendBot('Namaste! &#127800; Main Priya hoon — Real Meet se.<br><br>Jo bhi poochhna ho, freely poochhen — yahan sab private hai &#128522;<br><br><small style="color:#999;">College girl &middot; Office girl &middot; Corporate &middot; Widow &middot; Mature &middot; Russian — All India available!</small>');
+      },800);
+    },400);
   }
 };
 
-document.getElementById('chatWidgetOverlay').addEventListener('click', function (e) {
-  if (e.target === this) closeFreeChat();
+window.closeFreeChat=function(){
+  var overlay=document.getElementById('chatWidgetOverlay');
+  overlay.classList.remove('open');
+  if(lead.lines.length>2&&!lead.outcome){
+    submitLead('Chat without booking');
+  }
+};
+
+// Close overlay on backdrop click
+(function(){ var ov=document.getElementById('chatWidgetOverlay'); if(ov) ov.addEventListener('click',function(e){
+  if(e.target===this) closeFreeChat();
+}); })();
+
+// ─── Homepage button lead tracking ───────────
+// Intercept call buttons to also submit lead
+(function(){
+  function hookBtn(id, label){
+    var el=document.getElementById(id);
+    if(!el) return;
+    el.addEventListener('click',function(){ submitCallLead(label); }, true);
+  }
+  hookBtn('mainCTA','WhatsApp CTA');
+  hookBtn('bottomCTA','WhatsApp Bottom');
+  hookBtn('mainCallCTA','Call Button');
+  hookBtn('bottomCallCTA','Call Bottom');
+  hookBtn('floatCallBtn','Float Call');
+})();
+
+// ─── Payment back / crash fix ────────────────
+// If Razorpay modal closes (back button), restore page properly
+window.addEventListener('popstate',function(){
+  try {
+    var pm=document.getElementById('paymentModal');
+    if(pm) pm.style.display='none';
+    var ml=document.getElementById('modalLoadingContent');
+    var mm=document.getElementById('modalMainContent');
+    if(ml) ml.style.display='none';
+    if(mm) mm.style.display='block';
+    document.body.style.overflow='';
+    document.body.style.position='';
+  } catch(e){}
 });
 
-// After payment success → redirect to WA
-var _orig = window.showSuccessPage;
-window.showSuccessPage = function () {
-  if (typeof _orig === 'function') _orig();
-  hasPaid = true;
-  var msg = 'Hi! Maine ₹49 pay kar diya ✅ Mam se connect karna hai'
-    + (lead.name ? ' | ' + lead.name : '')
-    + (lead.city ? ' | ' + lead.city : '');
-  setTimeout(function () {
-    window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank');
-  }, 1200);
+// Prevent page crash when Razorpay iframe closes
+window.addEventListener('message',function(e){
+  try {
+    if(e.data && (e.data.source==='razorpay'||e.data.razorpay)){
+      // Razorpay event — make sure body stays scrollable
+      setTimeout(function(){ document.body.style.overflow=''; },500);
+    }
+  } catch(e2){}
+});
+
+// After payment success → also send lead then open WA
+var _origSuccess=window.showSuccessPage;
+window.showSuccessPage=function(){
+  hasPaid=true;
+  submitLead('PAID Rs49');
+  if(typeof _origSuccess==='function') _origSuccess();
+  var msg='Hi! Maine Rs49 pay kar diya ✅ Mam se connect karna hai'
+    +(lead.name?' | '+lead.name:'')
+    +(lead.city?' | '+lead.city:'');
+  setTimeout(function(){
+    window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(msg),'_blank');
+  },1200);
 };
 
-document.addEventListener('DOMContentLoaded', function () {
-  msgBox  = document.getElementById('chatMessages');
-  inputEl = document.getElementById('chatInput');
+document.addEventListener('DOMContentLoaded',function(){
+  msgBox=document.getElementById('chatMessages');
+  inputEl=document.getElementById('chatInput');
 });
 
 })();
