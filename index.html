@@ -596,69 +596,37 @@
       .modal-content { padding: 24px 20px; }
     }
   
-    /* ── FLOATING BUTTONS ── */
-    .float-btns {
+    /* ── SINGLE CHAT FAB ── */
+    .chat-fab {
       position: fixed;
-      bottom: 80px;
-      right: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      z-index: 999;
-    }
-    .float-btn {
-      width: 38px; height: 38px;
+      bottom: 24px;
+      right: 20px;
+      z-index: 8000;
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
+      background: linear-gradient(145deg, #e9188c, #c4146f);
       border: none;
       cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(233,24,140,0.45), 0 2px 8px rgba(0,0,0,0.15);
       transition: transform 0.2s, box-shadow 0.2s;
-      text-decoration: none;
-      position: relative;
+      position: fixed;
     }
-    .float-btn:hover { transform: scale(1.08); }
-    .float-btn:active { transform: scale(0.95); }
-    .float-call {
-      background: linear-gradient(145deg, #25d366, #128c3e);
-      box-shadow: 0 4px 18px rgba(37,211,102,0.5);
-    }
-    .float-tg {
-      background: linear-gradient(145deg, #40b3e0, #1a8fbd);
-      box-shadow: 0 4px 18px rgba(44,165,214,0.5);
-    }
-    .float-btn svg { width: 18px; height: 18px; }
-    .float-btn::after {
-      content: '';
-      position: absolute; inset: -3px;
-      border-radius: 50%;
-      border: 2px solid currentColor;
-      opacity: 0;
-      animation: floatPulse 2.5s ease-in-out infinite;
-    }
-    .float-call::after { color: #25d366; }
-    .float-tg::after { color: #40b3e0; }
-    @keyframes floatPulse {
-      0% { opacity: 0.5; transform: scale(1); }
-      100% { opacity: 0; transform: scale(1.6); }
-    }
-    .float-label {
+    .chat-fab:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(233,24,140,0.55); }
+    .chat-fab:active { transform: scale(0.95); }
+    .chat-fab-dot {
       position: absolute;
-      right: 54px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(20,20,20,0.82);
-      color: white;
-      font-size: 0.58rem;
-      font-weight: 600;
-      padding: 5px 11px;
-      border-radius: 100px;
-      white-space: nowrap;
-      letter-spacing: 0.05em;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.2s;
+      top: 4px; right: 4px;
+      width: 12px; height: 12px;
+      background: #4ade80;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      animation: fabPulse 2s ease-in-out infinite;
     }
-    .float-btn:hover .float-label { opacity: 1; }
+    @keyframes fabPulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
   
     /* ── VIDEO SECTION ── */
     .video-section {
@@ -872,13 +840,6 @@
       margin-left: 2px;
     }
 
-    /* Float WhatsApp */
-    .float-wa {
-      background: linear-gradient(145deg, #25d366, #128c3e);
-      box-shadow: 0 4px 18px rgba(37,211,102,0.5);
-    }
-    .float-wa::after { color: #25d366; }
-
     /* ── CHAT WIDGET ── */
     .chat-widget-overlay {
       position: fixed; inset: 0;
@@ -996,23 +957,6 @@
       0%,60%,100% { transform: translateY(0); background: #ccc; }
       30% { transform: translateY(-5px); background: #e9188c; }
     }
-    .chat-quick-replies {
-      display: flex; flex-wrap: wrap; gap: 6px;
-      padding: 10px 16px 0;
-      background: #f7f0f4;
-    }
-    .quick-reply {
-      font-size: 0.76rem; font-weight: 600;
-      padding: 6px 13px;
-      border-radius: 100px;
-      border: 1.5px solid #e9188c;
-      color: #e9188c;
-      background: #fff;
-      cursor: pointer;
-      transition: all 0.15s;
-      white-space: nowrap;
-    }
-    .quick-reply:hover { background: #e9188c; color: #fff; }
     .chat-input-row {
       display: flex; gap: 8px;
       padding: 12px 14px;
@@ -1357,21 +1301,7 @@
     </div>
   </div>
 
-  <!-- FLOATING BUTTONS: Call top, WhatsApp middle, Telegram bottom -->
-  <div class="float-btns">
-    <button class="float-btn float-call" id="floatCallBtn">
-      <span class="float-label">Call — ₹49</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6.09 6.09l1.13-.93a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-    </button>
-    <button class="float-btn float-wa" id="floatWaBtn">
-      <span class="float-label">WhatsApp</span>
-      <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    </button>
-    <button class="float-btn float-tg" id="floatTgBtn">
-      <span class="float-label">Telegram Free</span>
-      <svg viewBox="0 0 24 24" fill="white"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-    </button>
-  </div>
+
 
   <script>
     // Video play logic — show overlay, tap to play with sound
@@ -1555,11 +1485,12 @@
     });
   </script>
 
-  <!-- Floating pill button -->
-  <button class="free-chat-pill" onclick="openFreeChat()">
-    <span class="pill-dot"></span>
-    💬 Free Chat — Priya se poochhen
-    <span class="pill-badge">FREE</span>
+  <!-- Single floating chat button -->
+  <button class="chat-fab" onclick="openFreeChat()" aria-label="Chat with Priya">
+    <svg viewBox="0 0 24 24" fill="white" width="24" height="24">
+      <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+    </svg>
+    <span class="chat-fab-dot"></span>
   </button>
 
   <!-- ═══ FREE CHAT WIDGET ═══ -->
@@ -1579,7 +1510,6 @@
       </div>
 
       <div class="chat-messages" id="chatMessages"></div>
-      <div class="chat-quick-replies" id="quickReplies"></div>
 
       <div class="chat-input-row">
         <input class="chat-input" id="chatInput" type="text"
@@ -1609,50 +1539,6 @@
   <iframe name="hidden_iframe" style="display:none"></iframe>
 
 <style>
-/* Free Chat floating button — premium pill */
-.free-chat-pill {
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 8000;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 13px 26px;
-  background: linear-gradient(135deg, #e9188c, #c4146f);
-  color: #fff;
-  border: none;
-  border-radius: 100px;
-  font-family: inherit;
-  font-size: 0.88rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  cursor: pointer;
-  box-shadow: 0 4px 24px rgba(233,24,140,0.45), 0 0 0 0 rgba(233,24,140,0.3);
-  animation: pillPulse 2.8s ease-in-out infinite;
-  white-space: nowrap;
-}
-@keyframes pillPulse {
-  0%,100% { box-shadow: 0 4px 24px rgba(233,24,140,0.45), 0 0 0 0 rgba(233,24,140,0.3); }
-  50%      { box-shadow: 0 4px 30px rgba(233,24,140,0.6), 0 0 0 10px rgba(233,24,140,0); }
-}
-.free-chat-pill .pill-dot {
-  width: 8px; height: 8px;
-  background: #4ade80;
-  border-radius: 50%;
-  animation: blink 1.4s ease-in-out infinite;
-}
-.free-chat-pill .pill-badge {
-  background: rgba(255,255,255,0.25);
-  font-size: 0.65rem;
-  font-weight: 800;
-  padding: 2px 8px;
-  border-radius: 100px;
-  letter-spacing: 0.06em;
-}
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
-
 /* Pay card inside chat */
 .rm-pay-card {
   background: linear-gradient(145deg, #fff8fd, #fff);
@@ -1695,71 +1581,144 @@
 </style>
 
 <script>
-;(function() {
+(function () {
 'use strict';
 
 // ─── Config ───────────────────────────────────
-var WA  = '919217507608';
-var TG  = 'xkhushii';
-var msgBox, qrBox, inputEl;
+var WA = '919217507608';
+var msgBox, inputEl;
 
 // Lead tracking
-var lead = { name:'', city:'', outcome:'', lines:[] };
+var lead = { name: '', city: '', outcome: '', lines: [] };
 
-// Per-topic reply-rotation so same topic never repeats
-var usedIdx = {};
-function pick(key, arr) {
-  if (!usedIdx[key]) usedIdx[key] = 0;
-  var i = usedIdx[key] % arr.length;
-  usedIdx[key]++;
-  return arr[i];
-}
+// Conversation history for API
+var chatHistory = [];
 
-// ─── UI ───────────────────────────────────────
+// System prompt
+var SYSTEM_PROMPT = `You are Priya, a warm, polished, and professional assistant for Real Meet — India's premium wellness and massage service.
+
+You speak in the same language as the user, Hindi or English. Match the user's tone naturally. Sound human, courteous, confident, and calm. Never mention that you are AI, a bot, or an automated assistant.
+
+PERSONALITY
+- Warm, caring, and professional.
+- Respectful in every reply.
+- Clear, concise, and helpful.
+- Never sound robotic, pushy, or repetitive.
+- Keep the conversation premium and discreet.
+
+WHAT REAL MEET OFFERS
+- Home Visit: Staff visits the user's home, PG, or hotel.
+- Hotel Service: In-room service at hotels.
+- Spa and Massage: Professional body massage service.
+- Private Meeting: One-to-one personal meeting option.
+- Available 24 hours, 7 days a week, across India.
+
+STAFF PROFILES
+- College Girl, Office Girl, Corporate, Widow, Single Girl, Russian Staff.
+- Age range: 20 to 40 years.
+- All profiles are verified and professional.
+- Real photos are shared on WhatsApp after Rs.49 booking.
+
+BOOKING PROCESS
+- Pay Rs.49 consultation fee.
+- Team calls within 2 minutes.
+- Profile photos are shared on WhatsApp.
+- User chooses the preferred profile.
+- Remaining payment is cash at the time of service.
+- Identity is kept private.
+
+RESPONSE STYLE
+- Answer directly and clearly.
+- Keep replies short to medium length unless the user asks for details.
+- If the user asks about a service, explain the relevant details confidently and end with a booking suggestion.
+- If the user asks about pricing, explain that exact rates depend on profile and service type, then guide them toward booking.
+- Avoid repeating the same line too often.
+- Do not overpromise. Keep claims professional and believable.
+
+STRICT RULES
+
+Rule 1 — For any Real Meet related question:
+Respond clearly, warmly, and professionally. End with a booking suggestion.
+
+Rule 2 — For any question not related to Real Meet, such as weather, cricket, movies, food, politics, technology, relationships, health, or anything else:
+Reply exactly in Hindi:
+"Yeh sawaal mere scope se bahar hai, lekin aap hamare personal staff Mam se call pe seedha poochh sakti hain — woh aapke har sawaal ka jawab deti hain. Sirf Rs.49 pay karein aur 2 minute mein Mam ka personal number mil jaayega. Call pe aap jo bhi poochhen — woh sab batayengi."
+Reply exactly in English:
+"That question is outside my area, but you can ask our personal staff Mam directly on a call — she answers everything. Just pay Rs.49 and get Mam's personal number within 2 minutes. You can ask her anything on the call."
+
+Rule 3 — If the user asks for a direct number or personal contact:
+Reply exactly in Hindi:
+"Personal number sirf Rs.49 booking ke baad share hota hai. Pay karein aur turant Mam ka number mil jaayega — phir aap seedha baat kar sakte hain jab chahein."
+Reply exactly in English:
+"Personal number is shared only after Rs.49 booking. Pay now and get Mam's number instantly — then you can contact her directly anytime."
+
+Rule 4 — If the user says it is expensive or they are not interested:
+Reply calmly and respectfully.
+Hindi:
+"Main samajhti hoon. Lekin sochiye — sirf Rs.49 mein Mam ka personal number milega, real photos milengi, aur aap khud decide kar sakte hain. Koi pressure nahi."
+English:
+"I understand. But think about it — just Rs.49 gets you Mam's personal number, real photos, and you decide yourself. No pressure."
+
+Rule 5 — Always end every reply with this line:
+Hindi:
+"Rs.49 pay karein aur 2 minute mein Mam ka personal number seedha aapke paas aayega."
+English:
+"Pay Rs.49 and get Mam's personal number directly within 2 minutes."`;
+
+// ─── UI helpers ───────────────────────────────
 function ftime() {
   var d = new Date();
-  return ('0'+d.getHours()).slice(-2) + ':' + ('0'+d.getMinutes()).slice(-2);
+  return ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2);
 }
 
-function appendBot(html, delay) {
-  delay = delay || 0;
-  var box = msgBox;
-  var tid = 'ti'+Date.now()+Math.random();
-  var ti  = document.createElement('div');
-  ti.id = tid; ti.className = 'chat-typing';
-  ti.innerHTML = '<span></span><span></span><span></span>';
-  box.appendChild(ti); box.scrollTop = 9999;
-
-  setTimeout(function() {
-    var el = document.getElementById(tid);
-    if (el) el.remove();
-    var w = document.createElement('div');
-    w.style.cssText = 'display:flex;flex-direction:column;align-items:flex-start;margin-bottom:4px';
-    w.innerHTML = '<div class="chat-msg bot">'+html+'</div>'
-      + '<div class="chat-msg-time">'+ftime()+'</div>';
-    box.appendChild(w); box.scrollTop = 9999;
-    lead.lines.push('Priya: '+html.replace(/<[^>]+>/g,'').substring(0,140));
-  }, delay + 950);
+function scrollBottom() {
+  if (msgBox) msgBox.scrollTop = 9999;
 }
 
 function appendUser(text) {
   var w = document.createElement('div');
   w.style.cssText = 'display:flex;flex-direction:column;align-items:flex-end;margin-bottom:4px';
-  w.innerHTML = '<div class="chat-msg user">'+text+'</div>'
-    + '<div class="chat-msg-time">'+ftime()+'</div>';
-  msgBox.appendChild(w); msgBox.scrollTop = 9999;
-  lead.lines.push('User: '+text.substring(0,140));
+  w.innerHTML = '<div class="chat-msg user">' + escHtml(text) + '</div>'
+    + '<div class="chat-msg-time">' + ftime() + '</div>';
+  msgBox.appendChild(w);
+  scrollBottom();
+  lead.lines.push('User: ' + text.substring(0, 140));
 }
 
-function setQR(items, delay) {
-  delay = delay || 0;
-  setTimeout(function() {
-    if (!items || !items.length) { qrBox.innerHTML=''; qrBox.style.display='none'; return; }
-    qrBox.style.display = 'flex';
-    qrBox.innerHTML = items.map(function(t) {
-      return '<button class="quick-reply" onclick="RMBot.qr(\''+t.replace(/'/g,"\\'")+'\')">'+ t +'</button>';
-    }).join('');
-  }, delay);
+function escHtml(t) {
+  return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// Show typing indicator, return remove function
+function showTyping() {
+  var ti = document.createElement('div');
+  ti.className = 'chat-typing';
+  ti.innerHTML = '<span></span><span></span><span></span>';
+  msgBox.appendChild(ti);
+  scrollBottom();
+  return function() { if (ti.parentNode) ti.parentNode.removeChild(ti); };
+}
+
+function appendBot(text) {
+  var w = document.createElement('div');
+  w.style.cssText = 'display:flex;flex-direction:column;align-items:flex-start;margin-bottom:4px';
+  // Convert newlines to <br>
+  var html = escHtml(text).replace(/\n/g, '<br>');
+  w.innerHTML = '<div class="chat-msg bot">' + html + '</div>'
+    + '<div class="chat-msg-time">' + ftime() + '</div>';
+  msgBox.appendChild(w);
+  scrollBottom();
+  lead.lines.push('Priya: ' + text.substring(0, 140));
+}
+
+function appendBotWithPay(text) {
+  appendBot(text);
+  // Add pay card after message
+  var w = document.createElement('div');
+  w.style.cssText = 'display:flex;flex-direction:column;align-items:flex-start;margin-bottom:4px';
+  w.innerHTML = payCard();
+  msgBox.appendChild(w);
+  scrollBottom();
 }
 
 // Pay card HTML
@@ -1772,7 +1731,7 @@ function payCard() {
     +   '<span class="rm-pay-off">75% OFF</span>'
     + '</div>'
     + '<div class="rm-pay-perks">'
-    +   '📞 Main aapko Madam se live connect kar dungi<br>'
+    +   '📞 Mam se live connect<br>'
     +   '📸 Profile photos seedha WhatsApp pe<br>'
     +   '📍 Timing &amp; location — aap decide karenge<br>'
     +   '💵 Baaki payment service pe cash — no advance<br>'
@@ -1783,302 +1742,62 @@ function payCard() {
     + '</div>';
 }
 
-// TG fallback note
-function tgNote() {
-  return '<div class="rm-tg-note">'
-    + '<svg width="14" height="14" viewBox="0 0 24 24" fill="#0088cc"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.317 13.4l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.831.159z"/></svg>'
-    + 'Ya Telegram pe bhi message kar sakte hain: <a href="https://t.me/'+TG+'" target="_blank">@'+TG+'</a>'
-    + '&nbsp;(reply thodi der mein milega wahan)'
-    + '</div>';
-}
+// ─── API Call ─────────────────────────────────
+async function callPriya(userMessage) {
+  chatHistory.push({ role: 'user', content: userMessage });
 
-// ─── Intent detection ─────────────────────────
-var intents = [
-  { key:'greet',    rx:/^(hi|hello|hii|hey|namaste|hlo|hlw|hye|hy|sup|helo|namsate|salam)\b/i },
-  { key:'service',  rx:/servi|kya milega|kya hai|kya karte|kya dete|kya offer|bata|batao|detail|explain|samjhao/i },
-  { key:'price',    rx:/price|rate|kitna|cost|charge|fees?|paisa|paise|kitne|amount|budget|rupee|rs\.?|₹|kamat|kitni|charge/i },
-  { key:'profile',  rx:/profile|girl|ladki|photo|pic|dikh|russian|indian|model|staff|aunty|bhabhi|kaisi|kaun si|konsi/i },
-  { key:'city',     rx:/city|kahan|where|locat|delhi|jaipur|surat|mumbai|noida|gurgaon|agra|avail|aata|aati|service kahan|cover/i },
-  { key:'safety',   rx:/safe|real|genuine|trust|sach|pakka|confirm|fraud|fake|scam|sure|guarant|sahi|pakki baat|original/i },
-  { key:'cod',      rx:/cod|cash|advance|bina payment|credit|udhaar|pehle payment|paise pehle/i },
-  { key:'booking',  rx:/book|connect|milna|milwa|set karo|fix|ready|haan|ok\b|okay|chalega|chalo|kab|timing|time|slot|kaise milega/i },
-  { key:'tg',       rx:/telegram|tg|@/i },
-  { key:'negative', rx:/nahi|nai\b|mat\b|no\b|mahanga|zyada|expensive|baad mein|later|sochta|band karo|jane do|rehne do|chhod|chod/i },
-];
+  var removeTyping = showTyping();
 
-function detect(t) {
-  for (var i = 0; i < intents.length; i++) {
-    if (intents[i].rx.test(t)) return intents[i].key;
+  try {
+    var response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: SYSTEM_PROMPT,
+        messages: chatHistory
+      })
+    });
+
+    var data = await response.json();
+    removeTyping();
+
+    var reply = '';
+    if (data.content && data.content.length > 0) {
+      reply = data.content.map(function(b) { return b.text || ''; }).join('');
+    } else {
+      reply = 'Thodi der baad try karein. 🙏';
+    }
+
+    chatHistory.push({ role: 'assistant', content: reply });
+    appendBotWithPay(reply);
+
+  } catch (err) {
+    removeTyping();
+    appendBot('Thodi der baad try karein. Network issue lag raha hai. 🙏');
   }
-  return 'default';
 }
-
-// Extract name from text
-function extractName(t) {
-  var m = t.match(/(?:naam|name)\s+(?:hai|is|hain)?\s*([a-z]{2,14})/i)
-        || t.match(/main\s+([a-z]{2,14})\s+(?:hoon|hun|bol|baat)/i)
-        || t.match(/^([a-z]{2,12})$/i);
-  if (!m) return '';
-  var stop = 'kya hai hoon hun nahi price rate city delhi jaipur surat service book call chat meet real help haan okay ok yes no aap main mai agar kaise'.split(' ');
-  var n = m[1].toLowerCase();
-  return stop.indexOf(n) === -1 ? m[1].charAt(0).toUpperCase()+m[1].slice(1) : '';
-}
-
-// ─── Replies (multiple per intent, rotate) ────
-var replies = {
-
-  greet: [
-    function() {
-      appendBot('Namaste! 🌸 Main Priya hoon — Real Meet ki personal assistant.<br><br>Aap bilkul sahi jagah aaye hain! Koi bhi sawaal ho — service ke baare mein, availability, ya booking — sab main bataungi. Khulke poochh sakte hain, yahan sab private hai 😊', 0);
-      setQR(['Service kya hai? 💆‍♀️','Rates batao 💰','Profiles kesi hain? 👩','City mein available? 📍','Book karna hai 📞'], 2000);
-    },
-    function() {
-      appendBot('Hi! 😊 Aapka swagat hai Real Meet mein!<br><br>Main Priya hoon aur main yahan hoon aapki poori help ke liye. Koi hesitation mat rakhein — jo bhi poochhn ho, main hoon na! 🌸', 0);
-      setQR(['Service ke details chahiye','Rate kya hai?','Profiles?','Available ho kya?'], 2000);
-    }
-  ],
-
-  service: [
-    function() {
-      appendBot('Bilkul! Hum <b>premium body massage service</b> provide karte hain — aur sabse khaas baat yeh hai ki <b>aapko kahin aana nahi padta</b>. Hum aate hain aapke paas! 🌺<br><br>'
-        + '🏠 <b>Home Visit</b> — Aapke ghar ya PG<br>'
-        + '🏨 <b>Hotel Room</b> — Kisi bhi hotel mein<br>'
-        + '🔑 <b>Private Apartment</b> — Fully discreet setup<br><br>'
-        + 'Indian aur Russian dono staff available hai — age 20–28, trained professionals. Aur haan, <b>service 24/7 available hai</b> — jab aapko zaroorat ho! 😊', 0);
-      setTimeout(function() {
-        appendBot('Rates aur profile details ke liye Madam se ek baar baat karna padega — woh personally sab explain karengi aur aapke hisaab se best option suggest karengi.<br><br>' + payCard(), 2200);
-      }, 3500);
-    },
-    function() {
-      appendBot('Acha sawaal kiya! 😊 Dekhiye — hum sirf massage nahi, <b>ek complete relaxation experience</b> provide karte hain.<br><br>'
-        + 'Aap chahe hotel mein ho, ghar mein ho, ya kisi private apartment mein — <b>hamari team aapke paas aati hai</b>. Koi jhanjhat nahi, koi awkwardness nahi.<br><br>'
-        + 'Staff bilkul professional hai — Indian aur Russian dono options hain. Aur sab kuch 100% discreet hota hai. 🔒', 0);
-      setTimeout(function() {
-        appendBot('Ek specific detail jo main batana chahungi — <b>profile selection aap khud karenge</b>, Madam call pe photos share karengi. Toh koi surprise nahi! 📸<br><br>' + payCard(), 2200);
-      }, 3800);
-    }
-  ],
-
-  price: [
-    function() {
-      appendBot('Seedha bolunga — <b>exact price call pe hi batai jaati hai</b>. Aur yeh actually aapke fayde mein hai! 😊<br><br>'
-        + 'Kyunki price depend karti hai:<br>'
-        + '• Aapki city aur exact location<br>'
-        + '• Profile type — Indian, Russian ya VIP<br>'
-        + '• Duration aur service type<br><br>'
-        + 'Call pe Madam <b>aapke budget ke hisaab se best package</b> suggest karengi — koi fixed rate nahi, sab flexible hai!', 0);
-      setTimeout(function() {
-        appendBot('Bahut log pehle poochh lete hain "kitna lagega" — phir call karke realize karte hain ki unke budget mein hi tha! 😄<br><br>'+payCard(), 2300);
-      }, 3800);
-    },
-    function() {
-      appendBot('Main samajhti hoon — price pehle jaanna chahte hain aap. 😊<br><br>'
-        + 'Honestly bolunga — hum website pe rate isliye nahi likhte kyunki <b>har client ke liye deal alag hoti hai</b>. Kisi ka budget alag, kisi ki city alag, kisi ko sirf 1 hour chahiye, kisi ko full evening.<br><br>'
-        + 'Madam ne aaj tak kisi ko disappointed nahi kiya budget se. <b>₹3,000 se ₹15,000+</b> tak ke packages hain — sab mein something hai! 💰', 0);
-      setTimeout(function() {
-        appendBot('Toh ek baar call pe baat kar lo — agar budget match na kare, toh koi force nahi. But 99% log agree karte hain! 😊<br><br>'+payCard(), 2300);
-      }, 3800);
-    },
-    function() {
-      appendBot('Price ki baat karte hain! 💰<br><br>'
-        + 'Seedha fact — hum website pe rate nahi likhte taaki <b>aapko best deal personally de sakein</b>. Jo banda call karta hai, usse woh rate milta hai jo internet pe nahi milta.<br><br>'
-        + 'Madam ke paas har budget ke liye options hain. Plus — <b>baaki payment cash mein service pe</b> hoti hai, sirf ₹49 abhi pay karna hai call connect karne ke liye! 🌸', 0);
-      setTimeout(function() { appendBot(payCard(), 500); }, 3500);
-    }
-  ],
-
-  profile: [
-    function() {
-      appendBot('Ooh yeh toh sabse interesting sawaal hai! 😄<br><br>'
-        + 'Hamare paas genuinely <b>bahut variety</b> hai:<br><br>'
-        + '👱‍♀️ <b>Indian</b> — Age 20–28, sweet, professional touch<br>'
-        + '🌟 <b>Russian / Exotic</b> — Premium experience, very popular<br>'
-        + '💎 <b>VIP Models</b> — Top-rated, best of the best<br>'
-        + '👩 <b>Mature / Experienced</b> — Bhi available hain<br><br>'
-        + 'Sab <b>verified aur trained</b> hain — koi random nahi bheja jaata! ✅', 0);
-      setTimeout(function() {
-        appendBot('Photos website pe isliye nahi hoti privacy ke liye — lekin <b>call ke baad Madam turant WhatsApp pe photos bhejti hain</b>. Aap dekh ke decide karo — koi rush nahi! 📸<br><br>'+payCard(), 2300);
-      }, 3800);
-    },
-    function() {
-      appendBot('Profiles ke baare mein poochh raha hai? Bilkul sahi! 😊<br><br>'
-        + 'Main honestly bol sakti hoon — <b>humari profiles genuinely premium hain</b>. Hum kisi ko bhi bhejna allow nahi karte. Sirf verified, presentable aur professional staff.<br><br>'
-        + 'Indian girls zyada popular hain for their warmth. Russian/exotic profiles premium segment mein hain. Aur VIP category — woh toh ekdum alag level ka experience hai! 💫', 0);
-      setTimeout(function() {
-        appendBot('<b>Aap khud choose karenge</b> — Madam call pe photos share karengi aur aap apni preference batayenge. Yeh process bilkul comfortable hai! 🌸<br><br>'+payCard(), 2200);
-      }, 3800);
-    }
-  ],
-
-  city: [
-    function() {
-      var cities = ['Delhi NCR','Noida','Gurgaon','Jaipur','Surat'];
-      appendBot('Location cover karte hain hum — <b>Delhi NCR, Noida, Gurgaon, Jaipur aur Surat</b> mein actively available hain! 📍<br><br>'
-        + 'Aur agar aapki city is list mein nahi — call pe confirm kar lete hain, nearby areas bhi cover hoti hain kabhi kabhi.<br><br>'
-        + 'Exact area aur timing call pe <b>2 minutes mein confirm</b> ho jaata hai! ⚡', 0);
-      setTimeout(function() {
-        appendBot('Aap kahan se hain? Bata dein — main confirm kar sakti hoon availability! 😊<br><br>'+payCard(), 2300);
-      }, 3500);
-    },
-    function() {
-      appendBot('Availability ke baare mein — hum <b>24/7 available</b> hain, yeh pehle bolunga! 😊<br><br>'
-        + 'Cities: <b>Delhi/NCR, Jaipur, Surat</b> — main active zones hain.<br><br>'
-        + 'Same-day booking possible hai most cases mein — <b>Madam real-time availability check karti hain</b> call pe. Slot book hone mein sirf 5 minutes lagte hain! ⚡', 0);
-      setTimeout(function() { appendBot(payCard(), 500); }, 3200);
-    }
-  ],
-
-  safety: [
-    function() {
-      appendBot('Bahut important sawaal kiya aapne — aur main seedha jawab dungi! 🌸<br><br>'
-        + '<b>2+ saal se yeh service chal rahi hai</b>. Agar fake hota, toh itne saalon mein band ho jaata.<br><br>'
-        + 'Hamare paas <b>10,000+ satisfied clients</b> hain — aur woh baar baar aate hain. Ek baar ka client rarely ek baar hota hai! 😄<br><br>'
-        + '🔒 Aapki identity — koi record nahi<br>'
-        + '📍 Location — aap decide karte ho<br>'
-        + '❌ Koi pressure nahi — agar pasand na aaye toh service cancel', 0);
-      setTimeout(function() {
-        appendBot('Madam khud call karengi — ek baar baat karo, sab shak door ho jaayega. Real log, real service! ✅<br><br>'+payCard(), 2300);
-      }, 4000);
-    },
-    function() {
-      appendBot('Yeh concern main bilkul samajhti hoon — aur honestly bolunga! 😊<br><br>'
-        + 'Internet pe bahut fake services hain — main jaanti hoon. Lekin humari <b>reputation 2+ saal mein built</b> hui hai.<br><br>'
-        + 'Ek simple cheez notice karo — hum website chalate hain, phone number dete hain, Madam personally call karti hain. <b>Fraud log yeh sab nahi karte</b>. Woh bas payment lekar gayab ho jaate hain.<br><br>'
-        + 'Hum ₹49 lete hain — kyunki Madam ka time valuable hai aur serious clients filter karte hain. Agar real nahi hote toh itni transparency kyun? 🙏', 0);
-      setTimeout(function() {
-        appendBot(payCard(), 500);
-      }, 4200);
-    }
-  ],
-
-  cod: [
-    function() {
-      appendBot('Haan ji, COD possible hai! 😊<br><br>'
-        + 'Process ekdum simple hai:<br>'
-        + '1️⃣ ₹49 online pay karo — yeh sirf call connect karne ke liye hai<br>'
-        + '2️⃣ Madam call pe sab discuss karengi — profile, timing, location<br>'
-        + '3️⃣ <b>Baaki poori payment — cash in hand, service ke time</b><br><br>'
-        + 'Koi bada advance nahi, koi risky transaction nahi. ₹49 toh ek cup coffee ki kimat hai na! ☕', 0);
-      setTimeout(function() { appendBot(payCard(), 500); }, 3200);
-    },
-    function() {
-      appendBot('Bilkul samajh sakti hoon — online payment mein hesitation hoti hai. 😊<br><br>'
-        + '<b>Sirf ₹49 online</b> — yeh call connection fee hai. Baaki service ki full payment <b>cash mein, service ke waqt</b> dete ho directly. No tricks, no hidden charges.<br><br>'
-        + 'Bahut log pehle yahi question karte hain — phir realize karte hain ki ₹49 toh kuch bhi nahi, aur service kitni valuable thi! 🌸', 0);
-      setTimeout(function() { appendBot(payCard(), 400); }, 3200);
-    }
-  ],
-
-  booking: [
-    function() {
-      appendBot('Arre wah! Achha decision kiya! 🌸<br><br>'
-        + 'Booking process ekdum simple hai — ₹49 pay karo, aur main turant aapko <b>Madam se live connect</b> kar dungi. Woh call pe:<br><br>'
-        + '✅ Aapki city confirm karengi<br>'
-        + '✅ Profile photos WhatsApp pe bhejngi<br>'
-        + '✅ Timing aur location set karenge<br>'
-        + '✅ Baaki payment cash mein service pe<br><br>'
-        + 'Total time — <b>5 minutes mein sab set!</b> ⚡', 0);
-      setTimeout(function() { appendBot(payCard(), 400); }, 3200);
-    },
-    function() {
-      appendBot('Booking karna hai? Perfect! 😊<br><br>'
-        + 'Sirf ek step hai — ₹49 pay karo neeche se. Uske baad <b>Madam ka call aayega</b> ya aap directly WhatsApp pe aajao. Wahan sab decide hoga — profile, time, location.<br><br>'
-        + 'Same-day booking usually possible hoti hai! ⚡', 0);
-      setTimeout(function() { appendBot(payCard(), 400); }, 2800);
-    }
-  ],
-
-  tg: [
-    function() {
-      appendBot('Haan, Telegram pe bhi hoon main! 😊<br><br>'
-        + '<b>Telegram: <a href="https://t.me/'+TG+'" target="_blank" style="color:#0088cc;font-weight:700;">@'+TG+'</a></b><br><br>'
-        + 'Lekin honestly bolunga — <b>Telegram pe reply thodi der mein milta hai</b> kyunki wahan messages queue mein hote hain.<br><br>'
-        + 'Agar aap chahte hain ki <b>call turant connect ho</b> — toh ₹49 pay karo, main abhi Madam se connect kar dungi! Woh personally baat karengi. ⚡', 0);
-      setTimeout(function() { appendBot(payCard(), 400); }, 3500);
-    }
-  ],
-
-  negative: [
-    function() {
-      appendBot('Koi baat nahi! 😊 Main force nahi karti — yeh aapka decision hai completely.<br><br>'
-        + 'Bas ek cheez bolungi — jo log hesitate karte hain, woh usually baad mein aate hain aur bolte hain "pehle kyun nahi kiya!" 😄<br><br>'
-        + 'Jab bhi ready ho — main yahan hoon. Koi bhi sawaal ho toh poochh lena! 🌸', 0);
-      lead.outcome = 'Hesitant/Left';
-      submitLead();
-      setQR(['Theek hai, ek baar try karta hoon','Rates thoda batao','Safety ka bharosa do'], 2200);
-    },
-    function() {
-      appendBot('Arey! 😊 Dekho main samajhti hoon — lekin ek minute suno.<br><br>'
-        + '₹49 mein aap actually kya pa rahe ho:<br>'
-        + '→ Madam se live baat<br>'
-        + '→ Profile photos<br>'
-        + '→ Service ka full detail<br>'
-        + '→ Booking confirmed<br><br>'
-        + 'Ek chai ki kimat mein itna sab? Sochna padega! 😄 Jab bhi mann bade — main yahan hoon! 🌸', 0);
-      lead.outcome = 'Unconvinced';
-      submitLead();
-    },
-    function() {
-      appendBot('Acha theek hai! 🙏 Kabhi bhi wapas aana — main 24/7 hoon.<br><br>'
-        + 'Ek last baat — agar kabhi curious ho toh Telegram pe bhi aa sakte ho. Wahan thoda slow reply milta hai, lekin main hoon wahan bhi! 😊<br><br>'
-        + tgNote(), 0);
-      lead.outcome = 'Left — shown TG';
-      submitLead();
-    }
-  ],
-
-  default: [
-    function(userText) {
-      appendBot('Samajh gayi! 😊<br><br>'
-        + 'Honestly bolunga — <b>yeh detail Madam aapko personally better explain kar sakti hain</b>. Main toh sirf assistant hoon, woh actual expert hain! 😄<br><br>'
-        + 'Ek chhoti si call mein sab clear ho jaata hai — aur believe me, Madam bahut friendly hain. Koi awkwardness nahi hogi! 🌸', 0);
-      setTimeout(function() { appendBot(payCard(), 400); }, 3000);
-    },
-    function(userText) {
-      appendBot('Achha! 😊 Yeh interesting sawaal hai...<br><br>'
-        + 'Dekhiye main chatbot hoon toh kuch cheezein explain karna mushkil hai text mein — Madam voice pe bahut better samjha sakti hain. Plus woh <b>aapki exact situation ke hisaab se</b> guide karengi!<br><br>'
-        + 'Trust me — ek baar baat karo, sab doubts door ho jaayenge! 💯', 0);
-      setTimeout(function() { appendBot(payCard(), 400); }, 3000);
-    }
-  ]
-};
 
 // ─── Public API ───────────────────────────────
 window.RMBot = {
 
-  qr: function(text) {
-    qrBox.innerHTML = ''; qrBox.style.display = 'none';
-    appendUser(text);
-    RMBot.respond(text);
-  },
-
-  send: function() {
+  send: function () {
     var text = inputEl.value.trim();
     if (!text) return;
     inputEl.value = '';
-    qrBox.innerHTML = ''; qrBox.style.display = 'none';
     appendUser(text);
-    // Try to extract name
-    var n = extractName(text);
-    if (n && !lead.name) lead.name = n;
-    RMBot.respond(text);
+    callPriya(text);
   },
 
-  respond: function(text) {
-    var intent = detect(text);
-    var pool   = replies[intent] || replies['default'];
-    var fn     = pick(intent, pool);
-    fn(text);
-  },
-
-  pay: function() {
+  pay: function () {
     lead.outcome = 'Clicked Pay ₹49';
     submitLead();
     closeFreeChat();
-    var msg = 'Hi! Maine ₹49 pay kar diya ✅ — Madam se connect karna hai 🌸'
-      + (lead.name ? '\nNaam: '+lead.name : '')
-      + (lead.city ? '\nCity: '+lead.city : '');
-    openPaymentModal('whatsapp','https://wa.me/'+WA+'?text='+encodeURIComponent(msg));
+    var msg = 'Hi! Maine ₹49 pay kar diya ✅ — Mam se connect karna hai 🌸'
+      + (lead.name ? '\nNaam: ' + lead.name : '')
+      + (lead.city ? '\nCity: ' + lead.city : '');
+    openPaymentModal('whatsapp', 'https://wa.me/' + WA + '?text=' + encodeURIComponent(msg));
   }
 };
 
@@ -2091,28 +1810,26 @@ function submitLead() {
     document.getElementById('lf_chat').value    = lead.lines.slice(-20).join('\n');
     document.getElementById('lf_time').value    = new Date().toLocaleString('en-IN');
     document.getElementById('leadForm').submit();
-  } catch(e) {}
+  } catch (e) {}
 }
 
 // ─── Open / Close ─────────────────────────────
 var opened = false;
 
-window.openFreeChat = function() {
+window.openFreeChat = function () {
   document.getElementById('chatWidgetOverlay').classList.add('open');
   if (!opened) {
     opened = true;
     msgBox  = document.getElementById('chatMessages');
-    qrBox   = document.getElementById('quickReplies');
     inputEl = document.getElementById('chatInput');
-    // Greeting
-    setTimeout(function() {
-      appendBot('Namaste! 🌸 Main <b>Priya</b> hoon — Real Meet ki personal assistant.<br><br>Yahan sab free hai, sab private hai — jo bhi poochhna ho, bilkul khulke poochhen! 😊', 0);
-      setQR(['Service kya hai? 💆‍♀️','Rates batao 💰','Profiles kesi hain? 👩','City check karo 📍','Book karna hai 📞'], 2000);
+    // Opening greeting via API
+    setTimeout(function () {
+      callPriya('hello');
     }, 400);
   }
 };
 
-window.closeFreeChat = function() {
+window.closeFreeChat = function () {
   document.getElementById('chatWidgetOverlay').classList.remove('open');
   if (lead.lines.length > 2 && !lead.outcome) {
     lead.outcome = 'Chat without booking';
@@ -2120,37 +1837,32 @@ window.closeFreeChat = function() {
   }
 };
 
-document.getElementById('chatWidgetOverlay').addEventListener('click', function(e) {
+document.getElementById('chatWidgetOverlay').addEventListener('click', function (e) {
   if (e.target === this) closeFreeChat();
-});
-
-// Float WA button
-var fwa = document.getElementById('floatWaBtn');
-if (fwa) fwa.addEventListener('click', function() {
-  window.open('https://wa.me/'+WA+'?text='+encodeURIComponent('Hi! Real Meet service ke baare mein poochhna tha 🌸'), '_blank');
 });
 
 // After payment success → redirect to WA
 var _orig = window.showSuccessPage;
-window.showSuccessPage = function() {
+window.showSuccessPage = function () {
   if (typeof _orig === 'function') _orig();
-  var msg = 'Hi! Maine ₹49 pay kar diya ✅ Madam se connect karna hai'
-    + (lead.name ? ' | '+lead.name : '')
-    + (lead.city ? ' | '+lead.city : '');
-  setTimeout(function() {
-    window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(msg), '_blank');
+  var msg = 'Hi! Maine ₹49 pay kar diya ✅ Mam se connect karna hai'
+    + (lead.name ? ' | ' + lead.name : '')
+    + (lead.city ? ' | ' + lead.city : '');
+  setTimeout(function () {
+    window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank');
   }, 1200);
 };
 
-// Lazy init if openFreeChat called before DOM ready
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   msgBox  = document.getElementById('chatMessages');
-  qrBox   = document.getElementById('quickReplies');
   inputEl = document.getElementById('chatInput');
 });
 
 })();
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
