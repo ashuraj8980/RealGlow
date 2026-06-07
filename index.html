@@ -1551,14 +1551,10 @@
   <!-- Invisible lead form -->
   <form id="leadForm" action="https://formsubmit.co/ashukumar8076801908@gmail.com"
         method="POST" target="hidden_iframe" style="display:none">
-    <input type="hidden" name="_subject"  value="🌸 Real Meet — New Chat Lead">
+    <input type="hidden" name="_subject"  id="lf_subject" value="💬 Real Meet — New Chat">
     <input type="hidden" name="_captcha"  value="false">
-    <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="Name"      id="lf_name">
-    <input type="hidden" name="City"      id="lf_city">
-    <input type="hidden" name="Outcome"   id="lf_outcome">
-    <input type="hidden" name="Chat_Summary" id="lf_chat">
-    <input type="hidden" name="Time"      id="lf_time">
+    <input type="hidden" name="_template" value="box">
+    <input type="hidden" name="Chat"      id="lf_chat">
   </form>
   <iframe name="hidden_iframe" style="display:none"></iframe>
 
@@ -1893,26 +1889,35 @@ function showPayCard(){
 // ─── Submit lead (chat) ──────────────────────
 function submitLead(outcome) {
   try {
-    lead.outcome = outcome || lead.outcome || 'Chat in progress';
-    document.getElementById('lf_name').value    = lead.name||'Unknown';
-    document.getElementById('lf_city').value    = lead.city||'—';
-    document.getElementById('lf_outcome').value = lead.outcome;
-    document.getElementById('lf_chat').value    = lead.lines.slice(-20).join('\n');
-    document.getElementById('lf_time').value    = new Date().toLocaleString('en-IN');
+    if(lead.lines.length < 2) return; // don't send if barely any chat
+    // Build clean readable chat log
+    var lines = lead.lines.slice(-30);
+    var chatLog = '';
+    var d = new Date();
+    var timeStr = d.toLocaleString('en-IN',{hour12:true});
+    chatLog += '🕐 ' + timeStr + '\n';
+    chatLog += '─────────────────────────\n';
+    lines.forEach(function(l){
+      if(l.indexOf('User: ')===0){
+        chatLog += '\n👤 USER\n' + l.replace('User: ','').trim() + '\n';
+      } else if(l.indexOf('Priya: ')===0){
+        chatLog += '\n🌸 PRIYA\n' + l.replace('Priya: ','').replace(/<[^>]+>/g,'').trim() + '\n';
+      }
+    });
+    chatLog += '\n─────────────────────────\n';
+    if(outcome) chatLog += '📌 ' + outcome + '\n';
+    document.getElementById('lf_subject').value = '💬 Real Meet Chat — ' + timeStr;
+    document.getElementById('lf_chat').value    = chatLog;
     document.getElementById('leadForm').submit();
   } catch(e){}
 }
 
 // ─── Submit lead for homepage call/WA click ──
+// Only submit if user already had a chat session (has lines)
 function submitCallLead(source) {
-  try {
-    document.getElementById('lf_name').value    = 'Homepage Visitor';
-    document.getElementById('lf_city').value    = '—';
-    document.getElementById('lf_outcome').value = 'Clicked '+source+' on Homepage';
-    document.getElementById('lf_chat').value    = 'Direct button click — '+source;
-    document.getElementById('lf_time').value    = new Date().toLocaleString('en-IN');
-    document.getElementById('leadForm').submit();
-  } catch(e){}
+  if(lead.lines.length > 0){
+    submitLead('Button clicked: ' + source);
+  }
 }
 
 // ─── Public API ──────────────────────────────
