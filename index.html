@@ -1713,6 +1713,7 @@ var intents = [
   { key:'negative', rx:/\bnahi\b|\bnai\b|\bnhi\b|\bno\b|mahanga|zyada|expensive|baad\s*mein|later|sochta|band\s*karo|jane\s*do|rehne\s*do|chhod|nahi\s*chahiye/i },
   { key:'thanks',   rx:/thanks|thank\s*you|shukriya|dhanyawad|\bthx\b|\bty\b/i },
   { key:'outscope', rx:/weather|cricket|movie|film|khana|food|politics|news|technology|health|doctor|hospital|relationship|pyaar|\blove\b|share\s*market|stock|crypto|bitcoin/i },
+  { key:'tg',      rx:/telegram|@xkhushii|tg\s*pe|telegram\s*pe/i },
 ];
 
 function detect(t) {
@@ -1738,63 +1739,208 @@ function tryExtractCity(t) {
 }
 
 // ─── Replies ─────────────────────────────────
+var TG_ID = 'xkhushii';
+var TG_LINK = '<a href="https://t.me/xkhushii" target="_blank" style="color:#e91e8c;font-weight:600;text-decoration:none;">@xkhushii</a>';
+
 var R = {
+
   greet:[
-    'Namaste! &#127800; Kaise hain aap?<br><br>Main Priya hoon — Real Meet se. Jo bhi poochhna ho freely poochhen, yahan sab private hai &#128522;<br><br><small style="color:#aaa;">College girl &middot; Office girl &middot; Corporate &middot; Widow &middot; Mature &middot; Russian — All India available!</small>',
-    'Hi! &#128522; Aapka Real Meet mein swagat hai!<br><br>Main Priya — aapki help ke liye yahan hoon. Service ke baare mein, profiles ke baare mein, ya booking — kuch bhi poochho!<br><br>Batao, kya jaanna chahte hain? &#127800;',
-    'Hey! &#128522; Aaye aap?<br><br>Main Priya hoon. Yahan bilkul freely baat kar sakte hain — sab 100% private rahega. Kya help kar sakti hoon aapki? &#127800;',
+    'Namaste! Main Priya hoon — Real Meet ki personal assistant.<br><br>Koi bhi sawaal ho — service, profiles, pricing ya booking — freely poochhen. Sab 100% private hai.<br><br>Apna naam batao, phir personally help karungi.',
+    'Hello! Real Meet mein swagat hai.<br><br>Main Priya hoon. Yahan bilkul openly baat kar sakte hain. Kya jaanna chahte hain?<br><br><small style="color:#aaa;">College Girl &middot; Office Girl &middot; Corporate &middot; Widow &middot; Russian — All India available</small>',
+    'Hi! Achha hua aap aaye.<br><br>Main Priya hoon. Koi bhi cheez poochhen — main clearly bata dungi. Kya help kar sakti hoon?',
   ],
+
+  flirty:[
+    'Ha ha! Yeh toh bahut interesting sawaal hai.<br><br>Main Priya hoon — aapki guide. Service ke baare mein, profiles ke baare mein — jo bhi jaanna ho poochhen. Main hoon na yahan!<br><br>Batao kya chahiye?',
+    'Arey wah! Seedha dil pe lag gaya sawaal.<br><br>Seriously bolunga — Real Meet mein sab real hai. Staff verified hai, service genuine hai. Koi bhi sawaal ho poochhen!',
+    'Haha, aap toh bahut direct hain!<br><br>Koi baat nahi — yahan sab freely baat kar sakte hain. Kya service chahiye? Profiles? Ya directly booking?',
+  ],
+
+  where_are_you:[
+    'Main Delhi mein hoon — Real Meet ka main office wahan hai. Lekin service poori India mein available hai!<br><br>Aap kis city mein hain? Wahan ki availability seedha bata sakti hoon.',
+    'Main Priya hoon — Real Meet ki representative. Aapki city mein bhi hamari service available hai.<br><br>Batao kahan se ho — turant confirm kar deti hoon!',
+  ],
+
+  name_of_girl:[
+    'Hamare paas bahut si profiles hain — naam nahi, categories hain:<br><br>College Girl, Office Girl, Corporate, Widow, Single, Mature, Russian.<br><br>Real photos Rs.49 ke baad WhatsApp pe milte hain. Aap category choose karo — phir photos dekh ke final decision karo.',
+    'Specific naam nahi hota — profiles categories mein hain. Photos dekh ke aap khud choose karo.<br><br>Rs.49 pay karo aur Mam turant WhatsApp pe real photos send karengi.',
+  ],
+
+  meet_me:[
+    'Bilkul mil sakte hain! Yahi toh hamara kaam hai.<br><br>Process simple hai — Rs.49 pay karo, Mam se baat karo, profile choose karo, aur timing fix karo. Staff aapke location pe aayegi.<br><br>Kahan milna chahte hain — ghar, hotel ya koi aur jagah?',
+    'Haan, meeting arrange ho sakti hai. Home visit ya hotel — dono possible hai.<br><br>Rs.49 pay karo aur Mam sab arrange kar deti hain. Same-day bhi possible hai!',
+  ],
+
+  alone:[
+    'Haan, meeting bilkul private hoti hai — sirf aap aur hamari staff. Koi teen party nahi, koi witness nahi.<br><br>100% discreet service hai hamari. Location bhi aap choose karte ho.',
+    'Bilkul akele mil sakte hain — yahi toh service hai. Private, discreet, koi nahi jaanta.<br><br>Ghar pe ya hotel pe — jo comfortable ho.',
+  ],
+
+  real_photo:[
+    'Haan, real photos milte hain — fake ya edited nahi.<br><br>Rs.49 pay karne ke baad Mam WhatsApp pe real profile photos send karti hain. Dekh ke decide karo — koi pressure nahi.',
+    'Photos bilkul real hain. Hum fake nahi karte — agar fake karte toh 10,000+ clients repeat nahi karte.<br><br>Rs.49 pay karo aur turant photos milenge WhatsApp pe.',
+  ],
+
+  service_type:[
+    'Service types ke baare mein bata deti hoon:<br><br>Full body massage — Rs.1,500 se start (1 hour)<br>Home visit — Rs.2,000 se start<br>Hotel service — Rs.2,500 se start<br>Full evening / Night — alag package<br><br>Exact detail Mam call pe batayengi aapke budget ke hisaab se.',
+    'Kaunsi service chahiye?<br><br>Massage sirf — ya private meeting bhi?<br>Home pe — ya hotel mein?<br><br>Bata do — seedha relevant rate bata deti hoon.',
+  ],
+
+  night_service:[
+    'Haan, night service bhi available hai.<br><br>Rate profile aur duration pe depend karta hai. Rs.49 pay karo aur Mam call pe poora detail clearly bata deti hain — night package, rate, sab kuch.',
+    'Night service available hai — different packages hain. Mam call pe clearly bata deti hain.<br><br>Rs.49 pay karo aur directly Mam se baat karo.',
+  ],
+
+  husband_wife:[
+    'Couple service bhi available hai kuch cases mein.<br><br>Exact detail Mam call pe better bata sakti hain — Rs.49 pay karo aur directly poochho. Woh clearly guide karengi.',
+  ],
+
+  how_old:[
+    'Hamare profiles ki age 20 se 45 saal tak hai.<br><br>College Girl — 20-24<br>Office Girl — 24-30<br>Corporate — 26-35<br>Widow / Mature — 30-45<br>Russian — 22-35<br><br>Kaunsi age prefer karoge?',
+    'Age range 20 se 45 saal. Aap jo chahein — young bhi available hai, mature bhi.<br><br>Photos dekh ke decide karo — Rs.49 ke baad Mam WhatsApp pe send karengi.',
+  ],
+
+  safe:[
+    'Haan bilkul — hamare saath safe hai.<br><br>Aapki identity record nahi hoti, location aap choose karte ho, koi pressure nahi, aur baaki payment cash on service.<br><br>2+ saal se service chal rahi hai — 10,000+ satisfied clients hain. Agar fake hote toh itne saal kaise chalte?',
+    'Safe hai — main guarantee ke saath bol sakti hoon.<br><br>Hum website chalate hain, openly baat karte hain. Fraud log yeh nahi karte.<br><br>Rs.49 sirf access ke liye — baaki sab cash on service. Koi bada risk nahi.',
+  ],
+
   number:[
-    'Haan bilkul — main bhi chahti hoon seedha connect ho! &#128522;<br><br>Lekin seedha number isliye nahi de sakti kyunki roz <b>bahut saare log message karte hain</b> — serious clients ko filter karna padta hai.<br><br>&#8377;49 pay karo — aur <b>Mam ka direct number turant milega</b>. Phir seedha baat karo jab chahein! &#128242;',
-    'Number toh dena chahti hoon — genuinely! &#128522;<br><br>Lekin Mam ne system banaya hai:<br>&#8377;49 pay karo → number aur WhatsApp access milega → phir seedha personal baat.<br><br>Sirf ek step aur — aur seedha connect! &#128242;',
-    'Personal number sirf booking ke baad milta hai &#128522;<br><br>Iska fayda aapko bhi hai — <b>Mam sirf genuine clients ko number deti hain</b>. Toh jab aapko milega, full attention milegi directly.<br><br>&#8377;49 → number → seedha baat! &#128242;',
+    'Personal number sirf Rs.49 booking ke baad milta hai.<br><br>Reason simple hai — Mam ke paas bahut saare messages aate hain, sirf genuine clients ko personal time milta hai.<br><br>Rs.49 pay karo aur 2 minute mein Mam directly call ya WhatsApp karengi. Phir direct contact permanent ho jaata hai.',
+    'Seedha number nahi de sakti publicly — lekin Rs.49 pay karo aur turant Mam ka personal number milega.<br><br>Ek baar connect hone ke baad aap directly Mam se baat kar sakte hain jab chahein.',
+    'Personal contact sirf confirmed booking ke baad milta hai — aapki privacy ke liye bhi, Mam ki bhi.<br><br>Rs.49 → Mam personally contact karengi → direct connection permanent.',
   ],
+
   whatsapp:[
-    'WhatsApp pe best hai! &#128522;<br><br>&#8377;49 pay karo → Mam aapko WhatsApp pe directly contact karengi:<br>&#128248; Real profile photos milenge<br>&#128197; Timing aur location set hogi<br>&#128172; Seedha personal chat<br><br>Pay karo — turant WhatsApp access! &#128154;',
-    'Haan WhatsApp pe zyada easy hota hai baat karna &#128522;<br><br>&#8377;49 ke baad Mam ka WhatsApp number seedha milega — photos, details, booking sab wahan comfortably ho jaata hai. &#128154;',
+    'WhatsApp pe seedha connect karna chahte hain — bilkul sahi choice hai.<br><br>Rs.49 pay karo aur Mam ka WhatsApp number turant milega. Real photos, booking, sab wahan comfortably ho jaata hai.',
+    'WhatsApp pe best hota hai — photos, timing, location sab easily set ho jaata hai.<br><br>Rs.49 ke baad Mam ka personal WhatsApp milega.',
   ],
+
   profile:[
-    'Profiles mein genuinely bahut options hain! &#128522;<br><br>&#127891; <b>College Girl</b> — Age 20-24, fun &amp; young<br>&#128188; <b>Office/Job Girl</b> — Age 24-30, smart &amp; professional<br>&#127970; <b>Corporate Lady</b> — Age 26-35, premium class<br>&#128146; <b>Widow / Unsatisfied</b> — Age 28-40, experienced<br>&#128157; <b>Single Girl</b> — Age 22-32, independent<br>&#127775; <b>Mature / Aunty</b> — Age 35-45<br>&#127760; <b>Russian / Exotic</b> — Premium, very popular<br><br>Sab <b>real, verified, genuine</b> hain &#10003;<br><br>Photos WhatsApp pe milti hain &#8377;49 ke baad — aap dekh ke decide karo!',
-    'Kaunsi type pasand hai aapko? &#128522;<br><br>Hamare paas sab hai:<br>&bull; <b>Young &amp; Fun</b> — College/Office girl (20-28)<br>&bull; <b>Professional</b> — Corporate lady (25-35)<br>&bull; <b>Mature &amp; Experienced</b> — Widow/Aunty (30-45)<br>&bull; <b>Premium Exotic</b> — Russian staff<br><br>Aap choose karo — photos WhatsApp pe milenge &#8377;49 ke baad! &#128248;',
+    'Profiles ke baare mein detail mein bata deti hoon:<br><br><b>College Girl</b> — Age 20-24, Rs.1,500 se start<br><b>Office / Job Girl</b> — Age 24-30, Rs.2,000 se start<br><b>Corporate</b> — Age 26-35, Rs.3,000 se start<br><b>Widow / Single</b> — Age 28-40, Rs.2,000 se start<br><b>Mature / Aunty</b> — Age 35-45, Rs.1,500 se start<br><b>Russian / Exotic</b> — Rs.5,000 se start<br><br>Sab verified hain. Real photos Rs.49 ke baad WhatsApp pe milte hain.',
+    'Kaunsi type mein interest hai?<br><br>Young — College/Office (20-28)<br>Professional — Corporate (25-35)<br>Mature — Widow/Aunty (30-45)<br>Exotic — Russian<br><br>Category batao — seedha relevant photos aur rate bata deti hoon.',
+    'Photos aur details Rs.49 ke baad Mam personally share karengi WhatsApp pe. Aap dekh ke decide karo — koi pressure nahi.',
   ],
+
   service:[
-    'Real Meet ek <b>premium personal meeting service</b> hai &#127802;<br><br>&#127968; <b>Home Visit</b> — Aapke ghar/PG/apartment pe<br>&#127968; <b>Hotel Visit</b> — Kisi bhi hotel room mein<br>&#128134; <b>Spa &amp; Massage</b> — Professional relaxation<br>&#129309; <b>Private Real Meeting</b> — One-to-one, fully discreet<br><br><b>All India available — 24/7, har state mein!</b><br><br>Har profile ka rate alag — call pe clearly bata diya jaata hai. Koi hidden charge nahi! &#10003;',
-    'Kya provide karte hain hum:<br><br>&#10003; Home visit ya Hotel — aap decide karo<br>&#10003; Staff profiles: College, Office, Corporate, Widow, Mature, Russian<br>&#10003; Age 20 se 40 tak, sab verified<br>&#10003; All India coverage — metro se chhote shehar tak<br>&#10003; Baaki payment <b>cash on service</b><br>&#10003; Identity 100% private &#128274;<br><br>Booking process sirf 5 minute! &#8377;49 pay karo aur sab details seedha mil jaayenge &#128522;',
+    'Real Meet kya provide karta hai — clearly bata deti hoon:<br><br><b>Home Visit</b> — Hamari staff aapke ghar ya PG pe aati hai<br><b>Hotel Service</b> — Kisi bhi hotel mein<br><b>Spa aur Massage</b> — Professional relaxation<br><b>Private Meeting</b> — One-to-one discreet meeting<br><br>All India, 24 ghante available. Koi hidden charge nahi.',
+    'Hum kya dete hain:<br><br>Home / Hotel visit — aap decide karo<br>Staff: College, Office, Corporate, Widow, Mature, Russian<br>Age 20-45, sab verified<br>All India coverage<br>Cash on service — koi bada advance nahi<br>Identity 100% private',
   ],
+
   price:[
-    'Rate ke baare mein bata deti hoon! &#128176;<br><br>Exact price depend karta hai:<br>&bull; Aapki city<br>&bull; Profile type — College, Corporate, Russian<br>&bull; Duration — 1hr, 2hr, ya full evening<br><br>Roughly range:<br>&#8226; Basic: <b>&#8377;3,000–5,000</b><br>&#8226; Premium: <b>&#8377;5,000–10,000</b><br>&#8226; VIP/Russian: <b>&#8377;10,000+</b><br><br>Baaki sab <b>cash on service</b> — sirf &#8377;49 abhi! &#128522;',
-    '&#8377;49 sirf <b>access fee</b> hai — call aur WhatsApp ke liye.<br><br>Baaki poori service payment <b>cash in hand</b> hoti hai — service ke waqt directly. Koi bada advance nahi, koi risk nahi! &#128522;<br><br>Budget bataoge toh best option suggest kar sakti hoon!',
+    'Rate clearly bata deti hoon:<br><br><b>1 hour — Rs.1,500 se start</b><br><b>2 hour — Rs.2,500 se start</b><br><b>3 hour — Rs.3,500 se start</b><br><b>Full evening — Rs.5,000 se start</b><br><b>Full night — Rs.8,000 se start</b><br><br>Profile type ke hisaab se rate thoda vary karta hai. Russian premium hoti hai — Rs.5,000 se start.<br><br>Baaki sab cash on service — Rs.49 sirf consultation ke liye.',
+    'Rs.49 sirf call access ke liye hai — baaki poori service cash in hand hoti hai.<br><br>Rate depend karta hai profile aur duration pe. Budget batao — best option suggest kar sakti hoon.',
+    'Honestly bata deti hoon — rate Rs.1,500 se start hoti hai 1 hour ke liye. Upar Rs.15,000+ tak bhi jaata hai premium packages mein.<br><br>Mam call pe aapke budget mein best match dhundh deti hain.',
   ],
+
   city:[
-    '<b>Haan, aapki city mein available hai!</b> &#128205;<br><br>Real Meet puri India mein available hai:<br><br>&#127981; <b>North India</b> — Delhi, Noida, Gurgaon, Agra, Lucknow, Kanpur, Varanasi, Chandigarh, Amritsar, Dehradun, Meerut<br>&#127981; <b>West India</b> — Mumbai, Pune, Surat, Ahmedabad, Vadodara, Rajkot, Nagpur, Goa<br>&#127981; <b>South India</b> — Bangalore, Hyderabad, Chennai, Coimbatore, Kochi, Visakhapatnam<br>&#127981; <b>East India</b> — Kolkata, Bhubaneswar, Patna, Ranchi, Guwahati<br>&#127981; <b>Central India</b> — Bhopal, Indore, Raipur, Jaipur, Jodhpur<br><br>Jo bhi state ya city ho — <b>hum wahan hain!</b> &#128522;<br>Ek baar call pe confirm kar lete hain — &#8377;49 pay karo!',
-    'Aapki city pakka cover hoti hai! &#128522;<br><br>Hum <b>har state mein</b> available hain — Metro cities se lekar tier-2 cities tak. Same-day service bhi possible hai most cities mein! &#9889;<br><br>Exact availability &#8377;49 ke baad call pe <b>2 minute mein confirm</b> ho jaati hai. Aap city batao — main check karti hoon! &#128205;',
+    'Aapki city mein service available hai!<br><br>Hum puri India mein hain — har state cover hoti hai. Exact availability Rs.49 ke baad call pe 2 minute mein confirm hoti hai.<br><br>Aap city batao — main seedha bata deti hoon.',
+    'All India service hai — metro se tier-2 cities tak, chhote shehar bhi cover hote hain.<br><br>Same-day booking bhi possible hai zyaadatar cities mein. City batao?',
   ],
-  safety:[
-    'Bilkul sahi poochha — safety sabse zaroori hai! &#128591;<br><br>&#128274; Aapki identity — koi record nahi, koi trace nahi<br>&#128205; Location — aap decide karte ho, hum aate hain<br>&#10060; Koi pressure nahi — profile pasand na aaye, cancel<br>&#128181; Cash on service — koi bada advance nahi<br>&#128526; 100% discreet service<br><br><b>2+ saal ki trusted service, 10,000+ satisfied clients</b> — baar baar aate hain wahi log. Yahi sabse badi guarantee hai! &#128522;',
-    'Trust karna bilkul sahi concern hai &#128522;<br><br>Ek simple cheez notice karo — hum website chalate hain, openly baat karte hain. Fraud log yeh sab nahi karte.<br><br>Aur &#8377;49 ke baad jo bhi baat ho — woh seedha Mam se hogi, personally. <b>Koi bada advance nahi</b> — sirf &#8377;49 access ke liye. Risk almost zero! &#10003;',
+
+  state_city:[
+    'Haan, {CITY} mein hamari service available hai.<br><br>Wahan kaafi profiles available hain. Same-day booking bhi possible hai.<br><br>Rs.49 pay karo aur Mam call pe exact area aur timing confirm kar deti hain.',
   ],
+
+  bihar:[
+    'Haan, Bihar mein available hain hum!<br><br>Patna, Gaya, Muzaffarpur, Bhagalpur, Darbhanga, Hajipur, Ara, Sasaram, Begusarai — kaafi cities cover hoti hain.<br><br>Rs.49 pay karo aur Mam aapki exact city mein availability confirm kar deti hain.',
+  ],
+
+  up:[
+    'Uttar Pradesh mein haan available hain!<br><br>Lucknow, Kanpur, Agra, Varanasi, Prayagraj, Meerut, Ghaziabad, Noida, Mathura, Aligarh, Bareilly, Gorakhpur, Moradabad — bahut cities cover hoti hain.<br><br>Aapki city bataiye — Mam confirm kar deti hain.',
+  ],
+
+  rajasthan:[
+    'Rajasthan mein bilkul available hain!<br><br>Jaipur, Jodhpur, Udaipur, Kota, Ajmer, Bikaner, Alwar, Bhilwara, Sikar — sab cover hote hain.<br><br>Rs.49 pay karo aur Mam exact availability confirm kar deti hain.',
+  ],
+
+  mp:[
+    'Madhya Pradesh mein haan service available hai!<br><br>Bhopal, Indore, Gwalior, Jabalpur, Ujjain, Rewa, Sagar — kaafi cities mein hain hum.<br><br>City batao — Mam confirm kar deti hain.',
+  ],
+
   cash:[
-    'Poora process clear kar deti hoon! &#128522;<br><br>1&#65039;&#8419; <b>&#8377;49 abhi</b> — sirf call + WhatsApp access ke liye<br>2&#65039;&#8419; <b>Mam se baat</b> — profile choose karo, timing fix karo<br>3&#65039;&#8419; <b>Service ke waqt</b> — poori payment <b>cash in hand!</b><br><br>Koi bada advance nahi, koi bank transfer nahi, koi risk nahi! &#10003;<br>&#8377;49 ek cup coffee se bhi kam! &#9749;',
+    'Process bilkul clear hai:<br><br>1. Rs.49 abhi — call aur WhatsApp access ke liye<br>2. Mam se baat — profile choose karo, timing fix karo<br>3. Service ke waqt — poori payment cash in hand<br><br>Koi bada advance nahi. Koi risk nahi.',
   ],
+
   booking:[
-    'Book karna chahte hain? Sahi decision! &#127800;<br><br>Sirf itna karo:<br>&#10003; &#8377;49 pay karo (UPI/Card)<br>&#10003; Mam ka call ya WhatsApp <b>2 minute mein</b> aayega<br>&#10003; Profiles ki photos WhatsApp pe milenge<br>&#10003; Aap apni pasand bataenge<br>&#10003; Timing aur location confirm<br>&#10003; <b>Same-day service possible!</b> &#9889;<br><br>Total time: 5-10 minute. Itna aasan! &#128522;',
-    'Ek step mein booking ho jaati hai! &#128522;<br><br>&#8377;49 pay karo → Mam directly contact karengi → sab set ho jaayega. Baaki payment cash on service.<br><br>Ready ho? Neeche button dabao! &#127800;',
+    'Booking simple hai:<br><br>Rs.49 pay karo → Mam 2 minute mein contact karengi → WhatsApp pe real photos milenge → profile choose karo → timing aur location confirm → cash on service<br><br>Total 10 minute. Same-day possible hai.',
+    'Ek step mein ho jaata hai — Rs.49 pay karo aur Mam directly contact karengi. Baaki sab unse seedha set ho jaayega.',
   ],
+
+  time:[
+    'Service ka time aap decide karte ho — morning, evening ya raat koi bhi time.<br><br>24 ghante available hain hum. Exact timing Mam call pe fix kar deti hain.<br><br>Rs.49 pay karo aur timing seedha confirm karo.',
+    'Koi bhi time ho — hum available hain. Same-day bhi possible hai zyaadatar cases mein.<br><br>Rs.49 → Mam contact karengi → timing fix karein.',
+  ],
+
+  duration:[
+    'Duration aap choose karo:<br><br>1 hour — Rs.1,500 se<br>2 hour — Rs.2,500 se<br>3 hour — Rs.3,500 se<br>Full evening — Rs.5,000 se<br>Full night — Rs.8,000 se<br><br>Kaunsa option comfortable lagta hai?',
+  ],
+
+  hotel:[
+    'Hotel service bilkul available hai — kisi bhi hotel mein, koi bhi star rating.<br><br>Aapko sirf room book karna hai. Staff discreetly aayegi — koi notice nahi karega.<br><br>Rs.49 pay karo aur Mam sab arrange kar deti hain.',
+    'Haan, hotel mein service available hai. 3 star, 4 star, 5 star — koi bhi.<br><br>Aap room book karo, timing batao — Mam baaki sab handle karengi.',
+  ],
+
+  home:[
+    'Ghar pe service bilkul available hai — home visit hamari speciality hai.<br><br>Staff aapke ghar, PG ya apartment pe aayegi. Discreet aur private — koi nahi jaanta.<br><br>Rs.49 pay karo aur timing fix karo Mam se.',
+    'Haan, ghar pe aayengi hamari staff. Aapko kahin jaana nahi padta.<br><br>Rs.49 → Mam contact karengi → timing aur address set karein.',
+  ],
+
+  pg:[
+    'PG mein bhi service available hai. Hamari staff discreetly aati hai — koi issue nahi hota.<br><br>Rs.49 pay karo aur Mam sab arrange kar deti hain.',
+  ],
+
+  alone_girl:[
+    'Haan, single girl milti hai — alag alag profiles mein. College Girl, Office Girl, Single Women — sab available hain.<br><br>Real photos Rs.49 ke baad milenge. Dekh ke choose karo.',
+  ],
+
+  two_girls:[
+    'Do girls ka arrangement bhi possible hai kuch cases mein.<br><br>Exact availability aur rate Mam call pe bata sakti hain. Rs.49 pay karo aur directly poochho.',
+  ],
+
+  satisfaction:[
+    'Satisfaction guaranteed hai hamare saath — isliye 10,000+ clients repeat karte hain.<br><br>Agar pasand nahi aaya toh cancel kar sakte ho. Koi force nahi. Baaki payment toh cash on service hai hi.',
+    '100% satisfaction hamara goal hai. Profile aap choose karte ho — photos dekh ke. Koi surprise nahi hota.',
+  ],
+
+  discount:[
+    'Discount ke baare mein Mam directly bata sakti hain — pehle client ke liye sometimes special deal milti hai.<br><br>Rs.49 pay karo aur Mam se poochho — woh best deal dene ki koshish karti hain.',
+    'Regular clients ke liye better rates hote hain. Mam se baat karo — woh aapki situation ke hisaab se best option suggest karengi.',
+  ],
+
+  fake:[
+    'Main samajhti hoon yeh concern — internet pe bahut fake services hain.<br><br>Lekin hum 2+ saal se hain, 10,000+ verified clients hain. Agar fake hote toh itne saalon mein kab ka band ho jaata.<br><br>Rs.49 mein ek baar try karo — baaki sab cash on service. Koi bada risk nahi.',
+    'Proof dene ka sabse achha tarika — khud try karo. Rs.49 pay karo, Mam se baat karo, photos dekho — sab real dikhega apne aap.',
+  ],
+
+  privacy:[
+    'Privacy ke baare mein — aapki identity kabhi record nahi hoti. Koi data save nahi hota.<br><br>Location aap choose karte ho. Staff discreetly aati hai. Koi nahi jaanta.<br><br>Yahi wajah hai ki clients baar baar aate hain.',
+    '100% private service hai. Koi record nahi, koi trace nahi. Aap comfortable rehte ho hamesha.',
+  ],
+
   negative:[
-    'Koi baat nahi, main samajhti hoon &#128522;<br><br>Bas ek cheez bolunga — jo log pehle hesitate karte hain, woh baad mein kehte hain "yaar pehle kyun nahi kiya!" &#128516;<br><br>Jab bhi mann kare — main 24/7 yahan hoon. Koi sawaal ho toh poochhna! &#127800;',
-    'Bilkul theek hai, koi pressure nahi &#128522;<br><br>Sirf yaad rakhna — &#8377;49 mein kya milta hai:<br>&#8594; Mam ka personal number<br>&#8594; Real profile photos<br>&#8594; Baaki sab cash on service<br><br>Ek chai ki kimat mein itna sab! &#9749; Jab ready ho — main hoon &#127800;',
+    'Koi baat nahi — jab bhi ready ho, main 24/7 yahan hoon.<br><br>Koi confusion ho toh Telegram pe bhi reach kar sakte hain — '+TG_LINK+' pe message karo.',
+    'Bilkul theek hai, koi pressure nahi. Jab mann kare wapas aana.<br><br>Rs.49 mein Mam ka personal number, real photos, aur baaki cash on service — jab ready ho toh batana.',
   ],
+
   thanks:[
-    'Arey koi baat nahi! &#128522; Koi bhi sawaal ho toh poochhna — main hoon yahan! &#127800;',
-    'Khushi hui help karke! &#128522; Booking ke liye kabhi bhi — main 24/7 available hoon! &#127800;',
+    'Koi baat nahi! Koi bhi sawaal ho toh zaroor poochhen.',
+    'Khushi hui help karke. Kabhi bhi — 24/7 available hoon.',
   ],
+
+  tg:[
+    'Haan, Telegram pe bhi hain hum — '+TG_LINK+'<br><br>Lekin honestly — call ya WhatsApp pe instant personal response milta hai, Telegram se faster.<br><br>Rs.49 pay karein aur Mam 2 minute mein directly contact karengi.',
+  ],
+
   outscope:[
-    'Haha yeh toh mere area se bahar hai &#128522;<br><br>Lekin aap Mam se call pe kuch bhi poochh sakte hain — woh bahut friendly hain aur helpful bhi! &#8377;49 pay karo → number milega → phir koi bhi baat karo! &#127800;',
+    'Yeh topic mere scope se bahar hai — lekin Telegram pe '+TG_LINK+' pe message kar sakte hain, wahan guidance milegi.<br><br>Ya Real Meet ke baare mein koi sawaal ho toh yahan poochhen.',
+    'Is baare mein main directly help nahi kar sakti. Real Meet service ke baare mein koi bhi sawaal ho toh batao — service, profiles, pricing, booking — sab bata sakti hoon.',
   ],
+
   default:[
-    'Samajh gayi! &#128522;<br><br>Honestly — <b>call pe sab zyada clearly ho jaata hai</b>. Text mein kuch baatein theek se convey nahi ho paatin.<br><br>Ek baar Mam se seedha baat karo — 5 minute mein sab clear ho jaayega! &#127800;',
-    'Yeh thoda specific sawaal hai &#128522;<br><br>Mam personally aapke hisaab se guide karengi — woh bahut experienced hain aur sab clearly samjhati hain!<br><br>&#8377;49 pay karo → 2 min mein number → seedha baat! &#128222;',
-    'Acha poochha! &#128522;<br><br>Yeh detail call pe best explain hoti hai — Mam aapki situation ke hisaab se perfectly guide karengi. Ek baar try karo! &#127800;',
+    'Yeh cheez Mam call pe bahut achhe se explain kar sakti hain — aapki situation ke hisaab se personally guide karengi.<br><br>Rs.49 pay karein aur 2 minute mein Mam ka number seedha aapke paas aayega.',
+    'Main sirf Real Meet service se related help kar sakti hoon. Service, profiles, pricing, booking — kuch bhi poochhen.<br><br>Ya Telegram pe '+TG_LINK+' pe reach karein.',
+    'Is baare mein Mam zyada clearly bata sakti hain. Ek baar seedha baat karo — 5 minute mein sab clear ho jaata hai.',
   ],
 };
 
@@ -1889,7 +2035,7 @@ function showPayCard(){
 // ─── Submit lead (chat) ──────────────────────
 function submitLead(outcome) {
   try {
-    if(lead.lines.length < 2) return; // don't send if barely any chat
+    if(lead.lines.length < 1) return; // send even with 1 line
     // Build clean readable chat log
     var lines = lead.lines.slice(-30);
     var chatLog = '';
