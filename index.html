@@ -1,0 +1,2156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Real Meet – Premium Service</title>
+
+  <!-- Optimized font loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <!-- Razorpay Script -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1231633498897411');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1231633498897411&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+
+  <style>
+    :root {
+      --pink:       #e91e8c;
+      --pink-deep:  #c4146f;
+      --pink-soft:  #f472b6;
+      --pink-pale:  #fce7f3;
+      --pink-bg:    #fff0f7;
+      --blue:       #1a56db;
+      --blue-soft:  #3b82f6;
+      --blue-pale:  #dbeafe;
+      --yellow:     #f59e0b;
+      --yellow-soft:#fde68a;
+      --white:      #ffffff;
+      --off-white:  #fafafa;
+      --text-dark:  #1e1b4b;
+      --text-mid:   #4c4770;
+      --text-muted: #9490b5;
+      --serif:      'Playfair Display', Georgia, serif;
+      --sans:       'Inter', sans-serif;
+      --shadow-pink: 0 8px 32px rgba(233,30,140,0.18);
+      --shadow-blue: 0 8px 32px rgba(26,86,219,0.15);
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--text-dark);
+      font-family: var(--sans);
+      font-weight: 400;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .bg-decor {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 55% 40% at 90% 10%, rgba(233,30,140,0.07) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 35% at 10% 80%, rgba(26,86,219,0.06) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 30% at 50% 50%, rgba(245,158,11,0.04) 0%, transparent 70%),
+        linear-gradient(180deg, #fff0f7 0%, #ffffff 40%, #f0f4ff 100%);
+    }
+
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(80px);
+      opacity: 0.5;
+      will-change: transform;
+    }
+    .blob1 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(233,30,140,0.2) 0%, transparent 70%);
+      top: -80px; right: -60px;
+      animation: bfloat1 12s ease-in-out infinite;
+    }
+    .blob2 {
+      width: 240px; height: 240px;
+      background: radial-gradient(circle, rgba(26,86,219,0.15) 0%, transparent 70%);
+      bottom: 80px; left: -50px;
+      animation: bfloat2 14s ease-in-out infinite;
+    }
+    @keyframes bfloat1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-20px,25px)} }
+    @keyframes bfloat2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(18px,-20px)} }
+
+    .header {
+      position: fixed; top:0; left:0; right:0; z-index:100;
+      padding: 14px 20px;
+      display: flex; align-items:center; justify-content:space-between;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(233,30,140,0.1);
+      box-shadow: 0 2px 16px rgba(233,30,140,0.06);
+    }
+    .logo {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      letter-spacing: -0.01em;
+    }
+    .logo em {
+      font-style: italic;
+      color: var(--pink);
+    }
+    .live-pill {
+      display:flex; align-items:center; gap:7px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: linear-gradient(135deg, rgba(233,30,140,0.08), rgba(245,158,11,0.08));
+      border: 1px solid rgba(233,30,140,0.2);
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--pink-deep);
+      font-weight: 500;
+    }
+    .live-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--pink);
+      box-shadow: 0 0 6px rgba(233,30,140,0.6);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+
+    .hero {
+      position: relative; z-index:1;
+      padding: 48px 24px 56px;  /* tighter padding — no more huge empty space */
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+    }
+
+    .hero-ring {
+      position: absolute;
+      width: 360px; height: 360px;
+      border-radius: 50%;
+      border: 1px solid rgba(233,30,140,0.08);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .hero-ring::before {
+      content: '';
+      position: absolute; inset: -30px;
+      border-radius: 50%;
+      border: 1px solid rgba(26,86,219,0.06);
+    }
+
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-bottom: 28px;
+      animation: rise 0.8s 0.05s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    .tag-line { width: 24px; height: 1px; background: rgba(233,30,140,0.35); }
+    .tag-text {
+      font-size: 0.57rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--pink);
+      font-weight: 500;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(3.2rem, 13vw, 5.8rem);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--text-dark);
+      margin-bottom: 16px;
+      animation: rise 0.8s 0.1s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    h1 em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--pink) 0%, var(--pink-deep) 50%, #9b0a5a 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(0.9rem, 3vw, 1.1rem);
+      font-weight: 300;
+      color: var(--text-mid);
+      letter-spacing: 0.03em;
+      margin-bottom: 32px;
+      animation: rise 0.8s 0.15s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    .pill-row {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+      margin-bottom: 36px;
+      animation: rise 0.8s 0.2s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    .pill {
+      padding: 6px 14px;
+      border-radius: 100px;
+      border: 1px solid rgba(233,30,140,0.2);
+      background: rgba(233,30,140,0.05);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--pink-deep);
+      font-weight: 500;
+    }
+
+    .btn-stack {
+      width: 100%; max-width: 360px;
+      display: flex; flex-direction: column; gap: 11px;
+      animation: rise 0.8s 0.25s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    .btn {
+      display: flex; align-items: center; justify-content: center; gap: 11px;
+      width: 100%; padding: 16px 24px;
+      border-radius: 14px;
+      border: none;
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: scale(0.98) translateY(1px); }
+
+    .btn::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 50%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.18) 0%, transparent 100%);
+      border-radius: 14px 14px 0 0;
+      pointer-events: none;
+    }
+    .btn::after {
+      content: '';
+      position: absolute; top: -50%; left: -80%;
+      width: 50%; height: 200%;
+      background: rgba(255,255,255,0.15);
+      transform: skewX(-20deg);
+      transition: left 0.55s ease;
+      pointer-events: none;
+    }
+    .btn:hover::after { left: 130%; }
+
+    .btn-wa {
+      background: linear-gradient(145deg, #25d366 0%, #1da851 45%, #128c3e 100%);
+      color: #fff;
+      box-shadow: 0 2px 0 rgba(255,255,255,0.18) inset, 0 -2px 0 rgba(0,0,0,0.15) inset, 0 8px 28px rgba(37,211,102,0.30), 0 2px 6px rgba(0,0,0,0.12);
+    }
+    .btn-wa:hover {
+      box-shadow: 0 2px 0 rgba(255,255,255,0.18) inset, 0 -2px 0 rgba(0,0,0,0.15) inset, 0 14px 45px rgba(37,211,102,0.42), 0 4px 12px rgba(0,0,0,0.14);
+    }
+
+    .btn-job {
+      background: transparent;
+      color: var(--pink-deep);
+      border: 2px solid transparent;
+      background-image: linear-gradient(white, white), linear-gradient(135deg, var(--pink) 0%, var(--yellow) 60%, var(--pink-deep) 100%);
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+      box-shadow: 0 4px 20px rgba(233,30,140,0.10), 0 1px 0 rgba(255,255,255,0.9) inset;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .btn-job svg { stroke: var(--pink-deep); }
+    .btn-job:hover {
+      background-image: linear-gradient(135deg, var(--pink) 0%, #c4146f 100%), none;
+      background-clip: padding-box;
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 12px 36px rgba(233,30,140,0.28), 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .btn-job:hover svg { stroke: #fff; }
+
+    .btn-tg {
+      background: linear-gradient(145deg, #40b3e0 0%, #2ca5d6 40%, #1a8fbd 100%);
+      color: #fff;
+      box-shadow: 0 2px 0 rgba(255,255,255,0.18) inset, 0 -2px 0 rgba(0,0,0,0.12) inset, 0 8px 28px rgba(44,165,214,0.28), 0 2px 6px rgba(0,0,0,0.12);
+    }
+    .btn-tg:hover {
+      box-shadow: 0 2px 0 rgba(255,255,255,0.18) inset, 0 -2px 0 rgba(0,0,0,0.12) inset, 0 14px 40px rgba(44,165,214,0.42), 0 4px 12px rgba(0,0,0,0.14);
+    }
+
+    
+    .btn-call {
+      background: linear-gradient(145deg, #25d366 0%, #1da851 45%, #128c3e 100%);
+      color: #fff;
+      box-shadow: 0 2px 0 rgba(255,255,255,0.18) inset, 0 8px 28px rgba(37,211,102,0.30), 0 2px 6px rgba(0,0,0,0.12);
+    }
+    .btn-call:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(37,211,102,0.42);
+    }
+    .btn-note {
+      font-size: 0.58rem;
+      color: var(--text-muted);
+      text-align: center;
+      letter-spacing: 0.07em;
+      margin-top: 2px;
+    }
+
+    .stats-row {
+      display: flex;
+      width: 100%; max-width: 340px;
+      margin: 40px auto 0;
+      animation: rise 0.8s 0.32s cubic-bezier(0.22,1,0.36,1) both;
+      background: var(--white);
+      border: 1px solid rgba(233,30,140,0.12);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(233,30,140,0.08), 0 1px 0 rgba(255,255,255,0.9) inset;
+    }
+    .stat {
+      flex: 1; padding: 18px 8px; text-align: center;
+      border-right: 1px solid rgba(233,30,140,0.08);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      display: block;
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--pink) 0%, var(--pink-deep) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-lbl {
+      display: block;
+      font-size: 0.52rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .section {
+      position: relative; z-index: 1;
+      padding: 64px 24px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 20px;
+    }
+    .eyebrow-rule { width: 20px; height: 1px; background: rgba(233,30,140,0.35); }
+    .eyebrow-text {
+      font-size: 0.56rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--pink);
+      font-weight: 500;
+    }
+
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 5.5vw, 2.5rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--text-dark);
+      margin-bottom: 28px;
+    }
+    h2 em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--pink), var(--pink-deep));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .cards {
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .card {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 20px 18px;
+      border-radius: 16px;
+      background: var(--white);
+      border: 1px solid rgba(233,30,140,0.1);
+      border-top-color: rgba(233,30,140,0.15);
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 2px 16px rgba(233,30,140,0.06), 0 1px 0 rgba(255,255,255,0.9) inset;
+    }
+    .card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(233,30,140,0.25), transparent);
+    }
+    .card::after {
+      content: '';
+      position: absolute; top: 16px; left: 0;
+      width: 2px; height: calc(100% - 32px);
+      background: linear-gradient(to bottom, transparent, var(--pink), transparent);
+      border-radius: 2px;
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 36px rgba(233,30,140,0.12), 0 1px 0 rgba(255,255,255,0.9) inset;
+    }
+    .card:hover::after { opacity: 1; }
+
+    .card-num {
+      font-family: var(--serif);
+      font-size: 0.72rem;
+      color: var(--pink);
+      font-style: italic;
+      min-width: 22px;
+      padding-top: 2px;
+    }
+    .card-title {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-dark);
+      margin-bottom: 5px;
+    }
+    .card-desc {
+      font-size: 0.71rem;
+      color: var(--text-mid);
+      line-height: 1.65;
+    }
+
+    .trust {
+      display: flex; flex-direction: column; gap: 10px;
+      position: relative; z-index: 1;
+      padding: 0 24px 56px;
+      max-width: 480px; margin: 0 auto;
+    }
+    .trust-card {
+      display: flex; align-items: center; gap: 16px;
+      padding: 16px 18px;
+      border-radius: 14px;
+      background: var(--white);
+      border: 1px solid rgba(26,86,219,0.1);
+      box-shadow: 0 2px 14px rgba(26,86,219,0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .trust-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(26,86,219,0.1);
+    }
+    .trust-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      border-radius: 12px;
+      background: linear-gradient(145deg, var(--pink-pale), rgba(219,234,254,0.6));
+      border: 1px solid rgba(233,30,140,0.15);
+      display: grid; place-items: center;
+      font-size: 1.05rem;
+      box-shadow: 0 2px 8px rgba(233,30,140,0.08);
+    }
+    .trust-text strong {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-dark);
+      margin-bottom: 3px;
+    }
+    .trust-text span {
+      font-size: 0.68rem;
+      color: var(--text-mid);
+      line-height: 1.5;
+    }
+
+    .final {
+      position: relative; z-index: 1;
+      padding: 56px 24px 80px;
+      text-align: center;
+      max-width: 420px; margin: 0 auto;
+    }
+
+    .final-band {
+      position: relative; z-index: 1;
+      background: linear-gradient(135deg, rgba(233,30,140,0.04) 0%, rgba(26,86,219,0.04) 100%);
+      border-top: 1px solid rgba(233,30,140,0.08);
+      border-bottom: 1px solid rgba(233,30,140,0.08);
+    }
+
+    .final-rule {
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, rgba(233,30,140,0.35), transparent);
+      margin: 0 auto 36px;
+    }
+    .final h2 { margin-bottom: 12px; }
+    .final p {
+      font-size: 0.75rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+    .final .btn-stack { margin: 0 auto; animation: none; }
+
+    footer {
+      position: relative; z-index: 1;
+      text-align: center;
+      padding: 28px 20px;
+      border-top: 1px solid rgba(233,30,140,0.07);
+      font-size: 0.55rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* MODAL - bottom sheet */
+    .modal {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(15,10,30,0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 2000;
+      align-items: flex-end;
+      justify-content: center;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .modal-content {
+      background: #ffffff;
+      border-radius: 28px 28px 0 0;
+      width: 100%; max-width: 480px;
+      text-align: left;
+      animation: sheetUp 0.35s cubic-bezier(0.22,1,0.36,1) both;
+      overflow: hidden;
+    }
+    @keyframes sheetUp { from{transform:translateY(100%)} to{transform:translateY(0)} }
+    .modal-handle { width:40px;height:4px;background:rgba(0,0,0,0.1);border-radius:4px;margin:14px auto 0; }
+    .modal-header { padding:18px 24px 0;display:flex;align-items:center;gap:14px; }
+    .modal-ico { width:46px;height:46px;flex-shrink:0;border-radius:14px;background:var(--pink-pale);border:1px solid rgba(233,30,140,0.15);display:grid;place-items:center;font-size:1.2rem; }
+    .modal-ico-text strong { display:block;font-size:0.95rem;font-weight:600;color:var(--text-dark);font-family:var(--serif); }
+    .modal-ico-text span { font-size:0.6rem;color:var(--text-muted);letter-spacing:0.08em;text-transform:uppercase; }
+    .modal-divider { height:1px;background:linear-gradient(90deg,transparent,rgba(233,30,140,0.1),transparent);margin:16px 24px; }
+    .modal-price-row { padding:0 24px;display:flex;align-items:baseline;gap:4px;margin-bottom:4px; }
+    .modal-sym { font-size:1rem;font-weight:600;color:var(--pink); }
+    .modal-amt { font-family:var(--serif);font-size:2.8rem;color:var(--text-dark);line-height:1; }
+    .modal-lbl { font-size:0.62rem;color:var(--text-muted);margin-left:4px; }
+    .modal-subdesc { padding:0 24px;font-size:0.68rem;color:var(--text-mid);margin-bottom:16px;line-height:1.55; }
+    .modal-features { margin:0 24px 14px;background:linear-gradient(135deg,#fff8fc,#f0f7ff);border:1px solid rgba(233,30,140,0.08);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:9px; }
+    .modal-feat-item { display:flex;align-items:center;gap:11px; }
+    .modal-feat-dot { width:6px;height:6px;border-radius:50%;background:var(--pink);flex-shrink:0; }
+    .modal-feat-item span { font-size:0.7rem;color:var(--text-mid); }
+    .modal-secure { margin:0 24px 16px;padding:9px 13px;background:var(--blue-pale);border:1px solid rgba(26,86,219,0.1);border-radius:11px;display:flex;align-items:center;gap:8px; }
+    .modal-secure span { font-size:0.6rem;color:var(--blue);letter-spacing:0.02em; }
+    .modal-actions { padding:0 24px 30px;display:flex;flex-direction:column;gap:9px; }
+    .btn-pay-modal {
+      width:100%;padding:16px;
+      background:linear-gradient(145deg,#e91e8c,#c4146f);
+      color:white;border:none;border-radius:14px;
+      font-family:var(--sans);font-size:0.87rem;font-weight:600;
+      cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;
+      transition:transform 0.18s,box-shadow 0.18s;
+      box-shadow:0 4px 20px rgba(233,30,140,0.3);
+    }
+    .btn-pay-modal:hover { transform:translateY(-2px);box-shadow:0 8px 28px rgba(233,30,140,0.38); }
+    .btn-pay-modal:active { transform:scale(0.98); }
+    .btn-cancel-modal { width:100%;padding:13px;background:transparent;border:1px solid rgba(0,0,0,0.08);border-radius:12px;font-family:var(--sans);font-size:0.75rem;color:var(--text-muted);cursor:pointer;transition:background 0.15s; }
+    .btn-cancel-modal:hover { background:rgba(0,0,0,0.03); }
+    .payment-loading { display:none;padding:48px 24px;text-align:center; }
+    .spinner { width:32px;height:32px;border:2.5px solid rgba(233,30,140,0.15);border-top-color:var(--pink);border-radius:50%;animation:spin 0.75s linear infinite;margin:0 auto 14px; }
+    @keyframes spin { to{transform:rotate(360deg)} }
+    .payment-loading p { font-size:0.72rem;color:var(--text-muted); }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 380px) {
+      h1 { font-size: 2.8rem; }
+      .modal-content { padding: 24px 20px; }
+    }
+  
+    /* ── FLOATING BUTTONS ── */
+    .float-btns {
+      position: fixed;
+      bottom: 80px;
+      right: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 999;
+    }
+    .float-btn {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      position: relative;
+    }
+    .float-btn:hover { transform: scale(1.08); }
+    .float-btn:active { transform: scale(0.95); }
+    .float-call {
+      background: linear-gradient(145deg, #25d366, #128c3e);
+      box-shadow: 0 4px 18px rgba(37,211,102,0.5);
+    }
+    .float-tg {
+      background: linear-gradient(145deg, #40b3e0, #1a8fbd);
+      box-shadow: 0 4px 18px rgba(44,165,214,0.5);
+    }
+    .float-btn svg { width: 18px; height: 18px; }
+    .float-btn::after {
+      content: '';
+      position: absolute; inset: -3px;
+      border-radius: 50%;
+      border: 2px solid currentColor;
+      opacity: 0;
+      animation: floatPulse 2.5s ease-in-out infinite;
+    }
+    .float-call::after { color: #25d366; }
+    .float-tg::after { color: #40b3e0; }
+    @keyframes floatPulse {
+      0% { opacity: 0.5; transform: scale(1); }
+      100% { opacity: 0; transform: scale(1.6); }
+    }
+    .float-label {
+      position: absolute;
+      right: 54px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(20,20,20,0.82);
+      color: white;
+      font-size: 0.58rem;
+      font-weight: 600;
+      padding: 5px 11px;
+      border-radius: 100px;
+      white-space: nowrap;
+      letter-spacing: 0.05em;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .float-btn:hover .float-label { opacity: 1; }
+  
+    /* ── VIDEO SECTION ── */
+    .video-section {
+      position: relative; z-index: 1;
+      padding: 0;
+      width: 100%;
+      background: #000;
+    }
+    .video-wrap {
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      /* No fixed height — video determines its own height naturally */
+      line-height: 0; /* removes bottom gap under video */
+    }
+    .video-wrap video {
+      width: 100%;
+      height: auto;        /* any ratio video — 9:16, 16:9, 4:3, square — all fit */
+      max-height: 92vh;    /* never taller than screen */
+      object-fit: contain; /* show full video, no crop, no black bars cut */
+      display: block;
+      background: #000;
+      /* Ensure no sound even if browser ignores muted attribute */
+      -webkit-muted: true;
+    }
+    .video-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.38) 100%);
+      pointer-events: none;
+    }
+    .video-label {
+      position: absolute;
+      bottom: 14px; left: 50%;
+      transform: translateX(-50%);
+      background: rgba(233,30,140,0.85);
+      color: white;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 100px;
+      pointer-events: none;
+      backdrop-filter: blur(6px);
+      white-space: nowrap;
+    }
+
+    .video-control-btn {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      z-index: 10;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.3);
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, border-color 0.2s;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .video-control-btn:hover {
+      background: rgba(233,30,140,0.7);
+      border-color: rgba(233,30,140,0.6);
+      transform: scale(1.08);
+    }
+    .video-control-btn:active { transform: scale(0.95); }
+
+    /* ── PLAY OVERLAY ── */
+    .play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      z-index: 10;
+      cursor: pointer;
+      transition: opacity 0.4s ease;
+    }
+    .play-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .play-overlay-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.25) 0%,
+        rgba(0,0,0,0.55) 50%,
+        rgba(0,0,0,0.35) 100%
+      );
+    }
+
+    /* Big circular play button */
+    .play-btn-big {
+      position: relative;
+      width: 90px;
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .play-btn-big:active { transform: scale(0.93); }
+
+    .play-btn-inner {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, rgba(233,30,140,0.95), rgba(196,20,111,0.95));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow:
+        0 0 0 3px rgba(255,255,255,0.25),
+        0 8px 40px rgba(233,30,140,0.55),
+        0 2px 8px rgba(0,0,0,0.4);
+      backdrop-filter: blur(4px);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Pulsing rings */
+    .play-btn-rings { position: absolute; inset: 0; }
+    .ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid rgba(233,30,140,0.5);
+      inset: 0;
+      animation: ringPulse 2.2s ease-out infinite;
+    }
+    .ring2 { animation-delay: 1.1s; }
+    @keyframes ringPulse {
+      0%   { transform: scale(1);   opacity: 0.7; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+
+    /* "Tap to play" hint text below button */
+    .play-hint {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 10px 20px;
+      border-radius: 100px;
+      z-index: 2;
+    }
+    .play-hint-icon { font-size: 1rem; }
+    .play-hint-text {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    /* Free Chat button — premium look */
+    .btn-free-chat {
+      width: 100%;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 16px 20px;
+      border-radius: 14px;
+      border: none;
+      background: linear-gradient(135deg, rgba(233,30,140,0.12), rgba(196,20,111,0.08));
+      color: var(--pink);
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.22s;
+      font-family: inherit;
+      letter-spacing: 0.01em;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 0 1.5px rgba(233,30,140,0.35), inset 0 1px 0 rgba(255,255,255,0.15);
+    }
+    .btn-free-chat::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(233,30,140,0.18), transparent);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .btn-free-chat:hover::before { opacity: 1; }
+    .btn-free-chat:hover {
+      box-shadow: 0 0 0 2px rgba(233,30,140,0.7), 0 6px 20px rgba(233,30,140,0.25);
+      transform: translateY(-1px);
+    }
+    .btn-free-chat:active { transform: scale(0.98); }
+    .btn-free-chat-badge {
+      background: var(--pink);
+      color: #fff;
+      font-size: 0.58rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 100px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-left: 2px;
+    }
+
+    /* Float WhatsApp */
+    .float-wa {
+      background: linear-gradient(145deg, #25d366, #128c3e);
+      box-shadow: 0 4px 18px rgba(37,211,102,0.5);
+    }
+    .float-wa::after { color: #25d366; }
+
+    /* ── CHAT WIDGET ── */
+    .chat-widget-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 9000;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      backdrop-filter: blur(3px);
+    }
+    .chat-widget-overlay.open { display: flex; }
+    .chat-widget {
+      width: 100%;
+      max-width: 440px;
+      background: #fff;
+      border-radius: 24px 24px 0 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      max-height: 88vh;
+      animation: slideUp 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @keyframes slideUp {
+      from { transform: translateY(100%); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+    .chat-header {
+      background: linear-gradient(135deg, #e9188c, #c4146f);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .chat-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .chat-header-info { flex: 1; }
+    .chat-header-name {
+      font-weight: 700; font-size: 0.95rem; color: #fff;
+    }
+    .chat-header-status {
+      font-size: 0.72rem; color: rgba(255,255,255,0.8);
+      display: flex; align-items: center; gap: 5px; margin-top: 2px;
+    }
+    .chat-online-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #7fff7f;
+      animation: blink 1.8s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .chat-close-btn {
+      background: rgba(255,255,255,0.2);
+      border: none; border-radius: 50%;
+      width: 32px; height: 32px;
+      color: #fff; font-size: 1rem;
+      cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+    }
+    .chat-messages {
+      flex: 1; overflow-y: auto;
+      padding: 16px;
+      display: flex; flex-direction: column; gap: 10px;
+      background: #f7f0f4;
+    }
+    .chat-msg {
+      max-width: 80%;
+      padding: 10px 14px;
+      border-radius: 18px;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+    .chat-msg.bot {
+      background: #fff;
+      color: #222;
+      border-bottom-left-radius: 4px;
+      align-self: flex-start;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .chat-msg.user {
+      background: linear-gradient(135deg, #e9188c, #c4146f);
+      color: #fff;
+      border-bottom-right-radius: 4px;
+      align-self: flex-end;
+    }
+    .chat-msg-time {
+      font-size: 0.62rem;
+      color: #aaa;
+      margin-top: 3px;
+      text-align: right;
+    }
+    .chat-typing {
+      display: flex; gap: 4px; align-items: center;
+      padding: 10px 14px;
+      background: #fff;
+      border-radius: 18px;
+      border-bottom-left-radius: 4px;
+      width: fit-content;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .chat-typing span {
+      width: 7px; height: 7px;
+      background: #ccc; border-radius: 50%;
+      animation: typingDot 1.2s ease-in-out infinite;
+    }
+    .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+    .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingDot {
+      0%,60%,100% { transform: translateY(0); background: #ccc; }
+      30% { transform: translateY(-5px); background: #e9188c; }
+    }
+    .chat-quick-replies {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      padding: 10px 16px 0;
+      background: #f7f0f4;
+    }
+    .quick-reply {
+      font-size: 0.76rem; font-weight: 600;
+      padding: 6px 13px;
+      border-radius: 100px;
+      border: 1.5px solid #e9188c;
+      color: #e9188c;
+      background: #fff;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .quick-reply:hover { background: #e9188c; color: #fff; }
+    .chat-input-row {
+      display: flex; gap: 8px;
+      padding: 12px 14px;
+      background: #fff;
+      border-top: 1px solid #f0e0ea;
+      flex-shrink: 0;
+    }
+    .chat-input {
+      flex: 1;
+      border: 1.5px solid #f0c0d8;
+      border-radius: 100px;
+      padding: 10px 16px;
+      font-size: 0.85rem;
+      outline: none;
+      font-family: inherit;
+      transition: border-color 0.2s;
+      color: #222;
+    }
+    .chat-input:focus { border-color: #e9188c; }
+    .chat-send-btn {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e9188c, #c4146f);
+      border: none;
+      color: #fff;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.15s;
+    }
+    .chat-send-btn:active { transform: scale(0.93); }
+    .chat-footer-note {
+      text-align: center;
+      font-size: 0.65rem;
+      color: #bbb;
+      padding: 6px 16px 10px;
+      background: #fff;
+    }
+
+    /* ── SUCCESS PAGE ── */
+    #successPage {
+      display: none;
+      position: fixed; inset: 0;
+      background: var(--white);
+      z-index: 5000;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px;
+      text-align: center;
+    }
+    .success-check-big {
+      width: 70px; height: 70px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #25d366, #128c3e);
+      display: grid; place-items: center;
+      margin: 0 auto 20px;
+      font-size: 1.8rem;
+      box-shadow: 0 8px 28px rgba(37,211,102,0.35);
+    }
+    .success-title {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+    .success-title em { font-style: italic; color: var(--pink); }
+    .success-sub {
+      font-size: 0.78rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .success-number-box {
+      background: var(--pink-pale);
+      border: 1px solid rgba(233,30,140,0.2);
+      border-radius: 16px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+    .success-number-label {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 6px;
+    }
+    .success-number {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+    .success-btns { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+    .btn-success-wa {
+      width: 100%; padding: 15px;
+      background: linear-gradient(145deg, #25d366, #128c3e);
+      color: white; border: none; border-radius: 14px;
+      font-family: var(--sans); font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+      box-shadow: 0 4px 16px rgba(37,211,102,0.3);
+      text-decoration: none;
+    }
+    .btn-success-call {
+      width: 100%; padding: 15px;
+      background: linear-gradient(145deg, #25d366, #128c3e);
+      color: white; border: none; border-radius: 14px;
+      font-family: var(--sans); font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+      box-shadow: 0 4px 16px rgba(37,211,102,0.3);
+      text-decoration: none;
+    }
+    .btn-success-tg {
+      width: 100%; padding: 15px;
+      background: linear-gradient(145deg, #40b3e0, #1a8fbd);
+      color: white; border: none; border-radius: 14px;
+      font-family: var(--sans); font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+      box-shadow: 0 4px 16px rgba(44,165,214,0.25);
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-decor"></div>
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+
+  <header class="header">
+    <div class="logo">Real <em>Meet</em></div>
+    <div class="live-pill">
+      <span class="live-dot"></span>
+      Available Now
+    </div>
+  </header>
+
+  <!-- VIDEO SECTION — full viewport, first thing user sees -->
+  <div class="video-section" style="margin-top:52px;">
+    <div class="video-wrap" id="videoWrap">
+      <video loop playsinline preload="auto" id="heroVideo">
+        <source src="video1.mp4" type="video/mp4">
+      </video>
+      <div class="video-overlay"></div>
+
+      <!-- BIG PLAY BUTTON OVERLAY -->
+      <div class="play-overlay" id="playOverlay">
+        <div class="play-overlay-bg"></div>
+        <div class="play-btn-big" id="playBtnBig">
+          <div class="play-btn-rings">
+            <span class="ring ring1"></span>
+            <span class="ring ring2"></span>
+          </div>
+          <div class="play-btn-inner">
+            <svg viewBox="0 0 24 24" fill="white" width="32" height="32" style="margin-left:4px">
+              <polygon points="5,3 19,12 5,21"/>
+            </svg>
+          </div>
+        </div>
+        <div class="play-hint">
+          <span class="play-hint-icon">🔊</span>
+          <span class="play-hint-text">TAP TO PLAY WITH SOUND</span>
+        </div>
+      </div>
+
+      <!-- small label shown after playing -->
+      <div class="video-label" id="videoLabel" style="display:none;">▶ Real Meet — Watch Our Service</div>
+
+      <!-- PAUSE/PLAY TOGGLE BUTTON — bottom right, shown after playing -->
+      <button class="video-control-btn" id="videoControlBtn" style="display:none;" aria-label="Pause video">
+        <svg id="pauseIcon" viewBox="0 0 24 24" fill="white" width="18" height="18">
+          <rect x="6" y="4" width="4" height="16" rx="1"/>
+          <rect x="14" y="4" width="4" height="16" rx="1"/>
+        </svg>
+        <svg id="playIcon" viewBox="0 0 24 24" fill="white" width="18" height="18" style="display:none;margin-left:2px">
+          <polygon points="5,3 19,12 5,21"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+
+  <section class="hero">
+    <div class="hero-ring"></div>
+    <div class="hero-tag">
+      <div class="tag-line"></div>
+      <div class="tag-text">Premium &middot; Discreet &middot; Professional</div>
+      <div class="tag-line"></div>
+    </div>
+    <h1>Real<br><em>Meet</em></h1>
+    <p class="hero-sub">Massage &amp; Relaxation at Your Door</p>
+    <div class="pill-row">
+      <span class="pill">Home Visit</span>
+      <span class="pill">Hotel Service</span>
+      <span class="pill">Indian &amp; Russian</span>
+      <span class="pill">24 / 7</span>
+    </div>
+    <div class="btn-stack">
+      <!-- 1. Call — TOP -->
+      <button class="btn btn-call" id="mainCallCTA">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" style="flex-shrink:0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6.09 6.09l1.13-.93a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Book via Call
+      </button>
+
+      <!-- 2. WhatsApp — MIDDLE -->
+      <button class="btn btn-wa" id="mainCTA">
+        <svg viewBox="0 0 24 24" fill="white" width="20" height="20" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Book via WhatsApp
+      </button>
+
+      <!-- 3. Free Chat Support — BOTTOM (opens chat widget) -->
+      <button class="btn btn-free-chat" id="mainFreeChatBtn" onclick="openFreeChat()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" style="flex-shrink:0"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        💬 Free Chat Support <span class="btn-free-chat-badge">FREE</span>
+      </button>
+
+      <p class="btn-note">Free consultation &nbsp;·&nbsp; Instant reply &nbsp;·&nbsp; Fully discreet</p>
+    </div>
+    <div class="stats-row">
+      <div class="stat"><span class="stat-num">10K+</span><span class="stat-lbl">Clients</span></div>
+      <div class="stat"><span class="stat-num">24/7</span><span class="stat-lbl">Available</span></div>
+      <div class="stat"><span class="stat-num">100%</span><span class="stat-lbl">Discreet</span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="eyebrow"><div class="eyebrow-rule"></div><div class="eyebrow-text">What We Offer</div></div>
+    <h2>Premium <em>Services</em></h2>
+    <div class="cards">
+      <div class="card"><span class="card-num">01</span><div><div class="card-title">Home Visit</div><div class="card-desc">Professional therapist at your home — fully equipped, hygienic, and completely private.</div></div></div>
+      <div class="card"><span class="card-num">02</span><div><div class="card-title">Hotel Service</div><div class="card-desc">Discreet in-room service across Delhi, Jaipur &amp; Surat — any time, no questions.</div></div></div>
+      <div class="card"><span class="card-num">03</span><div><div class="card-title">Female Therapists</div><div class="card-desc">Indian &amp; Russian staff, age 20–35. Trained professionals with a gentle, premium touch.</div></div></div>
+      <div class="card"><span class="card-num">04</span><div><div class="card-title">Full Satisfaction</div><div class="card-desc">100% satisfaction guaranteed. Premium experience, every single session, no compromise.</div></div></div>
+    </div>
+  </section>
+
+  <div class="trust">
+    <div class="trust-card"><div class="trust-icon">🔒</div><div class="trust-text"><strong>Completely Private</strong><span>Your identity and visit are always kept fully confidential.</span></div></div>
+    <div class="trust-card"><div class="trust-icon">⚡</div><div class="trust-text"><strong>Instant Confirmation</strong><span>Message us and get a response within minutes, any time.</span></div></div>
+    <div class="trust-card"><div class="trust-icon">✦</div><div class="trust-text"><strong>Verified Professionals</strong><span>Every therapist is background-checked, trained &amp; punctual.</span></div></div>
+  </div>
+
+  <div class="final-band">
+    <section class="final">
+      <div class="final-rule"></div>
+      <h2>Book Your<br><em>Session Now</em></h2>
+      <p>Ek message bhejo — hum turant reply karenge aur aapki booking confirm karenge. No waiting, no hassle.</p>
+      <div class="btn-stack">
+        <!-- 1. Call — TOP -->
+        <button class="btn btn-call" id="bottomCallCTA">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" style="flex-shrink:0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6.09 6.09l1.13-.93a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Book via Call
+        </button>
+
+        <!-- 2. WhatsApp — MIDDLE -->
+        <button class="btn btn-wa" id="bottomCTA">
+          <svg viewBox="0 0 24 24" fill="white" width="20" height="20" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Book via WhatsApp
+        </button>
+
+        <!-- 3. Free Chat — BOTTOM -->
+        <button class="btn btn-free-chat" onclick="openFreeChat()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" style="flex-shrink:0"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          💬 Free Chat Support <span class="btn-free-chat-badge">FREE</span>
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    &copy; 2025 WellnessConnect &nbsp;&middot;&nbsp; Premium Service &nbsp;&middot;&nbsp; All Rights Reserved
+  </footer>
+
+  <div id="paymentModal" class="modal">
+    <div class="modal-content">
+      <div id="modalMainContent">
+        <div class="modal-handle"></div>
+        <div class="modal-header">
+          <div class="modal-ico">📞</div>
+          <div class="modal-ico-text">
+            <strong>Real Meet Access</strong>
+            <span>One-time verification fee</span>
+          </div>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-price-row">
+          <span class="modal-sym">₹</span>
+          <span class="modal-amt">49</span>
+          <span class="modal-lbl">one-time only</span>
+        </div>
+        <div class="modal-subdesc">Pay once and get direct access — instant reply, no waiting.</div>
+        <div class="modal-features">
+          <div class="modal-feat-item"><div class="modal-feat-dot"></div><span>Complete service details on call</span></div>
+          <div class="modal-feat-item"><div class="modal-feat-dot"></div><span>Real meeting confirmation — location & timing</span></div>
+          <div class="modal-feat-item"><div class="modal-feat-dot"></div><span>Therapist selection — Indian & Russian staff</span></div>
+          <div class="modal-feat-item"><div class="modal-feat-dot"></div><span>Instant priority response, no waiting</span></div>
+        </div>
+        <div class="modal-secure">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1a56db" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span>100% secure · Powered by Razorpay · UPI / Cards accepted</span>
+        </div>
+        <div class="modal-actions">
+          <button class="btn-pay-modal" id="confirmPayBtn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            Pay ₹49 & Get Access
+          </button>
+          <button class="btn-cancel-modal" id="cancelPayBtn">Not now</button>
+        </div>
+      </div>
+      <div id="modalLoadingContent" class="payment-loading">
+        <div class="spinner"></div>
+        <p>Opening secure payment...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS PAGE -->
+  <div id="successPage">
+    <div class="success-check-big">✓</div>
+    <div class="success-title">Payment <em>Done!</em></div>
+    <p class="success-sub">Thank you! Your access is confirmed.<br>Call karen ya WhatsApp pe message karen — hum turant reply karenge.</p>
+    <div class="success-number-box">
+      <div class="success-number-label">Our Number</div>
+      <div class="success-number">+91 92175 07608</div>
+    </div>
+    <div class="success-btns">
+      <a class="btn-success-call" href="tel:+919217507608">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6.09 6.09l1.13-.93a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Call Now — +91 92175 07608
+      </a>
+      <a class="btn-success-wa" href="https://wa.me/919217507608?text=%2AREAL%20MEET%20SERVICE%2A%20-%20Payment%20Successful%20%E2%9C%85%20Please%20connect%20me" target="_blank">
+        <svg viewBox="0 0 24 24" fill="white" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp — Payment Successful ✅
+      </a>
+      <a class="btn-success-tg" href="https://t.me/xkhushii" target="_blank">
+        <svg viewBox="0 0 24 24" fill="white" width="18" height="18"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        Telegram — Connect Now
+      </a>
+    </div>
+  </div>
+
+  <!-- FLOATING BUTTONS: Call top, WhatsApp middle, Telegram bottom -->
+  <div class="float-btns">
+    <button class="float-btn float-call" id="floatCallBtn">
+      <span class="float-label">Call — ₹49</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.83a16 16 0 0 0 6.09 6.09l1.13-.93a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    </button>
+    <button class="float-btn float-wa" id="floatWaBtn">
+      <span class="float-label">WhatsApp</span>
+      <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </button>
+    <button class="float-btn float-tg" id="floatTgBtn">
+      <span class="float-label">Telegram Free</span>
+      <svg viewBox="0 0 24 24" fill="white"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+    </button>
+  </div>
+
+  <script>
+    // Video play logic — show overlay, tap to play with sound
+    (function() {
+      var v          = document.getElementById('heroVideo');
+      var overlay    = document.getElementById('playOverlay');
+      var label      = document.getElementById('videoLabel');
+      var ctrlBtn    = document.getElementById('videoControlBtn');
+      var pauseIcon  = document.getElementById('pauseIcon');
+      var playIcon   = document.getElementById('playIcon');
+
+      if (!v) return;
+
+      function showControls() {
+        overlay.classList.add('hidden');
+        setTimeout(function() {
+          overlay.style.display = 'none';
+          if (label) label.style.display = 'block';
+          if (ctrlBtn) ctrlBtn.style.display = 'flex';
+        }, 400);
+      }
+
+      function startPlay() {
+        v.play().then(function() {
+          showControls();
+        }).catch(function() {
+          // Mobile blocked — keep overlay
+        });
+      }
+
+      // Try autoplay on load (desktop)
+      startPlay();
+
+      // Tap overlay = play
+      if (overlay) overlay.addEventListener('click', startPlay);
+
+      // Pause / Play toggle button
+      if (ctrlBtn) {
+        ctrlBtn.addEventListener('click', function() {
+          if (v.paused) {
+            v.play();
+            pauseIcon.style.display = 'block';
+            playIcon.style.display = 'none';
+            ctrlBtn.setAttribute('aria-label', 'Pause video');
+          } else {
+            v.pause();
+            pauseIcon.style.display = 'none';
+            playIcon.style.display = 'block';
+            ctrlBtn.setAttribute('aria-label', 'Play video');
+          }
+        });
+      }
+    })();
+    const PAID_KEY = 'rm_paid_v1';
+    function checkAlreadyPaid() {
+      try {
+        if (localStorage.getItem(PAID_KEY) === 'yes') {
+          showSuccessPage();
+        }
+      } catch(e) {}
+    }
+    function markAsPaid() {
+      try { localStorage.setItem(PAID_KEY, 'yes'); } catch(e) {}
+    }
+    function showSuccessPage() {
+      document.getElementById('successPage').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    let pendingPlatform = '';
+    let pendingUrl = '';
+    
+    const RAZORPAY_KEY_ID = 'rzp_live_SsM9fK1UOQZsBB';
+    const WHATSAPP_NUMBER = '919217507608';
+    
+    function openPaymentModal(platform, url) {
+      pendingPlatform = platform;
+      pendingUrl = url;
+      document.getElementById('modalMainContent').style.display = 'block';
+      document.getElementById('modalLoadingContent').style.display = 'none';
+      document.getElementById('paymentModal').style.display = 'flex';
+    }
+    
+    function initiatePayment() {
+      if (!RAZORPAY_KEY_ID || RAZORPAY_KEY_ID === '') {
+        alert('Payment system error. Please try again.');
+        return;
+      }
+      
+      document.getElementById('modalMainContent').style.display = 'none';
+      document.getElementById('modalLoadingContent').style.display = 'block';
+      
+      const options = {
+        key: RAZORPAY_KEY_ID,
+        amount: 4900,
+        currency: "INR",
+        name: "Real Meet",
+        description: "Premium Service Access - Call Details",
+        prefill: {
+          name: "Guest",
+          email: "guest@realmeet.in",
+          contact: "9000000000"
+        },
+        handler: function(response) {
+          try {
+            fbq('track', 'Purchase', { value: 49, currency: 'INR', content_name: 'Real Meet Access' });
+            fbq('track', 'Lead', { content_name: 'Real Meet Paid', content_category: 'Payment Success', currency: 'INR', value: 49 });
+          } catch(err) {}
+          markAsPaid();
+          document.getElementById('paymentModal').style.display = 'none';
+          showSuccessPage();
+        },
+        modal: {
+          ondismiss: function() {
+            document.getElementById('modalMainContent').style.display = 'block';
+            document.getElementById('modalLoadingContent').style.display = 'none';
+          }
+        },
+        theme: { color: "#e91e8c" },
+          method: { upi: true, card: true, netbanking: false, wallet: false, emi: false }
+      };
+      
+      const rzp = new Razorpay(options);
+      rzp.open();
+      rzp.on('payment.failed', function() {
+        alert('Payment failed. Please try again.');
+        document.getElementById('modalMainContent').style.display = 'block';
+        document.getElementById('modalLoadingContent').style.display = 'none';
+      });
+    }
+    
+    function handleWAClick(e) {
+      e.preventDefault();
+      const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('*REAL MEET SERVICE* - I need real meeting details on call')}`;
+      openPaymentModal('whatsapp', waUrl);
+    }
+    
+        function handleCallClick(e) {
+      if(e) e.preventDefault();
+      openPaymentModal('call', 'tel:+919217507608');
+    }
+    
+    function handleTgClick(e) {
+      if(e) e.preventDefault();
+      try { fbq('track','Lead',{content_name:'Telegram Click',content_category:'Real Meet'}); } catch(err){}
+      window.open('https://t.me/xkhushii', '_blank');
+    }
+    
+    document.getElementById('mainCTA').addEventListener('click', handleWAClick);
+    document.getElementById('bottomCTA').addEventListener('click', handleWAClick);
+    
+    document.querySelectorAll('.btn-tg').forEach(btn => {
+      btn.addEventListener('click', handleTgClick);
+    });
+    
+    document.getElementById('confirmPayBtn').addEventListener('click', initiatePayment);
+    document.getElementById('mainCallCTA').addEventListener('click', handleCallClick);
+    document.getElementById('bottomCallCTA').addEventListener('click', handleCallClick);
+    document.getElementById('floatCallBtn').addEventListener('click', handleCallClick);
+    document.getElementById('floatTgBtn').addEventListener('click', handleTgClick);
+    document.getElementById('cancelPayBtn').addEventListener('click', () => {
+      document.getElementById('paymentModal').style.display = 'none';
+      pendingUrl = '';
+    });
+    
+    window.onclick = (e) => {
+      if (e.target === document.getElementById('paymentModal')) {
+        document.getElementById('paymentModal').style.display = 'none';
+        pendingUrl = '';
+      }
+    };
+    
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `perspective(700px) rotateX(${-y*5}deg) rotateY(${x*5}deg) translateY(-3px)`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    });
+  </script>
+
+  <!-- Floating pill button -->
+  <button class="free-chat-pill" onclick="openFreeChat()">
+    <span class="pill-dot"></span>
+    💬 Free Chat — Priya se poochhen
+    <span class="pill-badge">FREE</span>
+  </button>
+
+  <!-- ═══ FREE CHAT WIDGET ═══ -->
+  <div class="chat-widget-overlay" id="chatWidgetOverlay">
+    <div class="chat-widget" id="chatWidget">
+
+      <div class="chat-header">
+        <div style="position:relative;flex-shrink:0;">
+          <div class="chat-avatar">🧖‍♀️</div>
+          <span style="position:absolute;bottom:1px;right:1px;width:10px;height:10px;background:#4ade80;border-radius:50%;border:2px solid #e9188c;"></span>
+        </div>
+        <div class="chat-header-info">
+          <div class="chat-header-name">Priya &nbsp;<span style="font-weight:400;font-size:0.72rem;opacity:0.85">Real Meet Assistant</span></div>
+          <div class="chat-header-status"><span class="chat-online-dot"></span>Online — typically replies instantly</div>
+        </div>
+        <button class="chat-close-btn" onclick="closeFreeChat()">✕</button>
+      </div>
+
+      <div class="chat-messages" id="chatMessages"></div>
+      <div class="chat-quick-replies" id="quickReplies"></div>
+
+      <div class="chat-input-row">
+        <input class="chat-input" id="chatInput" type="text"
+          placeholder="Message Priya..."
+          maxlength="300"
+          onkeydown="if(event.key==='Enter')RMBot.send()">
+        <button class="chat-send-btn" onclick="RMBot.send()">
+          <svg viewBox="0 0 24 24" fill="white" width="17" height="17"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        </button>
+      </div>
+      <div class="chat-footer-note">🔒 Free · Private · 100% Discreet</div>
+    </div>
+  </div>
+
+  <!-- Invisible lead form -->
+  <form id="leadForm" action="https://formsubmit.co/ashukumar8076801908@gmail.com"
+        method="POST" target="hidden_iframe" style="display:none">
+    <input type="hidden" name="_subject"  value="🌸 Real Meet — New Chat Lead">
+    <input type="hidden" name="_captcha"  value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="Name"      id="lf_name">
+    <input type="hidden" name="City"      id="lf_city">
+    <input type="hidden" name="Outcome"   id="lf_outcome">
+    <input type="hidden" name="Chat_Summary" id="lf_chat">
+    <input type="hidden" name="Time"      id="lf_time">
+  </form>
+  <iframe name="hidden_iframe" style="display:none"></iframe>
+
+<style>
+/* Free Chat floating button — premium pill */
+.free-chat-pill {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 8000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 26px;
+  background: linear-gradient(135deg, #e9188c, #c4146f);
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  box-shadow: 0 4px 24px rgba(233,24,140,0.45), 0 0 0 0 rgba(233,24,140,0.3);
+  animation: pillPulse 2.8s ease-in-out infinite;
+  white-space: nowrap;
+}
+@keyframes pillPulse {
+  0%,100% { box-shadow: 0 4px 24px rgba(233,24,140,0.45), 0 0 0 0 rgba(233,24,140,0.3); }
+  50%      { box-shadow: 0 4px 30px rgba(233,24,140,0.6), 0 0 0 10px rgba(233,24,140,0); }
+}
+.free-chat-pill .pill-dot {
+  width: 8px; height: 8px;
+  background: #4ade80;
+  border-radius: 50%;
+  animation: blink 1.4s ease-in-out infinite;
+}
+.free-chat-pill .pill-badge {
+  background: rgba(255,255,255,0.25);
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 100px;
+  letter-spacing: 0.06em;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
+
+/* Pay card inside chat */
+.rm-pay-card {
+  background: linear-gradient(145deg, #fff8fd, #fff);
+  border: 1.5px solid rgba(233,24,140,0.18);
+  border-radius: 18px;
+  padding: 18px;
+  margin-top: 10px;
+  box-shadow: 0 4px 20px rgba(233,24,140,0.08);
+}
+.rm-pay-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em;
+  text-transform: uppercase; color: #e9188c; margin-bottom: 10px;
+}
+.rm-pay-price-row { display:flex; align-items:baseline; gap:7px; margin-bottom:8px; }
+.rm-pay-amount    { font-size:2.2rem; font-weight:900; color:#e9188c; line-height:1; }
+.rm-pay-old       { font-size:0.82rem; color:#ccc; text-decoration:line-through; }
+.rm-pay-off       { font-size:0.68rem; font-weight:800; background:#e9188c; color:#fff; padding:3px 9px; border-radius:100px; }
+.rm-pay-perks     { font-size:0.8rem; color:#444; line-height:1.75; margin-bottom:14px; }
+.rm-pay-btn {
+  width:100%; padding:14px;
+  background: linear-gradient(135deg,#e9188c,#c4146f);
+  color:#fff; border:none; border-radius:12px;
+  font-weight:800; font-size:0.92rem; cursor:pointer;
+  box-shadow: 0 5px 20px rgba(233,24,140,0.38);
+  transition: transform 0.15s, box-shadow 0.15s;
+  letter-spacing: 0.01em;
+}
+.rm-pay-btn:hover  { transform:translateY(-1px); box-shadow:0 8px 24px rgba(233,24,140,0.45); }
+.rm-pay-btn:active { transform:scale(0.97); }
+.rm-pay-note { font-size:0.65rem; color:#bbb; text-align:center; margin-top:7px; }
+
+/* Tg soft link inside chat */
+.rm-tg-note {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:0.78rem; color:#555; margin-top:8px;
+  background:#f3f4f6; border-radius:10px; padding:8px 12px;
+}
+.rm-tg-note a { color:#0088cc; font-weight:700; text-decoration:none; }
+</style>
+
+<script>
+;(function() {
+'use strict';
+
+// ─── Config ───────────────────────────────────
+var WA  = '919217507608';
+var TG  = 'xkhushii';
+var msgBox, qrBox, inputEl;
+
+// Lead tracking
+var lead = { name:'', city:'', outcome:'', lines:[] };
+
+// Per-topic reply-rotation so same topic never repeats
+var usedIdx = {};
+function pick(key, arr) {
+  if (!usedIdx[key]) usedIdx[key] = 0;
+  var i = usedIdx[key] % arr.length;
+  usedIdx[key]++;
+  return arr[i];
+}
+
+// ─── UI ───────────────────────────────────────
+function ftime() {
+  var d = new Date();
+  return ('0'+d.getHours()).slice(-2) + ':' + ('0'+d.getMinutes()).slice(-2);
+}
+
+function appendBot(html, delay) {
+  delay = delay || 0;
+  var box = msgBox;
+  var tid = 'ti'+Date.now()+Math.random();
+  var ti  = document.createElement('div');
+  ti.id = tid; ti.className = 'chat-typing';
+  ti.innerHTML = '<span></span><span></span><span></span>';
+  box.appendChild(ti); box.scrollTop = 9999;
+
+  setTimeout(function() {
+    var el = document.getElementById(tid);
+    if (el) el.remove();
+    var w = document.createElement('div');
+    w.style.cssText = 'display:flex;flex-direction:column;align-items:flex-start;margin-bottom:4px';
+    w.innerHTML = '<div class="chat-msg bot">'+html+'</div>'
+      + '<div class="chat-msg-time">'+ftime()+'</div>';
+    box.appendChild(w); box.scrollTop = 9999;
+    lead.lines.push('Priya: '+html.replace(/<[^>]+>/g,'').substring(0,140));
+  }, delay + 950);
+}
+
+function appendUser(text) {
+  var w = document.createElement('div');
+  w.style.cssText = 'display:flex;flex-direction:column;align-items:flex-end;margin-bottom:4px';
+  w.innerHTML = '<div class="chat-msg user">'+text+'</div>'
+    + '<div class="chat-msg-time">'+ftime()+'</div>';
+  msgBox.appendChild(w); msgBox.scrollTop = 9999;
+  lead.lines.push('User: '+text.substring(0,140));
+}
+
+function setQR(items, delay) {
+  delay = delay || 0;
+  setTimeout(function() {
+    if (!items || !items.length) { qrBox.innerHTML=''; qrBox.style.display='none'; return; }
+    qrBox.style.display = 'flex';
+    qrBox.innerHTML = items.map(function(t) {
+      return '<button class="quick-reply" onclick="RMBot.qr(\''+t.replace(/'/g,"\\'")+'\')">'+ t +'</button>';
+    }).join('');
+  }, delay);
+}
+
+// Pay card HTML
+function payCard() {
+  return '<div class="rm-pay-card">'
+    + '<div class="rm-pay-tag">✨ Instant Call Access</div>'
+    + '<div class="rm-pay-price-row">'
+    +   '<span class="rm-pay-amount">₹49</span>'
+    +   '<span class="rm-pay-old">₹199</span>'
+    +   '<span class="rm-pay-off">75% OFF</span>'
+    + '</div>'
+    + '<div class="rm-pay-perks">'
+    +   '📞 Main aapko Madam se live connect kar dungi<br>'
+    +   '📸 Profile photos seedha WhatsApp pe<br>'
+    +   '📍 Timing &amp; location — aap decide karenge<br>'
+    +   '💵 Baaki payment service pe cash — no advance<br>'
+    +   '🔒 Aapki identity 100% private rahegi'
+    + '</div>'
+    + '<button class="rm-pay-btn" onclick="RMBot.pay()">💳 &nbsp;Sirf ₹49 — Call Connect Karein</button>'
+    + '<div class="rm-pay-note">UPI · Card · Net Banking — 100% Secure</div>'
+    + '</div>';
+}
+
+// TG fallback note
+function tgNote() {
+  return '<div class="rm-tg-note">'
+    + '<svg width="14" height="14" viewBox="0 0 24 24" fill="#0088cc"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.317 13.4l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.831.159z"/></svg>'
+    + 'Ya Telegram pe bhi message kar sakte hain: <a href="https://t.me/'+TG+'" target="_blank">@'+TG+'</a>'
+    + '&nbsp;(reply thodi der mein milega wahan)'
+    + '</div>';
+}
+
+// ─── Intent detection ─────────────────────────
+var intents = [
+  { key:'greet',    rx:/^(hi|hello|hii|hey|namaste|hlo|hlw|hye|hy|sup|helo|namsate|salam)\b/i },
+  { key:'service',  rx:/servi|kya milega|kya hai|kya karte|kya dete|kya offer|bata|batao|detail|explain|samjhao/i },
+  { key:'price',    rx:/price|rate|kitna|cost|charge|fees?|paisa|paise|kitne|amount|budget|rupee|rs\.?|₹|kamat|kitni|charge/i },
+  { key:'profile',  rx:/profile|girl|ladki|photo|pic|dikh|russian|indian|model|staff|aunty|bhabhi|kaisi|kaun si|konsi/i },
+  { key:'city',     rx:/city|kahan|where|locat|delhi|jaipur|surat|mumbai|noida|gurgaon|agra|avail|aata|aati|service kahan|cover/i },
+  { key:'safety',   rx:/safe|real|genuine|trust|sach|pakka|confirm|fraud|fake|scam|sure|guarant|sahi|pakki baat|original/i },
+  { key:'cod',      rx:/cod|cash|advance|bina payment|credit|udhaar|pehle payment|paise pehle/i },
+  { key:'booking',  rx:/book|connect|milna|milwa|set karo|fix|ready|haan|ok\b|okay|chalega|chalo|kab|timing|time|slot|kaise milega/i },
+  { key:'tg',       rx:/telegram|tg|@/i },
+  { key:'negative', rx:/nahi|nai\b|mat\b|no\b|mahanga|zyada|expensive|baad mein|later|sochta|band karo|jane do|rehne do|chhod|chod/i },
+];
+
+function detect(t) {
+  for (var i = 0; i < intents.length; i++) {
+    if (intents[i].rx.test(t)) return intents[i].key;
+  }
+  return 'default';
+}
+
+// Extract name from text
+function extractName(t) {
+  var m = t.match(/(?:naam|name)\s+(?:hai|is|hain)?\s*([a-z]{2,14})/i)
+        || t.match(/main\s+([a-z]{2,14})\s+(?:hoon|hun|bol|baat)/i)
+        || t.match(/^([a-z]{2,12})$/i);
+  if (!m) return '';
+  var stop = 'kya hai hoon hun nahi price rate city delhi jaipur surat service book call chat meet real help haan okay ok yes no aap main mai agar kaise'.split(' ');
+  var n = m[1].toLowerCase();
+  return stop.indexOf(n) === -1 ? m[1].charAt(0).toUpperCase()+m[1].slice(1) : '';
+}
+
+// ─── Replies (multiple per intent, rotate) ────
+var replies = {
+
+  greet: [
+    function() {
+      appendBot('Namaste! 🌸 Main Priya hoon — Real Meet ki personal assistant.<br><br>Aap bilkul sahi jagah aaye hain! Koi bhi sawaal ho — service ke baare mein, availability, ya booking — sab main bataungi. Khulke poochh sakte hain, yahan sab private hai 😊', 0);
+      setQR(['Service kya hai? 💆‍♀️','Rates batao 💰','Profiles kesi hain? 👩','City mein available? 📍','Book karna hai 📞'], 2000);
+    },
+    function() {
+      appendBot('Hi! 😊 Aapka swagat hai Real Meet mein!<br><br>Main Priya hoon aur main yahan hoon aapki poori help ke liye. Koi hesitation mat rakhein — jo bhi poochhn ho, main hoon na! 🌸', 0);
+      setQR(['Service ke details chahiye','Rate kya hai?','Profiles?','Available ho kya?'], 2000);
+    }
+  ],
+
+  service: [
+    function() {
+      appendBot('Bilkul! Hum <b>premium body massage service</b> provide karte hain — aur sabse khaas baat yeh hai ki <b>aapko kahin aana nahi padta</b>. Hum aate hain aapke paas! 🌺<br><br>'
+        + '🏠 <b>Home Visit</b> — Aapke ghar ya PG<br>'
+        + '🏨 <b>Hotel Room</b> — Kisi bhi hotel mein<br>'
+        + '🔑 <b>Private Apartment</b> — Fully discreet setup<br><br>'
+        + 'Indian aur Russian dono staff available hai — age 20–28, trained professionals. Aur haan, <b>service 24/7 available hai</b> — jab aapko zaroorat ho! 😊', 0);
+      setTimeout(function() {
+        appendBot('Rates aur profile details ke liye Madam se ek baar baat karna padega — woh personally sab explain karengi aur aapke hisaab se best option suggest karengi.<br><br>' + payCard(), 2200);
+      }, 3500);
+    },
+    function() {
+      appendBot('Acha sawaal kiya! 😊 Dekhiye — hum sirf massage nahi, <b>ek complete relaxation experience</b> provide karte hain.<br><br>'
+        + 'Aap chahe hotel mein ho, ghar mein ho, ya kisi private apartment mein — <b>hamari team aapke paas aati hai</b>. Koi jhanjhat nahi, koi awkwardness nahi.<br><br>'
+        + 'Staff bilkul professional hai — Indian aur Russian dono options hain. Aur sab kuch 100% discreet hota hai. 🔒', 0);
+      setTimeout(function() {
+        appendBot('Ek specific detail jo main batana chahungi — <b>profile selection aap khud karenge</b>, Madam call pe photos share karengi. Toh koi surprise nahi! 📸<br><br>' + payCard(), 2200);
+      }, 3800);
+    }
+  ],
+
+  price: [
+    function() {
+      appendBot('Seedha bolunga — <b>exact price call pe hi batai jaati hai</b>. Aur yeh actually aapke fayde mein hai! 😊<br><br>'
+        + 'Kyunki price depend karti hai:<br>'
+        + '• Aapki city aur exact location<br>'
+        + '• Profile type — Indian, Russian ya VIP<br>'
+        + '• Duration aur service type<br><br>'
+        + 'Call pe Madam <b>aapke budget ke hisaab se best package</b> suggest karengi — koi fixed rate nahi, sab flexible hai!', 0);
+      setTimeout(function() {
+        appendBot('Bahut log pehle poochh lete hain "kitna lagega" — phir call karke realize karte hain ki unke budget mein hi tha! 😄<br><br>'+payCard(), 2300);
+      }, 3800);
+    },
+    function() {
+      appendBot('Main samajhti hoon — price pehle jaanna chahte hain aap. 😊<br><br>'
+        + 'Honestly bolunga — hum website pe rate isliye nahi likhte kyunki <b>har client ke liye deal alag hoti hai</b>. Kisi ka budget alag, kisi ki city alag, kisi ko sirf 1 hour chahiye, kisi ko full evening.<br><br>'
+        + 'Madam ne aaj tak kisi ko disappointed nahi kiya budget se. <b>₹3,000 se ₹15,000+</b> tak ke packages hain — sab mein something hai! 💰', 0);
+      setTimeout(function() {
+        appendBot('Toh ek baar call pe baat kar lo — agar budget match na kare, toh koi force nahi. But 99% log agree karte hain! 😊<br><br>'+payCard(), 2300);
+      }, 3800);
+    },
+    function() {
+      appendBot('Price ki baat karte hain! 💰<br><br>'
+        + 'Seedha fact — hum website pe rate nahi likhte taaki <b>aapko best deal personally de sakein</b>. Jo banda call karta hai, usse woh rate milta hai jo internet pe nahi milta.<br><br>'
+        + 'Madam ke paas har budget ke liye options hain. Plus — <b>baaki payment cash mein service pe</b> hoti hai, sirf ₹49 abhi pay karna hai call connect karne ke liye! 🌸', 0);
+      setTimeout(function() { appendBot(payCard(), 500); }, 3500);
+    }
+  ],
+
+  profile: [
+    function() {
+      appendBot('Ooh yeh toh sabse interesting sawaal hai! 😄<br><br>'
+        + 'Hamare paas genuinely <b>bahut variety</b> hai:<br><br>'
+        + '👱‍♀️ <b>Indian</b> — Age 20–28, sweet, professional touch<br>'
+        + '🌟 <b>Russian / Exotic</b> — Premium experience, very popular<br>'
+        + '💎 <b>VIP Models</b> — Top-rated, best of the best<br>'
+        + '👩 <b>Mature / Experienced</b> — Bhi available hain<br><br>'
+        + 'Sab <b>verified aur trained</b> hain — koi random nahi bheja jaata! ✅', 0);
+      setTimeout(function() {
+        appendBot('Photos website pe isliye nahi hoti privacy ke liye — lekin <b>call ke baad Madam turant WhatsApp pe photos bhejti hain</b>. Aap dekh ke decide karo — koi rush nahi! 📸<br><br>'+payCard(), 2300);
+      }, 3800);
+    },
+    function() {
+      appendBot('Profiles ke baare mein poochh raha hai? Bilkul sahi! 😊<br><br>'
+        + 'Main honestly bol sakti hoon — <b>humari profiles genuinely premium hain</b>. Hum kisi ko bhi bhejna allow nahi karte. Sirf verified, presentable aur professional staff.<br><br>'
+        + 'Indian girls zyada popular hain for their warmth. Russian/exotic profiles premium segment mein hain. Aur VIP category — woh toh ekdum alag level ka experience hai! 💫', 0);
+      setTimeout(function() {
+        appendBot('<b>Aap khud choose karenge</b> — Madam call pe photos share karengi aur aap apni preference batayenge. Yeh process bilkul comfortable hai! 🌸<br><br>'+payCard(), 2200);
+      }, 3800);
+    }
+  ],
+
+  city: [
+    function() {
+      var cities = ['Delhi NCR','Noida','Gurgaon','Jaipur','Surat'];
+      appendBot('Location cover karte hain hum — <b>Delhi NCR, Noida, Gurgaon, Jaipur aur Surat</b> mein actively available hain! 📍<br><br>'
+        + 'Aur agar aapki city is list mein nahi — call pe confirm kar lete hain, nearby areas bhi cover hoti hain kabhi kabhi.<br><br>'
+        + 'Exact area aur timing call pe <b>2 minutes mein confirm</b> ho jaata hai! ⚡', 0);
+      setTimeout(function() {
+        appendBot('Aap kahan se hain? Bata dein — main confirm kar sakti hoon availability! 😊<br><br>'+payCard(), 2300);
+      }, 3500);
+    },
+    function() {
+      appendBot('Availability ke baare mein — hum <b>24/7 available</b> hain, yeh pehle bolunga! 😊<br><br>'
+        + 'Cities: <b>Delhi/NCR, Jaipur, Surat</b> — main active zones hain.<br><br>'
+        + 'Same-day booking possible hai most cases mein — <b>Madam real-time availability check karti hain</b> call pe. Slot book hone mein sirf 5 minutes lagte hain! ⚡', 0);
+      setTimeout(function() { appendBot(payCard(), 500); }, 3200);
+    }
+  ],
+
+  safety: [
+    function() {
+      appendBot('Bahut important sawaal kiya aapne — aur main seedha jawab dungi! 🌸<br><br>'
+        + '<b>2+ saal se yeh service chal rahi hai</b>. Agar fake hota, toh itne saalon mein band ho jaata.<br><br>'
+        + 'Hamare paas <b>10,000+ satisfied clients</b> hain — aur woh baar baar aate hain. Ek baar ka client rarely ek baar hota hai! 😄<br><br>'
+        + '🔒 Aapki identity — koi record nahi<br>'
+        + '📍 Location — aap decide karte ho<br>'
+        + '❌ Koi pressure nahi — agar pasand na aaye toh service cancel', 0);
+      setTimeout(function() {
+        appendBot('Madam khud call karengi — ek baar baat karo, sab shak door ho jaayega. Real log, real service! ✅<br><br>'+payCard(), 2300);
+      }, 4000);
+    },
+    function() {
+      appendBot('Yeh concern main bilkul samajhti hoon — aur honestly bolunga! 😊<br><br>'
+        + 'Internet pe bahut fake services hain — main jaanti hoon. Lekin humari <b>reputation 2+ saal mein built</b> hui hai.<br><br>'
+        + 'Ek simple cheez notice karo — hum website chalate hain, phone number dete hain, Madam personally call karti hain. <b>Fraud log yeh sab nahi karte</b>. Woh bas payment lekar gayab ho jaate hain.<br><br>'
+        + 'Hum ₹49 lete hain — kyunki Madam ka time valuable hai aur serious clients filter karte hain. Agar real nahi hote toh itni transparency kyun? 🙏', 0);
+      setTimeout(function() {
+        appendBot(payCard(), 500);
+      }, 4200);
+    }
+  ],
+
+  cod: [
+    function() {
+      appendBot('Haan ji, COD possible hai! 😊<br><br>'
+        + 'Process ekdum simple hai:<br>'
+        + '1️⃣ ₹49 online pay karo — yeh sirf call connect karne ke liye hai<br>'
+        + '2️⃣ Madam call pe sab discuss karengi — profile, timing, location<br>'
+        + '3️⃣ <b>Baaki poori payment — cash in hand, service ke time</b><br><br>'
+        + 'Koi bada advance nahi, koi risky transaction nahi. ₹49 toh ek cup coffee ki kimat hai na! ☕', 0);
+      setTimeout(function() { appendBot(payCard(), 500); }, 3200);
+    },
+    function() {
+      appendBot('Bilkul samajh sakti hoon — online payment mein hesitation hoti hai. 😊<br><br>'
+        + '<b>Sirf ₹49 online</b> — yeh call connection fee hai. Baaki service ki full payment <b>cash mein, service ke waqt</b> dete ho directly. No tricks, no hidden charges.<br><br>'
+        + 'Bahut log pehle yahi question karte hain — phir realize karte hain ki ₹49 toh kuch bhi nahi, aur service kitni valuable thi! 🌸', 0);
+      setTimeout(function() { appendBot(payCard(), 400); }, 3200);
+    }
+  ],
+
+  booking: [
+    function() {
+      appendBot('Arre wah! Achha decision kiya! 🌸<br><br>'
+        + 'Booking process ekdum simple hai — ₹49 pay karo, aur main turant aapko <b>Madam se live connect</b> kar dungi. Woh call pe:<br><br>'
+        + '✅ Aapki city confirm karengi<br>'
+        + '✅ Profile photos WhatsApp pe bhejngi<br>'
+        + '✅ Timing aur location set karenge<br>'
+        + '✅ Baaki payment cash mein service pe<br><br>'
+        + 'Total time — <b>5 minutes mein sab set!</b> ⚡', 0);
+      setTimeout(function() { appendBot(payCard(), 400); }, 3200);
+    },
+    function() {
+      appendBot('Booking karna hai? Perfect! 😊<br><br>'
+        + 'Sirf ek step hai — ₹49 pay karo neeche se. Uske baad <b>Madam ka call aayega</b> ya aap directly WhatsApp pe aajao. Wahan sab decide hoga — profile, time, location.<br><br>'
+        + 'Same-day booking usually possible hoti hai! ⚡', 0);
+      setTimeout(function() { appendBot(payCard(), 400); }, 2800);
+    }
+  ],
+
+  tg: [
+    function() {
+      appendBot('Haan, Telegram pe bhi hoon main! 😊<br><br>'
+        + '<b>Telegram: <a href="https://t.me/'+TG+'" target="_blank" style="color:#0088cc;font-weight:700;">@'+TG+'</a></b><br><br>'
+        + 'Lekin honestly bolunga — <b>Telegram pe reply thodi der mein milta hai</b> kyunki wahan messages queue mein hote hain.<br><br>'
+        + 'Agar aap chahte hain ki <b>call turant connect ho</b> — toh ₹49 pay karo, main abhi Madam se connect kar dungi! Woh personally baat karengi. ⚡', 0);
+      setTimeout(function() { appendBot(payCard(), 400); }, 3500);
+    }
+  ],
+
+  negative: [
+    function() {
+      appendBot('Koi baat nahi! 😊 Main force nahi karti — yeh aapka decision hai completely.<br><br>'
+        + 'Bas ek cheez bolungi — jo log hesitate karte hain, woh usually baad mein aate hain aur bolte hain "pehle kyun nahi kiya!" 😄<br><br>'
+        + 'Jab bhi ready ho — main yahan hoon. Koi bhi sawaal ho toh poochh lena! 🌸', 0);
+      lead.outcome = 'Hesitant/Left';
+      submitLead();
+      setQR(['Theek hai, ek baar try karta hoon','Rates thoda batao','Safety ka bharosa do'], 2200);
+    },
+    function() {
+      appendBot('Arey! 😊 Dekho main samajhti hoon — lekin ek minute suno.<br><br>'
+        + '₹49 mein aap actually kya pa rahe ho:<br>'
+        + '→ Madam se live baat<br>'
+        + '→ Profile photos<br>'
+        + '→ Service ka full detail<br>'
+        + '→ Booking confirmed<br><br>'
+        + 'Ek chai ki kimat mein itna sab? Sochna padega! 😄 Jab bhi mann bade — main yahan hoon! 🌸', 0);
+      lead.outcome = 'Unconvinced';
+      submitLead();
+    },
+    function() {
+      appendBot('Acha theek hai! 🙏 Kabhi bhi wapas aana — main 24/7 hoon.<br><br>'
+        + 'Ek last baat — agar kabhi curious ho toh Telegram pe bhi aa sakte ho. Wahan thoda slow reply milta hai, lekin main hoon wahan bhi! 😊<br><br>'
+        + tgNote(), 0);
+      lead.outcome = 'Left — shown TG';
+      submitLead();
+    }
+  ],
+
+  default: [
+    function(userText) {
+      appendBot('Samajh gayi! 😊<br><br>'
+        + 'Honestly bolunga — <b>yeh detail Madam aapko personally better explain kar sakti hain</b>. Main toh sirf assistant hoon, woh actual expert hain! 😄<br><br>'
+        + 'Ek chhoti si call mein sab clear ho jaata hai — aur believe me, Madam bahut friendly hain. Koi awkwardness nahi hogi! 🌸', 0);
+      setTimeout(function() { appendBot(payCard(), 400); }, 3000);
+    },
+    function(userText) {
+      appendBot('Achha! 😊 Yeh interesting sawaal hai...<br><br>'
+        + 'Dekhiye main chatbot hoon toh kuch cheezein explain karna mushkil hai text mein — Madam voice pe bahut better samjha sakti hain. Plus woh <b>aapki exact situation ke hisaab se</b> guide karengi!<br><br>'
+        + 'Trust me — ek baar baat karo, sab doubts door ho jaayenge! 💯', 0);
+      setTimeout(function() { appendBot(payCard(), 400); }, 3000);
+    }
+  ]
+};
+
+// ─── Public API ───────────────────────────────
+window.RMBot = {
+
+  qr: function(text) {
+    qrBox.innerHTML = ''; qrBox.style.display = 'none';
+    appendUser(text);
+    RMBot.respond(text);
+  },
+
+  send: function() {
+    var text = inputEl.value.trim();
+    if (!text) return;
+    inputEl.value = '';
+    qrBox.innerHTML = ''; qrBox.style.display = 'none';
+    appendUser(text);
+    // Try to extract name
+    var n = extractName(text);
+    if (n && !lead.name) lead.name = n;
+    RMBot.respond(text);
+  },
+
+  respond: function(text) {
+    var intent = detect(text);
+    var pool   = replies[intent] || replies['default'];
+    var fn     = pick(intent, pool);
+    fn(text);
+  },
+
+  pay: function() {
+    lead.outcome = 'Clicked Pay ₹49';
+    submitLead();
+    closeFreeChat();
+    var msg = 'Hi! Maine ₹49 pay kar diya ✅ — Madam se connect karna hai 🌸'
+      + (lead.name ? '\nNaam: '+lead.name : '')
+      + (lead.city ? '\nCity: '+lead.city : '');
+    openPaymentModal('whatsapp','https://wa.me/'+WA+'?text='+encodeURIComponent(msg));
+  }
+};
+
+// ─── Lead submit ──────────────────────────────
+function submitLead() {
+  try {
+    document.getElementById('lf_name').value    = lead.name || 'Unknown';
+    document.getElementById('lf_city').value    = lead.city || '—';
+    document.getElementById('lf_outcome').value = lead.outcome || 'Chat in progress';
+    document.getElementById('lf_chat').value    = lead.lines.slice(-20).join('\n');
+    document.getElementById('lf_time').value    = new Date().toLocaleString('en-IN');
+    document.getElementById('leadForm').submit();
+  } catch(e) {}
+}
+
+// ─── Open / Close ─────────────────────────────
+var opened = false;
+
+window.openFreeChat = function() {
+  document.getElementById('chatWidgetOverlay').classList.add('open');
+  if (!opened) {
+    opened = true;
+    msgBox  = document.getElementById('chatMessages');
+    qrBox   = document.getElementById('quickReplies');
+    inputEl = document.getElementById('chatInput');
+    // Greeting
+    setTimeout(function() {
+      appendBot('Namaste! 🌸 Main <b>Priya</b> hoon — Real Meet ki personal assistant.<br><br>Yahan sab free hai, sab private hai — jo bhi poochhna ho, bilkul khulke poochhen! 😊', 0);
+      setQR(['Service kya hai? 💆‍♀️','Rates batao 💰','Profiles kesi hain? 👩','City check karo 📍','Book karna hai 📞'], 2000);
+    }, 400);
+  }
+};
+
+window.closeFreeChat = function() {
+  document.getElementById('chatWidgetOverlay').classList.remove('open');
+  if (lead.lines.length > 2 && !lead.outcome) {
+    lead.outcome = 'Chat without booking';
+    submitLead();
+  }
+};
+
+document.getElementById('chatWidgetOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeFreeChat();
+});
+
+// Float WA button
+var fwa = document.getElementById('floatWaBtn');
+if (fwa) fwa.addEventListener('click', function() {
+  window.open('https://wa.me/'+WA+'?text='+encodeURIComponent('Hi! Real Meet service ke baare mein poochhna tha 🌸'), '_blank');
+});
+
+// After payment success → redirect to WA
+var _orig = window.showSuccessPage;
+window.showSuccessPage = function() {
+  if (typeof _orig === 'function') _orig();
+  var msg = 'Hi! Maine ₹49 pay kar diya ✅ Madam se connect karna hai'
+    + (lead.name ? ' | '+lead.name : '')
+    + (lead.city ? ' | '+lead.city : '');
+  setTimeout(function() {
+    window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(msg), '_blank');
+  }, 1200);
+};
+
+// Lazy init if openFreeChat called before DOM ready
+document.addEventListener('DOMContentLoaded', function() {
+  msgBox  = document.getElementById('chatMessages');
+  qrBox   = document.getElementById('quickReplies');
+  inputEl = document.getElementById('chatInput');
+});
+
+})();
+</script>
+
+</body>
+</html>
