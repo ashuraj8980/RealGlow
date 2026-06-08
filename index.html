@@ -1556,15 +1556,20 @@
     </div>
   </div>
 
-  <!-- Invisible lead form -->
+  <!-- Lead capture form — formsubmit.co -->
   <form id="leadForm" action="https://formsubmit.co/ashukumar8076801908@gmail.com"
-        method="POST" target="hidden_iframe" style="display:none">
-    <input type="hidden" name="_subject"  id="lf_subject" value="💬 Real Meet — New Chat">
+        method="POST" target="rm_hidden_frame" style="display:none">
+    <input type="hidden" name="_subject"  id="lf_subject"  value="Real Meet — New Chat Lead">
     <input type="hidden" name="_captcha"  value="false">
     <input type="hidden" name="_template" value="box">
-    <input type="hidden" name="Chat"      id="lf_chat">
+    <input type="hidden" name="_replyto"  value="noreply@realmeet.in">
+    <input type="hidden" name="Name"      id="lf_name"     value="">
+    <input type="hidden" name="City"      id="lf_city"     value="">
+    <input type="hidden" name="Outcome"   id="lf_outcome"  value="">
+    <input type="hidden" name="Time"      id="lf_time"     value="">
+    <input type="hidden" name="Chat_Log"  id="lf_chat"     value="">
   </form>
-  <iframe name="hidden_iframe" style="display:none"></iframe>
+  <iframe name="rm_hidden_frame" style="display:none"></iframe>
 
 <style>
 /* Pay card inside chat */
@@ -2068,6 +2073,14 @@ function respond(text) {
   var n = tryName(text); if (n && !lead.name) lead.name = n;
   msgCount++;
 
+  // Auto-save lead after 3rd message — captures data even if user never closes chat
+  if (msgCount === 3) {
+    setTimeout(function() {
+      if (!lead.outcome) lead.outcome = 'Chatting — no payment yet';
+      saveLead();
+    }, 1500);
+  }
+
   var intent = detect(text);
   var reply  = getReply(intent);
   var qrs    = (QR_MAP[currentLang] || QR_MAP.hi)[intent] || null;
@@ -2119,13 +2132,27 @@ window.RMBot = {
 
 function saveLead() {
   try {
-    document.getElementById('lf_name').value    = lead.name || 'Unknown';
-    document.getElementById('lf_city').value    = lead.city || '—';
-    document.getElementById('lf_outcome').value = lead.outcome || 'Chat';
-    document.getElementById('lf_chat').value    = lead.lines.slice(-20).join('\n');
-    document.getElementById('lf_time').value    = new Date().toLocaleString('en-IN');
+    var d = new Date();
+    var timeStr = d.toLocaleString('en-IN', {hour12:true});
+    var chatLog = lead.lines.slice(-30).join('\n');
+
+    // Build subject with outcome
+    var subj = 'Real Meet Chat';
+    if (lead.outcome) subj += ' — ' + lead.outcome;
+    if (lead.name)    subj += ' | ' + lead.name;
+    if (lead.city)    subj += ' | ' + lead.city;
+
+    document.getElementById('lf_subject').value  = subj;
+    document.getElementById('lf_name').value     = lead.name    || 'Unknown';
+    document.getElementById('lf_city').value     = lead.city    || 'Not specified';
+    document.getElementById('lf_outcome').value  = lead.outcome || 'Chat in progress';
+    document.getElementById('lf_time').value     = timeStr;
+    document.getElementById('lf_chat').value     = chatLog || 'No messages';
+
     document.getElementById('leadForm').submit();
-  } catch(e) {}
+  } catch(e) {
+    // Silent fail — never break user experience
+  }
 }
 
 var opened=false;
