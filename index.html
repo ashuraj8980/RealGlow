@@ -1556,20 +1556,8 @@
     </div>
   </div>
 
-  <!-- Lead capture form — formsubmit.co -->
-  <form id="leadForm" action="https://formsubmit.co/ashukumar8076801908@gmail.com"
-        method="POST" target="rm_hidden_frame" style="display:none">
-    <input type="hidden" name="_subject"  id="lf_subject"  value="Real Meet — New Chat Lead">
-    <input type="hidden" name="_captcha"  value="false">
-    <input type="hidden" name="_template" value="box">
-    <input type="hidden" name="_replyto"  value="noreply@realmeet.in">
-    <input type="hidden" name="Name"      id="lf_name"     value="">
-    <input type="hidden" name="City"      id="lf_city"     value="">
-    <input type="hidden" name="Outcome"   id="lf_outcome"  value="">
-    <input type="hidden" name="Time"      id="lf_time"     value="">
-    <input type="hidden" name="Chat_Log"  id="lf_chat"     value="">
-  </form>
-  <iframe name="rm_hidden_frame" style="display:none"></iframe>
+  <!-- Lead capture — fetch based, no iframe needed -->
+  <div id="leadFormPlaceholder" style="display:none"></div>
 
 <style>
 /* Pay card inside chat */
@@ -2073,12 +2061,16 @@ function respond(text) {
   var n = tryName(text); if (n && !lead.name) lead.name = n;
   msgCount++;
 
-  // Auto-save lead after 3rd message — captures data even if user never closes chat
-  if (msgCount === 3) {
+  // Auto-save at key points — captures data even if user never closes chat
+  if (msgCount === 1) {
+    setTimeout(function() { saveLead('First message'); }, 2000);
+  } else if (msgCount === 3) {
     setTimeout(function() {
-      if (!lead.outcome) lead.outcome = 'Chatting — no payment yet';
-      saveLead();
+      if (!lead.outcome) lead.outcome = 'Active chat — no payment';
+      saveLead('3 messages exchanged');
     }, 1500);
+  } else if (msgCount === 6) {
+    setTimeout(function() { saveLead('6 messages — highly engaged'); }, 1500);
   }
 
   var intent = detect(text);
@@ -2122,37 +2114,67 @@ window.RMBot = {
     appendUser(t); respond(t);
   },
   pay: function() {
-    lead.outcome = 'Clicked Pay';
-    saveLead(); closeFreeChat();
+    lead.outcome = 'PAID Rs.49 — Clicked Pay Button';
+    saveLead('User clicked Pay Rs.49 button');
     var msg = 'Hi! Maine Rs.49 pay kar diya. Mam se connect karna hai.'
       + (lead.name ? ' Name: '+lead.name : '');
     openPaymentModal('whatsapp', 'https://wa.me/'+WA_NUM+'?text='+encodeURIComponent(msg));
   }
 };
 
-function saveLead() {
+function saveLead(note) {
   try {
     var d = new Date();
-    var timeStr = d.toLocaleString('en-IN', {hour12:true});
-    var chatLog = lead.lines.slice(-30).join('\n');
+    var timeStr = d.toLocaleString('en-IN', { hour12: true });
+    var chatLines = lead.lines.slice(-30);
+    var chatText = chatLines.length ? chatLines.join('\n') : '(no messages yet)';
+    if (note) chatText += '\n\n[' + note + ']';
 
-    // Build subject with outcome
-    var subj = 'Real Meet Chat';
-    if (lead.outcome) subj += ' — ' + lead.outcome;
-    if (lead.name)    subj += ' | ' + lead.name;
-    if (lead.city)    subj += ' | ' + lead.city;
+    var subject = 'Real Meet Chat';
+    if (lead.outcome) subject += ' — ' + lead.outcome;
+    if (lead.name)    subject += ' | ' + lead.name;
+    if (lead.city)    subject += ' | ' + lead.city;
 
-    document.getElementById('lf_subject').value  = subj;
-    document.getElementById('lf_name').value     = lead.name    || 'Unknown';
-    document.getElementById('lf_city').value     = lead.city    || 'Not specified';
-    document.getElementById('lf_outcome').value  = lead.outcome || 'Chat in progress';
-    document.getElementById('lf_time').value     = timeStr;
-    document.getElementById('lf_chat').value     = chatLog || 'No messages';
+    var msgBody = ''
+      + '🕐 Time: '    + timeStr + '\n'
+      + '👤 Name: '    + (lead.name    || 'Unknown') + '\n'
+      + '📍 City: '    + (lead.city    || 'Not given') + '\n'
+      + '📊 Status: '  + (lead.outcome || 'Chatting') + '\n'
+      + '\n--- CHAT LOG ---\n\n'
+      + chatText;
 
-    document.getElementById('leadForm').submit();
-  } catch(e) {
-    // Silent fail — never break user experience
-  }
+    // ── FormSubmit AJAX (no page reload, no verification popup) ──
+    var fd = new FormData();
+    fd.append('_subject',  subject);
+    fd.append('_captcha',  'false');
+    fd.append('_template', 'box');
+    fd.append('_autoresponse', 'false');
+    fd.append('Name',      lead.name    || 'Unknown');
+    fd.append('City',      lead.city    || 'Not given');
+    fd.append('Status',    lead.outcome || 'Chatting');
+    fd.append('Time',      timeStr);
+    fd.append('Message',   msgBody);
+
+    fetch('https://formsubmit.co/ajax/ashukumar8076801908@gmail.com', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: fd
+    }).then(function(r){ return r.json(); })
+      .then(function(j){ /* success */ })
+      .catch(function() {
+        // Backup: try plain formsubmit endpoint
+        var fd2 = new FormData();
+        fd2.append('_subject', subject);
+        fd2.append('_captcha', 'false');
+        fd2.append('_next', window.location.href);
+        fd2.append('Message', msgBody);
+        fetch('https://formsubmit.co/ashukumar8076801908@gmail.com', {
+          method: 'POST',
+          body: fd2
+        }).catch(function(){});
+      });
+
+  } catch(e) {}
 }
 
 var opened=false;
@@ -2190,7 +2212,7 @@ window.closeFreeChat=function(){
   var overlay=document.getElementById('chatWidgetOverlay');
   overlay.classList.remove('open');
   if(lead.lines.length>2&&!lead.outcome){
-    lead.outcome='Chat without booking'; saveLead();
+    lead.outcome='Chat closed — no payment'; saveLead('User closed chat without paying');
   }
 };
 
