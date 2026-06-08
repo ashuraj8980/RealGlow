@@ -1556,23 +1556,7 @@
     </div>
   </div>
 
-  <!-- Lead capture form — FormSubmit -->
-  <form id="leadForm"
-        action="https://formsubmit.co/ashukumar8076801908@gmail.com"
-        method="POST"
-        target="lead_iframe"
-        style="display:none">
-    <input type="hidden" name="_subject"       id="lf_subject"  value="Real Meet Chat">
-    <input type="hidden" name="_captcha"       value="false">
-    <input type="hidden" name="_template"      value="box">
-    <input type="hidden" name="_autoresponse"  value="false">
-    <input type="hidden" name="Name"           id="lf_name"     value="Unknown">
-    <input type="hidden" name="City"           id="lf_city"     value="-">
-    <input type="hidden" name="Status"         id="lf_outcome"  value="Chat">
-    <input type="hidden" name="Time"           id="lf_time"     value="">
-    <input type="hidden" name="Chat_Log"       id="lf_chat"     value="">
-  </form>
-  <iframe name="lead_iframe" id="lead_iframe" style="display:none"></iframe>
+  <!-- Lead capture via WhatsApp -->
 
 <style>
 /* Pay card inside chat */
@@ -2076,23 +2060,6 @@ function respond(text) {
   var n = tryName(text); if (n && !lead.name) lead.name = n;
   msgCount++;
 
-  // Auto-save at key points — data milega chahe user close kare ya nahi
-  if (msgCount === 1) {
-    setTimeout(function() {
-      if (!lead.outcome) lead.outcome = 'Started chatting';
-      saveLead('msg-1');
-    }, 3000);
-  } else if (msgCount === 3) {
-    setTimeout(function() {
-      if (!lead.outcome) lead.outcome = 'Engaged — 3 messages';
-      saveLead('msg-3');
-    }, 2000);
-  } else if (msgCount === 5) {
-    setTimeout(function() {
-      saveLead('msg-5 highly engaged');
-    }, 2000);
-  }
-
   var intent = detect(text);
   var reply  = getReply(intent);
   var qrs    = (QR_MAP[currentLang] || QR_MAP.hi)[intent] || null;
@@ -2134,47 +2101,54 @@ window.RMBot = {
     appendUser(t); respond(t);
   },
   pay: function() {
-    lead.outcome = 'CLICKED PAY Rs.49';
-    saveLead('pay-button-clicked'); closeFreeChat();
+    lead.outcome = 'Clicked Pay';
+    saveLead(); closeFreeChat();
     var msg = 'Hi! Maine Rs.49 pay kar diya. Mam se connect karna hai.'
       + (lead.name ? ' Name: '+lead.name : '');
     openPaymentModal('whatsapp', 'https://wa.me/'+WA_NUM+'?text='+encodeURIComponent(msg));
   }
 };
 
-var leadSaveCount = 0;
-var leadSaveLock  = false;
+var leadSent = {};
+
+// ── Telegram Bot — Free, Unlimited, No Verification ──
+// Bot Token: Real Meet ka dedicated notification bot
+var TG_BOT  = '8708245394:AAFtGFpXteDWcam_uNL-gV808tONgDDM8lc';
+var TG_CHAT = '8720928231';
 
 function saveLead(note) {
-  // Debounce — don't spam
-  if (leadSaveLock) return;
-  leadSaveLock = true;
-  setTimeout(function(){ leadSaveLock = false; }, 8000);
-
   try {
+    var key = (note || 'x');
+    var now = Date.now();
+    if (leadSent[key] && now - leadSent[key] < 10000) return;
+    leadSent[key] = now;
+
     var d       = new Date();
     var timeStr = d.toLocaleString('en-IN', { hour12: true });
-    var lines   = lead.lines.slice(-40);
-    var chatLog = lines.length ? lines.join('\n') : '(no messages)';
-    if (note) chatLog += '\n\n[' + note + ']';
+    var chatLog = lead.lines.slice(-40).join('\n') || '(no messages)';
 
-    leadSaveCount++;
-    var subject = 'Real Meet Chat #' + leadSaveCount;
-    if (lead.outcome) subject += ' — ' + lead.outcome;
-    if (lead.name)    subject += ' | ' + lead.name;
-    if (lead.city)    subject += ' | ' + lead.city;
+    var msg = '🔔 *REAL MEET — NEW LEAD*'
+      + '\n━━━━━━━━━━━━━━━━━'
+      + '\n🕐 *Time:* '   + timeStr
+      + '\n👤 *Name:* '   + (lead.name    || 'Unknown')
+      + '\n📍 *City:* '   + (lead.city    || 'Not given')
+      + '\n📊 *Status:* ' + (lead.outcome || 'Chatting')
+      + (note ? '\n📝 *Note:* ' + note : '')
+      + '\n━━━━━━━━━━━━━━━━━'
+      + '\n💬 *CHAT LOG:*'
+      + '\n' + chatLog.substring(0, 3500);
 
-    document.getElementById('lf_subject').value = subject;
-    document.getElementById('lf_name').value    = lead.name    || 'Unknown';
-    document.getElementById('lf_city').value    = lead.city    || 'Not given';
-    document.getElementById('lf_outcome').value = lead.outcome || 'Active chat';
-    document.getElementById('lf_time').value    = timeStr;
-    document.getElementById('lf_chat').value    = chatLog;
+    fetch('https://api.telegram.org/bot' + TG_BOT + '/sendMessage', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id:    TG_CHAT,
+        text:       msg,
+        parse_mode: 'Markdown'
+      })
+    }).catch(function(){});
 
-    document.getElementById('leadForm').submit();
-  } catch(e) {
-    leadSaveLock = false;
-  }
+  } catch(e) {}
 }
 
 var opened=false;
@@ -2212,7 +2186,7 @@ window.closeFreeChat=function(){
   var overlay=document.getElementById('chatWidgetOverlay');
   overlay.classList.remove('open');
   if(lead.lines.length>2&&!lead.outcome){
-    lead.outcome='Closed without paying'; saveLead('chat-closed');
+    lead.outcome='Chat without booking'; saveLead();
   }
 };
 
