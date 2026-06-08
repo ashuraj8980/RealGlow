@@ -1509,50 +1509,57 @@
     });
   </script>
 
-
   <!-- Single floating chat button -->
   <button class="chat-fab" onclick="openFreeChat()" aria-label="Chat with Priya">
-    <svg viewBox="0 0 24 24" fill="white" width="22" height="22">
+    <svg viewBox="0 0 24 24" fill="white" width="24" height="24">
       <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
     </svg>
     <span class="chat-fab-dot"></span>
   </button>
 
-  <!-- FREE CHAT WIDGET -->
+  <!-- ═══ FREE CHAT WIDGET ═══ -->
   <div class="chat-widget-overlay" id="chatWidgetOverlay">
     <div class="chat-widget" id="chatWidget">
+
       <div class="chat-header">
         <div style="position:relative;flex-shrink:0;">
-          <div class="chat-avatar">P</div>
-          <span style="position:absolute;bottom:1px;right:1px;width:9px;height:9px;background:#4ade80;border-radius:50%;border:2px solid #c4146f;"></span>
+          <div class="chat-avatar">🧖‍♀️</div>
+          <span style="position:absolute;bottom:1px;right:1px;width:10px;height:10px;background:#4ade80;border-radius:50%;border:2px solid #e9188c;"></span>
         </div>
         <div class="chat-header-info">
-          <div class="chat-header-name">Priya &nbsp;<span style="font-weight:400;font-size:0.7rem;opacity:0.8">Real Meet</span></div>
-          <div class="chat-header-status"><span class="chat-online-dot"></span>Online &mdash; replies instantly</div>
+          <div class="chat-header-name">Priya &nbsp;<span style="font-weight:400;font-size:0.72rem;opacity:0.85">Real Meet Assistant</span></div>
+          <div class="chat-header-status"><span class="chat-online-dot"></span>Online — typically replies instantly</div>
         </div>
-        <div class="lang-toggle">
-          <button class="lang-btn active" id="btnHinglish" onclick="setLang('hinglish')">Hinglish</button>
-          <button class="lang-btn" id="btnEnglish" onclick="setLang('english')">English</button>
+        <!-- Language Toggle -->
+        <div style="display:flex;background:rgba(255,255,255,0.15);border-radius:100px;padding:3px;gap:2px;margin-right:6px;">
+          <button id="langHI" onclick="setLang('hi')" style="padding:4px 10px;border:none;border-radius:100px;font-size:0.68rem;font-weight:800;cursor:pointer;background:#fff;color:#e9188c;transition:all 0.2s;">HI</button>
+          <button id="langEN" onclick="setLang('en')" style="padding:4px 10px;border:none;border-radius:100px;font-size:0.68rem;font-weight:800;cursor:pointer;background:transparent;color:rgba(255,255,255,0.8);transition:all 0.2s;">EN</button>
         </div>
-        <button class="chat-close-btn" onclick="closeFreeChat()">&#10005;</button>
+        <button class="chat-close-btn" onclick="closeFreeChat()">✕</button>
       </div>
+
       <div class="chat-messages" id="chatMessages"></div>
+
+      <!-- Quick Replies -->
+      <div id="chatQR" style="display:none;flex-wrap:wrap;gap:6px;padding:8px 14px;background:#fff;border-top:1px solid #f5e6ef;"></div>
+
       <div class="chat-input-row">
         <input class="chat-input" id="chatInput" type="text"
-          placeholder="Type your message..."
+          placeholder="Message Priya..."
           maxlength="300"
           onkeydown="if(event.key==='Enter')RMBot.send()">
         <button class="chat-send-btn" onclick="RMBot.send()">
           <svg viewBox="0 0 24 24" fill="white" width="17" height="17"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
         </button>
       </div>
-      <div class="chat-footer-note">Private &middot; Secure &middot; 100% Discreet</div>
+      <div class="chat-footer-note">🔒 Free · Private · 100% Discreet</div>
     </div>
   </div>
 
+  <!-- Invisible lead form -->
   <form id="leadForm" action="https://formsubmit.co/ashukumar8076801908@gmail.com"
         method="POST" target="hidden_iframe" style="display:none">
-    <input type="hidden" name="_subject"  id="lf_subject" value="Real Meet Chat">
+    <input type="hidden" name="_subject"  id="lf_subject" value="💬 Real Meet — New Chat">
     <input type="hidden" name="_captcha"  value="false">
     <input type="hidden" name="_template" value="box">
     <input type="hidden" name="Chat"      id="lf_chat">
@@ -1560,564 +1567,663 @@
   <iframe name="hidden_iframe" style="display:none"></iframe>
 
 <style>
-.lang-toggle{display:flex;background:rgba(255,255,255,0.15);border-radius:20px;padding:3px;gap:2px;margin-right:8px;}
-.lang-btn{border:none;background:transparent;color:rgba(255,255,255,0.75);font-size:0.65rem;font-weight:700;padding:4px 10px;border-radius:16px;cursor:pointer;transition:all 0.18s;white-space:nowrap;}
-.lang-btn.active{background:rgba(255,255,255,0.92);color:#c4146f;}
-.chat-avatar{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;color:#fff;}
-/* Professional Pay Card */
-.rm-pay-card{background:#fff;border:1px solid #e8e8e8;border-radius:14px;padding:18px 20px;margin-top:10px;box-shadow:0 2px 14px rgba(0,0,0,0.07);}
-.rm-pay-header{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#999;margin-bottom:10px;}
-.rm-pay-price-row{display:flex;align-items:baseline;gap:8px;margin-bottom:12px;}
-.rm-pay-amount{font-size:1.9rem;font-weight:900;color:#1a1a1a;line-height:1;}
-.rm-pay-old{font-size:0.78rem;color:#bbb;text-decoration:line-through;}
-.rm-pay-off{font-size:0.62rem;font-weight:800;background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;padding:3px 8px;border-radius:6px;letter-spacing:0.04em;}
-.rm-pay-divider{height:1px;background:#f0f0f0;margin-bottom:12px;}
-.rm-pay-perks{font-size:0.77rem;color:#444;line-height:1.9;margin-bottom:16px;}
-.rm-pay-perk-row{display:flex;align-items:center;gap:8px;margin-bottom:1px;}
-.rm-pay-perk-dot{width:5px;height:5px;border-radius:50%;background:#e9188c;flex-shrink:0;}
-.rm-pay-btn{width:100%;padding:13px;background:#1a1a1a;color:#fff;border:none;border-radius:10px;font-weight:700;font-size:0.88rem;cursor:pointer;letter-spacing:0.02em;transition:background 0.18s,transform 0.12s;}
-.rm-pay-btn:hover{background:#333;transform:translateY(-1px);}
-.rm-pay-btn:active{transform:scale(0.98);}
-.rm-pay-note{font-size:0.62rem;color:#aaa;text-align:center;margin-top:8px;letter-spacing:0.03em;}
-/* FAB */
-.chat-fab{position:fixed;bottom:24px;right:20px;z-index:8000;width:54px;height:54px;border-radius:50%;background:linear-gradient(145deg,#e9188c,#c4146f);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(233,24,140,0.4);transition:transform 0.18s,box-shadow 0.18s;}
-.chat-fab:hover{transform:scale(1.07);}
-.chat-fab-dot{position:absolute;top:4px;right:4px;width:11px;height:11px;background:#4ade80;border-radius:50%;border:2px solid #fff;animation:fabPulse 2.2s ease-in-out infinite;}
-@keyframes fabPulse{0%,100%{opacity:1}50%{opacity:0.4}}
+/* Pay card inside chat */
+.rm-pay-card {
+  background: linear-gradient(145deg, #fff8fd, #fff);
+  border: 1.5px solid rgba(233,24,140,0.18);
+  border-radius: 18px;
+  padding: 18px;
+  margin-top: 10px;
+  box-shadow: 0 4px 20px rgba(233,24,140,0.08);
+}
+.rm-pay-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em;
+  text-transform: uppercase; color: #e9188c; margin-bottom: 10px;
+}
+.rm-pay-price-row { display:flex; align-items:baseline; gap:7px; margin-bottom:8px; }
+.rm-pay-amount    { font-size:2.2rem; font-weight:900; color:#e9188c; line-height:1; }
+.rm-pay-old       { font-size:0.82rem; color:#ccc; text-decoration:line-through; }
+.rm-pay-off       { font-size:0.68rem; font-weight:800; background:#e9188c; color:#fff; padding:3px 9px; border-radius:100px; }
+.rm-pay-perks     { font-size:0.8rem; color:#444; line-height:1.75; margin-bottom:14px; }
+.rm-pay-btn {
+  width:100%; padding:14px;
+  background: linear-gradient(135deg,#e9188c,#c4146f);
+  color:#fff; border:none; border-radius:12px;
+  font-weight:800; font-size:0.92rem; cursor:pointer;
+  box-shadow: 0 5px 20px rgba(233,24,140,0.38);
+  transition: transform 0.15s, box-shadow 0.15s;
+  letter-spacing: 0.01em;
+}
+.rm-pay-btn:hover  { transform:translateY(-1px); box-shadow:0 8px 24px rgba(233,24,140,0.45); }
+.rm-pay-btn:active { transform:scale(0.97); }
+.rm-pay-note { font-size:0.65rem; color:#bbb; text-align:center; margin-top:7px; }
+
+/* Tg soft link inside chat */
+.rm-tg-note {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:0.78rem; color:#555; margin-top:8px;
+  background:#f3f4f6; border-radius:10px; padding:8px 12px;
+}
+.rm-tg-note a { color:#0088cc; font-weight:700; text-decoration:none; }
 </style>
 
-<script>
-(function(){
-'use strict';
-var WA='919217507608';
-var TG='xkhushii';
-var TG_LINK='<a href="https://t.me/xkhushii" target="_blank" style="color:#e91e8c;font-weight:600;text-decoration:none;">@xkhushii (Telegram)</a>';
-var msgBox,inputEl;
-var lead={name:'',city:'',budget:'',outcome:'',lines:[]};
-var hasPaid=false;
-var msgCount=0;
-var payShownCount=0;
-var currentLang='hinglish';
-var opened=false;
-var rotIdx={};
 
-// ─── Language toggle ──────────────────────────
-window.setLang=function(lang){
-  currentLang=lang;
-  document.getElementById('btnHinglish').classList.toggle('active',lang==='hinglish');
-  document.getElementById('btnEnglish').classList.toggle('active',lang==='english');
+<script>
+(function () {
+'use strict';
+
+var WA = '919217507608';
+var msgBox, inputEl;
+var lead = { name: '', city: '', outcome: '', lines: [] };
+// Language system
+var currentLang = 'hi';
+window.setLang = function(l) {
+  currentLang = l;
+  ['HI','EN'].forEach(function(x) {
+    var b = document.getElementById('lang'+x);
+    if (!b) return;
+    var active = (x === l.toUpperCase());
+    b.style.background = active ? '#fff' : 'transparent';
+    b.style.color = active ? '#e9188c' : 'rgba(255,255,255,0.8)';
+  });
+  var inp = document.getElementById('chatInput');
+  if (inp) inp.placeholder = l==='en' ? 'Message Priya...' : 'Priya ko message karein...';
 };
 
-// ─── Pick rotating reply ──────────────────────
-function pick(key,arr){
-  if(!rotIdx[key])rotIdx[key]=0;
-  var i=rotIdx[key]%arr.length;
-  rotIdx[key]++;
-  return arr[i];
+var WA_NUM = '919217507608';
+var TG_UN  = 'xkhushii';
+var TG_LNK = '<a href="https://t.me/xkhushii" target="_blank" style="color:#e9188c;font-weight:700;text-decoration:none;">@xkhushii</a>';
+
+var lead = { name:'', city:'', outcome:'', lines:[] };
+var _rot = {};
+var msgCount = 0, shownPay = false, askedCity = false, askedProfile = false;
+
+function pickR(k, pool) {
+  _rot[k] = _rot[k] || 0;
+  var r = pool[_rot[k] % pool.length]; _rot[k]++;
+  return r;
 }
 
-function ftime(){var d=new Date();return('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);}
-function scrollBottom(){if(msgBox)msgBox.scrollTop=9999;}
-function escHtml(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+// Time
+function ft() {
+  var d = new Date();
+  return ('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);
+}
+function scrollB() { if (msgBox) msgBox.scrollTop = 9999; }
+function escH(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-function appendUser(text){
-  var w=document.createElement('div');
-  w.style.cssText='display:flex;flex-direction:column;align-items:flex-end;margin-bottom:4px';
-  w.innerHTML='<div class="chat-msg user">'+escHtml(text)+'</div><div class="chat-msg-time">'+ftime()+'</div>';
-  msgBox.appendChild(w);scrollBottom();
-  lead.lines.push('User: '+text.substring(0,200));
+// Quick replies
+function setQR(items, delay) {
+  delay = delay || 0;
+  setTimeout(function() {
+    var el = document.getElementById('chatQR');
+    if (!el) return;
+    if (!items || !items.length) { el.innerHTML = ''; el.style.display = 'none'; return; }
+    el.style.display = 'flex';
+    el.innerHTML = items.map(function(t) {
+      return '<button onclick="RMBot.qr(\''+t.replace(/\\/g,'\\\\').replace(/'/g,"\\'")+'\')"\
+ style="font-size:0.73rem;font-weight:600;padding:7px 13px;border-radius:100px;\
+border:1.5px solid #e9188c;color:#e9188c;background:#fff;cursor:pointer;white-space:nowrap;">'
+        + t + '</button>';
+    }).join('');
+  }, delay);
+}
+function clearQR() {
+  var el = document.getElementById('chatQR');
+  if (el) { el.innerHTML = ''; el.style.display = 'none'; }
 }
 
-function showTyping(cb,delay){
-  var ti=document.createElement('div');
-  ti.className='chat-typing';
-  ti.innerHTML='<span></span><span></span><span></span>';
-  msgBox.appendChild(ti);scrollBottom();
-  setTimeout(function(){if(ti.parentNode)ti.parentNode.removeChild(ti);cb();scrollBottom();},delay||1100);
+// Professional pay card - no emoji
+function payCard() {
+  var hi = currentLang === 'hi';
+  return '<div style="background:#fff;border:1px solid #e8dded;border-radius:14px;padding:22px;margin-top:10px;box-shadow:0 2px 18px rgba(30,27,75,0.07);">'
+    + '<div style="font-size:0.62rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:#9490b5;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid #f0eaf5;">'
+    + 'REAL MEET — INSTANT ACCESS</div>'
+    + '<div style="display:flex;align-items:baseline;gap:10px;margin-bottom:16px;">'
+    + '<span style="font-size:2.2rem;font-weight:900;color:#1e1b4b;line-height:1;">&#8377;49</span>'
+    + '<span style="font-size:0.82rem;color:#c4b5c8;text-decoration:line-through;">&#8377;199</span>'
+    + '<span style="font-size:0.62rem;font-weight:800;background:#e9188c;color:#fff;padding:3px 10px;border-radius:100px;letter-spacing:0.05em;">75% OFF</span>'
+    + '</div>'
+    + '<div style="font-size:0.8rem;color:#555;line-height:1.9;margin-bottom:18px;">'
+    + (hi
+      ? 'Direct call — Mam se personally baat karein<br>Real staff photos turant WhatsApp pe<br>Timing aur location aap tay karenge<br>Baaki payment cash on service, koi advance nahi<br>Identity aur privacy guaranteed protected'
+      : 'Direct call — speak personally with Mam<br>Real staff photos sent instantly on WhatsApp<br>You decide timing and location<br>Remaining payment cash on service, no advance<br>Identity and privacy fully protected')
+    + '</div>'
+    + '<button onclick="RMBot.pay()" style="width:100%;padding:14px 20px;background:#1e1b4b;color:#fff;border:none;border-radius:10px;font-weight:700;font-size:0.88rem;cursor:pointer;letter-spacing:0.03em;transition:background 0.2s;" onmouseover="this.style.background=\'#e9188c\'" onmouseout="this.style.background=\'#1e1b4b\'">'
+    + (hi ? 'Pay &#8377;49 — Mam se Abhi Baat Karein' : 'Pay &#8377;49 — Talk to Mam Now')
+    + '</button>'
+    + '<div style="font-size:0.61rem;color:#b0aac0;text-align:center;margin-top:10px;letter-spacing:0.04em;">UPI &nbsp;&middot;&nbsp; GPay &nbsp;&middot;&nbsp; PhonePe &nbsp;&middot;&nbsp; Card &nbsp;&middot;&nbsp; Net Banking</div>'
+    + '</div>';
 }
 
-function appendBot(html){
-  var w=document.createElement('div');
-  w.style.cssText='display:flex;flex-direction:column;align-items:flex-start;margin-bottom:4px';
-  w.innerHTML='<div class="chat-msg bot">'+html+'</div><div class="chat-msg-time">'+ftime()+'</div>';
-  msgBox.appendChild(w);scrollBottom();
-  lead.lines.push('Priya: '+html.replace(/<[^>]+>/g,'').substring(0,200));
+// Append user
+function appendUser(text) {
+  clearQR();
+  var w = document.createElement('div');
+  w.style.cssText = 'display:flex;flex-direction:column;align-items:flex-end;margin-bottom:4px';
+  w.innerHTML = '<div class="chat-msg user">' + escH(text) + '</div><div class="chat-msg-time">' + ft() + '</div>';
+  msgBox.appendChild(w); scrollB();
+  lead.lines.push('U: ' + text.substring(0,140));
 }
 
-// ─── Pay Card — shown every 3 messages ───────
-function payCard(){
-  var btnTxt=currentLang==='english'?'Pay Rs.49 — Get Access Now':'Rs.49 Pay Karein — Abhi Access Lein';
-  var h=currentLang==='english'
-    ?'DIRECT ACCESS — CONNECT WITH MAM'
-    :'DIRECT ACCESS — MAM SE MILEIN';
-  var perks=currentLang==='english'
-    ?['Mam\'s direct call within 2 minutes','Real profile photos on WhatsApp','You choose profile, timing and location','Remaining payment cash at service time','Your identity stays 100% private']
-    :['2 minute mein Mam ka direct call aayega','Real profile photos WhatsApp pe milenge','Profile, timing aur location aap decide karenge','Baaki payment cash in hand, service pe — koi advance nahi','Aapki identity 100% private rahegi'];
-  var ph=perks.map(function(p){
-    return'<div class="rm-pay-perk-row"><span class="rm-pay-perk-dot"></span><span>'+p+'</span></div>';
-  }).join('');
-  return'<div class="rm-pay-card"><div class="rm-pay-header">'+h+'</div>'
-    +'<div class="rm-pay-price-row"><span class="rm-pay-amount">Rs.49</span><span class="rm-pay-old">Rs.199</span><span class="rm-pay-off">75% OFF</span></div>'
-    +'<div class="rm-pay-divider"></div><div class="rm-pay-perks">'+ph+'</div>'
-    +'<button class="rm-pay-btn" onclick="RMBot.pay()">'+btnTxt+'</button>'
-    +'<div class="rm-pay-note">UPI &middot; Debit / Credit Card &middot; Net Banking &middot; 100% Secure</div></div>';
+// Bot typing then message
+function appendBot(html, delay, cb) {
+  delay = delay || 0;
+  var id = 'ti' + Date.now() + Math.random();
+  var ti = document.createElement('div');
+  ti.id = id; ti.className = 'chat-typing';
+  ti.innerHTML = '<span></span><span></span><span></span>';
+  msgBox.appendChild(ti); scrollB();
+  setTimeout(function() {
+    var e = document.getElementById(id); if (e) e.remove();
+    var w = document.createElement('div');
+    w.style.cssText = 'display:flex;flex-direction:column;align-items:flex-start;margin-bottom:4px';
+    w.innerHTML = '<div class="chat-msg bot">' + html + '</div><div class="chat-msg-time">' + ft() + '</div>';
+    msgBox.appendChild(w); scrollB();
+    lead.lines.push('P: ' + html.replace(/<[^>]+>/g,'').substring(0,140));
+    if (cb) cb();
+  }, 1100 + delay);
 }
 
-var lastPayTime=0;
-function showPay(delay){
-  if(hasPaid)return;
-  delay=delay||2500;
-  var now=Date.now();
-  if(now-lastPayTime<15000)return;
-  lastPayTime=now+delay;
-  setTimeout(function(){
-    if(hasPaid)return;
-    payShownCount++;
-    var w=document.createElement('div');
-    w.style.cssText='width:100%;max-width:92%;margin-bottom:8px';
-    w.innerHTML=payCard();
-    if(msgBox){msgBox.appendChild(w);scrollBottom();}
-  },delay);
+function addPayCard() {
+  var w = document.createElement('div');
+  w.style.cssText = 'display:flex;flex-direction:column;align-items:flex-start;margin-bottom:4px;width:100%';
+  w.innerHTML = payCard();
+  msgBox.appendChild(w); scrollB();
+  shownPay = true;
 }
 
-// ─── Intents ──────────────────────────────────
-var intents=[
-  // Basic greetings
-  {k:'greet',      r:/^(hi+|hello+|hey+|hii+|namaste|hlo|hlw|hye|hy|sup|namaskar|salam|good\s*(morning|evening|afternoon|night)|kaise\s*ho|kya\s*chal|helo|start|haan|kya\s*haal|theek\s*ho)\b/i},
-  // Affirmative / agreement
-  {k:'agree',      r:/^(haan|haa+n|yes+|yep|yup|ok+a*y*|theek\s*hai|bilkul|zaroor|sure|done|proceed|aage\s*bado|chalo|sahi\s*hai|perfect|great|good|accha|achha|right|got\s*it|understood|samajh|smjh)\b/i},
-  // Payment done
-  {k:'paid',       r:/payment\s*(done|kar\s*diya|ho\s*gaya|complete|kiya)|paid|pay\s*kar\s*diya|rs\.?\s*49\s*(pay|de|diya)|transaction\s*done/i},
-  // How to pay
-  {k:'how_pay',    r:/kaise\s*pay|payment\s*kaise|pay\s*karna\s*kaise|upi\s*kaise|paytm|gpay|phonepe|card\s*se|net\s*banking|payment\s*method|kaise\s*karein\s*pay/i},
-  // Name / who are you
-  {k:'name_q',     r:/tera\s*naam|apna\s*naam|your\s*name|tum\s*kaun|who\s*are\s*you|aap\s*kaun|introduce|priya\s*kaun/i},
-  // User telling their name
-  {k:'name_tell',  r:/mera\s*naam|my\s*name\s*is|main\s*hoon|i\s*am\s+[a-z]/i},
-  // Number / contact
-  {k:'number',     r:/number|contact|phone|mobile|direct.*number|personal.*number|madam.*number|mam.*number|number.*do|num\s*do|seedha\s*number|no\s*do|call\s*karo/i},
-  // WhatsApp
-  {k:'whatsapp',   r:/\bwhatsapp\b|wtsapp|wp\s*number|wa\s*number/i},
-  // Profiles
-  {k:'profile',    r:/profile|girl|ladki|photo|pic|dikhao|russian|college\s*girl|office\s*girl|widow|corporate|single\s*girl|unsatisfied|job\s*girl|mature|aunty|bhabhi|kaisi\s*hai|konsi|staff|model|age\s*kya/i},
-  // Service details
-  {k:'service',    r:/service|kya\s*milega|kya\s*karte|kya\s*dete|batao|detail|explain|samjhao|spa|massage|home\s*visit|private\s*meeting|real\s*meeting|kya\s*hai\s*ye|kya\s*offer|provide/i},
-  // Price / rate
-  {k:'price',      r:/price|rate|kitna|cost|charge|fees?|paisa|paise|kitne|amount|budget|rupee|\brs\.?\b|kitna\s*lagega|1\s*hour|2\s*hour|ghante|dur|full\s*night|overnight/i},
-  // City / location
-  {k:'city',       r:/city|kahan|where|location|available|area|cover|delhi|noida|gurgaon|gurugram|faridabad|meerut|ghaziabad|jaipur|jodhpur|udaipur|kota|ajmer|bikaner|surat|ahmedabad|vadodara|rajkot|mumbai|pune|nagpur|nashik|thane|bangalore|bengaluru|mysore|hyderabad|secunderabad|visakhapatnam|vijayawada|chennai|coimbatore|madurai|kolkata|howrah|siliguri|chandigarh|amritsar|ludhiana|jalandhar|patiala|bhopal|indore|gwalior|jabalpur|patna|gaya|muzaffarpur|bhagalpur|darbhanga|hajipur|lucknow|kanpur|agra|varanasi|prayagraj|allahabad|aligarh|bareilly|gorakhpur|moradabad|ranchi|jamshedpur|dhanbad|raipur|bilaspur|bhilai|bhubaneswar|cuttack|dehradun|haridwar|rishikesh|guwahati|shimla|manali|srinagar|jammu|kochi|thiruvananthapuram|kozhikode|kerala|gujarat|maharashtra|karnataka|tamilnadu|andhra|telangana|bengal|bihar|jharkhand|odisha|uttarakhand|assam|himachal|punjab|haryana|goa|rajasthan|up\b|mp\b|uttar\s*pradesh|madhya\s*pradesh|poori\s*india|all\s*india|poore\s*desh/i},
-  // Home / hotel
-  {k:'hotel',      r:/hotel\s*(mein|pe|service)|room\s*(mein|pe)|kisi\s*bhi\s*hotel|3\s*star|4\s*star|5\s*star/i},
-  {k:'home',       r:/ghar\s*(pe|par|aana)|home\s*visit|flat\s*pe|apartment|pg\s*pe|paying\s*guest|mere\s*ghar/i},
-  // Time
-  {k:'timing',     r:/kab\s*milega|kab\s*available|kitne\s*baje|time\s*kya|subah|shaam|dopahar|morning|evening|raat\s*ko|night\s*mein|aaj|kal|same\s*day|today|tomorrow/i},
-  // Safety / trust
-  {k:'safety',     r:/safe|real\s*hai|genuine|trust|sach|pakka|fraud|fake|scam|guarantee|sahi\s*hai|original|verified|legit|bharosa|real\s*service|sach\s*mein/i},
-  // Cash / advance
-  {k:'cash',       r:/cash|cod|advance|bina\s*payment|udhaar|pehle\s*pay|sirf\s*cash|online\s*nahi|paisa\s*pehle/i},
-  // Booking
-  {k:'booking',    r:/book|milna\s*hai|milwa|ready\s*hoon|kaise\s*milega|confirm\s*karo|date\s*fix|appointment|abhi\s*book|booking\s*karna/i},
-  // Privacy
-  {k:'privacy',    r:/private|privacy|kisi\s*ko\s*pata\s*nahi|identity|confidential|secret|koi\s*nahi\s*janega|discreet/i},
-  // Discount
-  {k:'discount',   r:/discount|offer|sasta|kam\s*price|special\s*deal|free|cheap/i},
-  // Two girls
-  {k:'two_girls',  r:/do\s*ladki|two\s*girls|2\s*girls|dono\s*chahiye/i},
-  // Satisfaction
-  {k:'satisfy',    r:/satisfaction|guarantee|pasand|enjoy|maza|khushi|acha\s*lagega/i},
-  // Telegram
-  {k:'tg',         r:/telegram|@xkhushii/i},
-  // Negative / not interested
-  {k:'negative',   r:/\bnahi\b|\bnai\b|\bnhi\b|\bno\b|mahanga|zyada|expensive|baad\s*mein|later|sochta\s*hoon|jane\s*do|rehne\s*do|chhod|nahi\s*chahiye|not\s*interested|skip/i},
-  // Thanks
-  {k:'thanks',     r:/thanks|thank\s*you|shukriya|dhanyawad|\bthx\b|\bty\b|bahut\s*achha|bahut\s*shukriya/i},
-  // Out of scope
-  {k:'outscope',   r:/weather|cricket|football|movie|film|khana\s*recipe|politics|share\s*market|stock|crypto|bitcoin|science|history|padhna|study/i},
+// =============================================
+// INTENT DETECTION
+// =============================================
+var INTENTS = [
+  { k:'greet',    r:/^(hi+|hello+|hey|namaste|hlo|hlw|hye|hy|sup|salam|namaskar|kaise\s*ho|kya\s*chal|good\s*(morning|evening|night|afternoon)|bhai|yaar|yrr|bro|helo|start)\s*[!?]*$/i },
+  { k:'number',   r:/\bnumber\b|personal\s*number|madam.*number|mam.*number|number.*do|number.*chahiye|number.*share|contact.*do|seedha.*number|direct.*contact|whatsapp.*number|number.*bata/i },
+  { k:'service',  r:/service|kya\s*milega|kya\s*karte|kya\s*dete|kya\s*offer|kya\s*provide|batao|detail|explain|samjhao|spa|massage|real.*meet.*kya|kya\s*hai\s*yeh|kaise\s*kaam/i },
+  { k:'profile',  r:/profile|girl|ladki|photo|pic|dikh|russian|college\s*girl|office\s*girl|widow|corporate|single\s*girl|mature|aunty|bhabhi|staff\s*kaisi|kaun\s*si|konsi|type\s*kya|age\s*kitni|kitni\s*age/i },
+  { k:'price',    r:/price|rate|kitna|cost|charge|fees?|paisa|paise|kitne|amount|budget|rupee|rs\.?\s*\d|&#8377;|\d+\s*rs|how\s*much|pricing|rate\s*kya|kitna\s*lagega/i },
+  { k:'city',     r:/city|kahan|where|available.*kahan|service.*kahan|all.*india|cover|mere.*area|which\s*city|kaunsi\s*city|kaun\s*sa\s*city|poori\s*india|sabhi\s*city|har\s*jagah/i },
+  { k:'delhi',    r:/delhi|noida|gurgaon|gurugram|faridabad|ghaziabad|meerut|ncr/i },
+  { k:'rajasthan',r:/jaipur|jodhpur|udaipur|kota|ajmer|bikaner|alwar|bhilwara|sikar|rajasthan/i },
+  { k:'gujarat',  r:/surat|ahmedabad|vadodara|rajkot|gandhinagar|anand|gujarat/i },
+  { k:'mumbai',   r:/mumbai|pune|nagpur|nashik|thane|aurangabad|navi\s*mumbai|kolhapur|maharashtra/i },
+  { k:'up',       r:/lucknow|kanpur|agra|varanasi|allahabad|prayagraj|mathura|aligarh|bareilly|gorakhpur|moradabad|ghaziabad|uttar\s*pradesh|\bup\b/i },
+  { k:'mp',       r:/bhopal|indore|gwalior|jabalpur|ujjain|rewa|sagar|madhya\s*pradesh|\bmp\b/i },
+  { k:'south',    r:/bangalore|bengaluru|mysore|hyderabad|secunderabad|chennai|coimbatore|madurai|kochi|thiruvananthapuram|kerala|karnataka|tamilnadu|tamil\s*nadu|andhra|telangana/i },
+  { k:'east',     r:/kolkata|howrah|patna|gaya|ranchi|jamshedpur|bhubaneswar|guwahati|bengal|bihar|jharkhand|odisha|assam/i },
+  { k:'north',    r:/chandigarh|amritsar|ludhiana|jalandhar|dehradun|shimla|srinagar|jammu|punjab|haryana|himachal|uttarakhand/i },
+  { k:'hotel',    r:/hotel|hotel\s*mein|hotel\s*room|hotel\s*pe|5\s*star|4\s*star|3\s*star/i },
+  { k:'home',     r:/ghar\s*pe|ghar\s*par|ghar\s*aa|home\s*visit|pg\s*pe|flat\s*pe|apartment|ghar\s*aayegi|home.*service/i },
+  { k:'safety',   r:/safe|real\s*hai|genuine|trust|sach|pakka|fraud|fake|scam|guarantee|sahi\s*hai|original|verified|bharosa|jhooth|cheat|legit/i },
+  { k:'cash',     r:/cash|cod|\badvance\b|bina.*payment|udhaar|pehle.*pay|cash.*on|sirf.*cash|no.*advance/i },
+  { k:'timing',   r:/kitne\s*time|kitni\s*der|kab\s*tak|same\s*day|aaj|tonight|abhi.*possible|how\s*soon|jaldi|kab\s*milega/i },
+  { k:'duration', r:/kitne\s*ghante|1\s*hour|2\s*hour|3\s*hour|full\s*night|overnight|poori\s*raat|full\s*evening/i },
+  { k:'privacy',  r:/private|privacy|identity|koi.*nahi\s*janega|koi.*dekhega|discreet|secret|record\s*hoga|koi.*janega/i },
+  { k:'discount', r:/discount|offer|sasta|deal|less.*price|price.*kam|rate.*kam|koi.*offer/i },
+  { k:'two',      r:/do\s*girl|2\s*girl|do\s*ladki|duo/i },
+  { k:'night',    r:/full\s*night|overnight|poori\s*raat|raat\s*bhar|raat.*stay/i },
+  { k:'booking',  r:/book|confirm|appointment|abhi\s*karna|ready\s*hoon|set\s*karo|slot|kaise\s*milega|milna\s*hai/i },
+  { k:'tg',       r:/telegram|@xkhushii/i },
+  { k:'paid',     r:/pay.*(?:kar|ho|kiya|diya)|paid|payment.*done|49.*diya|screenshot|receipt/i },
+  { k:'negative', r:/\bnahi\b|\bnai\b|\bnhi\b|\bno\b|mahanga|zyada|expensive|baad\s*mein|later|sochta|rehne\s*do|chhod|nahi\s*chahiye|interested\s*nahi/i },
+  { k:'thanks',   r:/thanks|thank\s*you|shukriya|dhanyawad|\bthx\b|\bty\b/i },
+  { k:'out',      r:/weather|cricket|movie|film|khana\s*banao|politics|news|technology|doctor|hospital|relationship|pyaar|\blove\b|stock|crypto|bitcoin|recipe|song\s*suno/i },
 ];
 
-function detect(t){
-  for(var i=0;i<intents.length;i++){
-    if(intents[i].r.test(t))return intents[i].k;
+function detect(t) {
+  for (var i = 0; i < INTENTS.length; i++) {
+    if (INTENTS[i].r.test(t)) return INTENTS[i].k;
   }
-  return 'default';
+  return 'dflt';
 }
 
-// ─── All Replies ──────────────────────────────
-var R={
-
-  greet:[
-    'Namaste! Main Priya hoon — Real Meet ki personal assistant.<br><br>Aapka swagat hai. Koi bhi sawaal ho — service, profiles, rate ya booking — freely poochhen. Yahan sab 100% private hai.<br><br>Pehle apna naam batao toh personally help karungi!',
-    'Hello! Real Meet mein aapka swagat hai.<br><br>Main Priya hoon. Bejhijhak kuch bhi poochhen — koi judgment nahi yahan. Kya help kar sakti hoon?',
-    'Hi! Achha hua aap aaye.<br><br>Main Priya hoon, Real Meet se. Seedha poochhen jo jaanna ho — main clearly bata dungi.',
-  ],
-
-  agree:[
-    'Bilkul! Toh phir seedha kaam karte hain.<br><br>Rs.49 pay karo — Mam 2 minute mein directly contact karengi. Real photos WhatsApp pe milenge, aap profile choose karo, aur baaki sab cash on service.',
-    'Perfect! Toh ab ek kaam karo — Rs.49 pay karo neeche se. Mam turant connect karengi aur sab arrange ho jaayega.',
-    'Achha! Toh ready hain aap. Rs.49 pay karo aur Mam directly aapko call karengi — real photos, booking, sab kuch wahan.',
-  ],
-
-  paid:[
-    'Bahut achha! Payment confirm hone ke baad Mam 2-5 minute mein aapko directly WhatsApp ya call karengi.<br><br>Agar 10 minute mein koi contact na aaye toh please Telegram pe message karein — '+TG_LINK,
-    'Payment ho gaya — ab bas wait karo. Mam thodi der mein contact karengi directly.<br><br>Koi issue ho toh Telegram pe reach karein: '+TG_LINK,
-  ],
-
-  how_pay:[
-    'Payment process bilkul simple hai:<br><br>1. Neeche "Rs.49 Pay Karein" button dabao<br>2. UPI (GPay, PhonePe, Paytm), Card ya Net Banking — koi bhi use karo<br>3. Payment complete hote hi Mam 2 minute mein directly call/WhatsApp karengi<br><br>Koi bada advance nahi — sirf Rs.49 abhi, baaki sab cash on service.',
-    'Neeche button hai — uss pe click karo. UPI, Debit/Credit Card, Net Banking — sab accept hota hai. Rs.49 pay hone ke baad Mam khud contact karengi.',
-  ],
-
-  name_q:[
-    'Main Priya hoon — Real Meet ki personal assistant. Mera kaam hai aapko service ke baare mein guide karna aur Mam se connect karana.<br><br>Aap ka naam kya hai? Personally address karna achha lagta hai!',
-    'Main Priya hoon. Real naam hai, real person nahi — main assistant hoon. Mam jo hain woh real expert hain jo aapko directly guide karengi.<br><br>Aapka naam batao?',
-  ],
-
-  name_tell:[
-    'Bahut achha! Ab batao — service ke baare mein kya jaanna hai? Profiles, rate, city — kuch bhi poochhen.',
-    'Nice! Kya help kar sakti hoon aapki?',
-  ],
-
-  number:[
-    'Personal number sirf Rs.49 booking ke baad milta hai — yeh Mam ki privacy ke liye bhi hai aur aapki bhi.<br><br>Process simple hai: Rs.49 pay karo → Mam 2 minute mein call ya WhatsApp karengi → phir direct contact permanent ho jaata hai.<br><br>Ek baar connect hone ke baad koi intermediary nahi — seedha Mam se.',
-    'Directly Mam ka number chahiye — bilkul samajhti hoon.<br><br>Mam ke paas roz bahut messages aate hain — sirf confirmed bookings pe personal time deti hain. Rs.49 pay karo aur turant direct number milega.',
-    'Number abhi nahi de sakti — lekin Rs.49 mein Mam khud 2 minute mein call karengi. Uske baad permanent direct contact ho jaata hai.',
-  ],
-
-  whatsapp:[
-    'WhatsApp pe connect karna chahte hain — perfect choice.<br><br>Rs.49 pay karo aur Mam ka personal WhatsApp number turant milega. Real photos, booking, timing — sab wahan comfortably ho jaata hai.',
-    'WhatsApp pe best hota hai sab kuch — photos, timing, location easily set ho jaata hai.<br><br>Rs.49 ke baad Mam ka personal WhatsApp milega directly.',
-  ],
-
-  profile:[
-    'Profiles clearly bata deti hoon:<br><br><b>College Girl</b> — Age 20-24, Rs.1,500/hr se<br><b>Office / Job Girl</b> — Age 24-30, Rs.2,000/hr se<br><b>Corporate</b> — Age 26-35, Rs.3,000/hr se<br><b>Widow / Single Women</b> — Age 28-40, Rs.2,000/hr se<br><b>Mature / Aunty</b> — Age 35-45, Rs.1,500/hr se<br><b>Russian / Exotic</b> — Rs.5,000/hr se<br><br>Sab verified hain. Real photos Rs.49 ke baad WhatsApp pe milte hain — dekh ke decide karo, koi pressure nahi.',
-    'Kaunsi type prefer karoge?<br><br>Young — College/Office (20-28 age)<br>Professional — Corporate (25-35 age)<br>Mature — Widow/Aunty (30-45 age)<br>Exotic — Russian<br><br>Jo bhi ho — photos pehle dekho phir decide karo. Rs.49 pay karo aur Mam turant photos send karengi.',
-    'Russian staff bahut popular hai — premium experience, Rs.5,000/hr se start.<br>College Girl bhi demand mein hai — young, age 20-24, Rs.1,500/hr se.<br><br>Exact photos aur details Rs.49 ke baad Mam personally share karengi.',
-  ],
-
-  service:[
-    'Real Meet kya provide karta hai — clearly bata deti hoon:<br><br><b>Home Visit</b> — Staff aapke ghar/PG/flat pe aati hai<br><b>Hotel Service</b> — Kisi bhi hotel mein, koi bhi star rating<br><b>Spa aur Massage</b> — Full body professional massage<br><b>Private Meeting</b> — One-to-one, fully discreet<br><br>All India, 24 ghante, 7 din available. Koi hidden charge nahi.',
-    'Hum dete hain:<br><br>Home ya Hotel visit — aap decide karo<br>Staff: College, Office, Corporate, Widow, Mature, Russian<br>Age 20-45, sab verified<br>All India coverage, same-day possible<br>Cash on service — koi bada advance nahi<br>Identity 100% private',
-  ],
-
-  price:[
-    'Rate clearly bata deti hoon:<br><br><b>1 hour — Rs.1,500 se start</b><br><b>2 hour — Rs.2,500 se start</b><br><b>3 hour — Rs.3,500 se start</b><br><b>Full evening (4-5 hr) — Rs.5,000 se</b><br><b>Full night — Rs.8,000 se</b><br><br>Russian ya premium profiles ka rate alag hota hai. Budget batao — best match suggest kar deti hoon.',
-    'Rs.49 sirf Mam se connect karne ke liye — baaki poori service cash in hand, service ke waqt. Koi bada online advance nahi.<br><br>Roughly: 1hr = Rs.1,500+, 2hr = Rs.2,500+, full night = Rs.8,000+. Profile type se thoda vary karta hai.',
-    'Budget kya hai aapka? Bata do — us range mein best option suggest kar sakti hoon. 1 hour Rs.1,500 se start hai.',
-  ],
-
-  city:[
-    'All India mein available hain hum — har city, har state.<br><br>Delhi NCR, Mumbai, Bangalore, Hyderabad, Chennai, Kolkata, Jaipur, Surat, Pune, Ahmedabad, Lucknow, Chandigarh, Bhopal, Indore, Patna, Ranchi, Bhubaneswar, Dehradun aur hazaron aur cities.<br><br>Chhota shehar bhi cover hota hai. Aap city batao — Mam call pe exact availability 2 minute mein confirm kar deti hain.',
-    'Haan, aapki city mein available hain! All India service hai — metro se tier-2 tier-3 cities tak, chhote shehar bhi.<br><br>Same-day booking bhi possible hai zyaadatar cities mein. City batao na?',
-    'Bihar — Patna, Gaya, Muzaffarpur, Bhagalpur, Darbhanga, Hajipur — sab cover hota hai.<br>UP — Lucknow, Kanpur, Agra, Varanasi, Meerut, Noida — sab available.<br>Rajasthan — Jaipur, Jodhpur, Udaipur, Kota — haan.<br>MP — Bhopal, Indore, Gwalior, Jabalpur — haan.<br><br>Koi bhi city ho — hum hain wahan. Rs.49 pay karo aur Mam confirm kar deti hain.',
-  ],
-
-  hotel:[
-    'Hotel service bilkul available hai — kisi bhi hotel mein, 3 star, 4 star, 5 star — koi bhi.<br><br>Aapko sirf room book karna hai. Staff discreetly aayegi — koi notice nahi karega. Timing aur address Mam se fix ho jaayega.',
-    'Haan, hotel mein available hai. Aap room book karo, timing batao — Mam baaki sab handle karengi. Rs.49 pay karo aur sab arrange ho jaayega.',
-  ],
-
-  home:[
-    'Ghar pe service bilkul available hai — home visit hamari speciality hai.<br><br>Staff aapke ghar, PG, flat ya apartment pe aayegi. Discreet aur private — koi nahi jaanta. Timing Mam se fix hoti hai.',
-    'Haan, ghar pe aayengi. Aapko kahin jaana nahi padta — staff directly aapke paas aati hai. Rs.49 pay karo aur Mam se timing fix karo.',
-  ],
-
-  timing:[
-    'Timing ke baare mein — hum 24 ghante available hain, 7 din. Morning, evening, raat — koi bhi time.<br><br>Same-day booking bhi possible hai. Exact slot Mam call pe seedha fix kar deti hain — Rs.49 pay karo aur abhi confirm karo.',
-    'Koi bhi time ho — subah, shaam ya raat — hum available hain. Aaj bhi booking possible hai zyaadatar cities mein.<br><br>Rs.49 pay karo aur Mam timing confirm kar deti hain.',
-  ],
-
-  safety:[
-    'Safety ke baare mein seedha bolunga — yeh sahi sawaal hai.<br><br>Hum 2+ saal se operate kar rahe hain. 10,000+ satisfied clients hain — agar genuine nahi hote toh itne saal kaise chalte?<br><br>Important points:<br>— Aapki identity kabhi record nahi hoti<br>— Location aap choose karte ho<br>— Koi bada advance nahi — sirf Rs.49<br>— Baaki payment cash on service<br>— Koi pressure nahi, cancel option available',
-    'Trust karna sahi concern hai. Proof dene ka sabse achha tarika — Rs.49 pay karo, Mam se baat karo, photos dekho — sab real dikhega apne aap.<br><br>Agar fake hote toh website, assistant, sab kuch maintain nahi karte.',
-  ],
-
-  cash:[
-    'Bilkul clear hai process:<br><br>1. Rs.49 abhi — sirf Mam se connect karne ke liye<br>2. Mam se baat, profile choose karo, timing fix karo<br>3. Service ke waqt — poori payment cash in hand<br><br>Koi bada advance nahi. Rs.49 se kam risk kya hoga?',
-    'Haan, baaki sab cash on service hai. Rs.49 sirf access ke liye — ek chai se bhi kam. Koi risk nahi.',
-  ],
-
-  booking:[
-    'Booking karna chahte hain — perfect!<br><br>Rs.49 pay karo → Mam 2 min mein contact karengi → WhatsApp pe real photos → profile choose karo → timing aur location confirm → cash on service.<br><br>Total time: 10 minute. Same-day bhi possible.',
-    'Ek step mein ho jaata hai — Rs.49 pay karo aur Mam seedha contact karengi. Baaki sab unse directly set hoga.',
-  ],
-
-  privacy:[
-    'Privacy ke baare mein — aapki identity kabhi record nahi hoti. Koi data save nahi hota.<br><br>Location aap choose karte ho. Staff discreetly aati hai. Koi trace nahi, koi record nahi.<br><br>Isliye hi 10,000+ clients repeat karte hain — complete privacy guarantee hai.',
-    '100% private service hai. Koi nahi jaanta — koi record nahi, koi trace nahi. Aap completely comfortable rahte ho.',
-  ],
-
-  discount:[
-    'Discount ke baare mein Mam directly guide kar sakti hain — kuch cases mein pehle client ko special deal milti hai.<br><br>Rs.49 pay karo aur Mam se poochho — woh best deal dene ki koshish karti hain budget ke hisaab se.',
-    'Regular clients ke liye better rates hote hain. Mam se seedha baat karo — woh aapki situation mein best option suggest karengi.',
-  ],
-
-  two_girls:[
-    'Do girls ka arrangement bhi possible hai kuch cases mein.<br><br>Exact availability aur rate ke baare mein Mam call pe seedha bata sakti hain. Rs.49 pay karo aur directly poochho — woh clearly guide karengi.',
-  ],
-
-  satisfy:[
-    'Satisfaction guaranteed hai — isliye itne clients repeat karte hain.<br><br>Profile aap khud choose karte ho — photos dekh ke. Koi surprise nahi, koi force nahi. Pasand na aaye toh cancel bhi kar sakte ho.',
-    '100% satisfaction hamaara goal hai. Photos pehle dekho, phir decide karo — koi pressure nahi kabhi.',
-  ],
-
-  tg:[
-    'Telegram pe bhi available hain — '+TG_LINK+'<br><br>Lekin honestly — call ya WhatsApp pe Mam ka instant personal response milta hai, Telegram se kaafi fast.<br><br>Rs.49 pay karo aur Mam 2 minute mein directly contact karengi.',
-  ],
-
-  negative:[
-    'Koi baat nahi — jab bhi ready ho, main 24/7 yahan hoon.<br><br>Agar koi confusion hai toh Telegram pe bhi poochh sakte hain — '+TG_LINK+' pe message karo, wahan bhi help milegi.',
-    'Bilkul theek hai. Koi pressure nahi. Jab mann kare wapas aana.<br><br>Ek baat yaad rakhna — Rs.49 mein Mam ka personal number, real photos, aur baaki cash on service. Jab ready ho.',
-  ],
-
-  thanks:[
-    'Koi baat nahi! Koi bhi sawaal ho toh zaroor poochhen — 24/7 hoon main.',
-    'Khushi hui help karke. Booking ke liye kabhi bhi — hoon yahan.',
-  ],
-
-  outscope:[
-    'Yeh topic mere scope se thoda bahar hai.<br><br>Lekin agar koi bhi aur cheez jaanni ho — Telegram pe seedha poochh sakte hain: '+TG_LINK+'. Wahan se bhi guide mil sakti hai.<br><br>Real Meet service ke baare mein kuch poochhna ho toh main yahan hoon!',
-    'Is topic pe main directly help nahi kar sakti. Real Meet service, profiles, rate, ya booking ke baare mein kuch bhi poochhen — sab bata sakti hoon.<br><br>Ya Telegram pe reach karein: '+TG_LINK,
-  ],
-
-  default:[
-    'Yeh cheez Mam call pe bahut achhe se explain kar sakti hain — aapki situation ke hisaab se personally guide karengi.<br><br>Rs.49 pay karein aur 2 minute mein Mam directly aapko contact karengi.',
-    'Is baare mein Mam zyada clearly bata sakti hain. Ek baar seedha baat karo — sab 5 minute mein clear ho jaata hai.<br><br>Ya koi aur sawaal ho toh yahan poochhen.',
-    'Samajh nahi aaya thoda — thoda clearly poochhen? Ya agar koi complex cheez hai toh Telegram pe '+TG_LINK+' pe directly poochh sakte hain.',
-  ],
-};
-
-// ─── Smart context memory ─────────────────────
-var ctx={
-  askedName:false,
-  askedCity:false,
-  askedBudget:false,
-  lastIntent:'',
-  consecutive:0 // same intent count
-};
-
-// Extract name from text
-function tryName(t){
-  var m=t.match(/(?:mera\s*naam|my\s*name\s*is|main\s*hoon|i\s*am)\s+([a-zA-Z]{2,14})/i)
-    ||t.match(/^([A-Z][a-z]{2,12})$/); // just a capitalized name
-  if(!m)return'';
-  var skip='haan nahi ok yes no service rate price city location safe real main booking chat help priya real meet'.split(' ');
-  var n=m[1].toLowerCase();
-  return skip.indexOf(n)===-1?m[1].charAt(0).toUpperCase()+m[1].slice(1):'';
+function tryName(t) {
+  var m = t.match(/(?:naam|name)\s*(?:hai|is)?\s*([a-zA-Z]{2,15})/i)
+        || t.match(/(?:I am|I'm|main)\s+([a-zA-Z]{2,15})\s*(?:hoon|hun)?/i);
+  if (!m) return '';
+  var stop = 'kya hai hoon hun nahi price rate city delhi service book call meet real help haan ok yes no aap main mai agar kaise bhai yaar hi hello hey mam madam'.split(' ');
+  var n = m[1].toLowerCase();
+  return stop.indexOf(n) === -1 ? m[1][0].toUpperCase()+m[1].slice(1) : '';
 }
 
-// Extract city from text
-function tryCity(t){
-  var cities=['delhi','noida','gurgaon','gurugram','faridabad','meerut','ghaziabad',
-    'mumbai','pune','nagpur','nashik','thane',
-    'bangalore','bengaluru','mysore','hubli','mangalore',
-    'hyderabad','secunderabad','warangal','visakhapatnam','vijayawada',
-    'chennai','coimbatore','madurai','salem',
-    'kolkata','howrah','durgapur','siliguri',
-    'jaipur','jodhpur','udaipur','kota','ajmer','bikaner',
-    'surat','ahmedabad','vadodara','rajkot',
-    'lucknow','kanpur','agra','varanasi','prayagraj','allahabad','aligarh','bareilly','gorakhpur','moradabad',
-    'patna','gaya','muzaffarpur','bhagalpur','darbhanga',
-    'bhopal','indore','gwalior','jabalpur','ujjain',
-    'chandigarh','amritsar','ludhiana','jalandhar','patiala',
-    'ranchi','jamshedpur','dhanbad',
-    'raipur','bilaspur','bhilai',
-    'bhubaneswar','cuttack','puri',
-    'dehradun','haridwar','rishikesh','roorkee',
-    'guwahati','silchar','dibrugarh',
-    'shimla','manali','dharamshala',
-    'srinagar','jammu',
-    'kochi','thiruvananthapuram','kozhikode','thrissur',
-    'goa','panaji'];
-  var tl=t.toLowerCase();
-  for(var i=0;i<cities.length;i++){
-    if(tl.indexOf(cities[i])>-1)return cities[i].charAt(0).toUpperCase()+cities[i].slice(1);
-  }
-  return'';
-}
+// =============================================
+// REPLY BANK
+// =============================================
+function getReply(k) {
+  var hi = currentLang === 'hi';
 
-// Extract budget from text
-function tryBudget(t){
-  var m=t.match(/rs\.?\s*(\d{3,6})|(\d{3,6})\s*(?:rs|rupee|ka\s*budget|budget)|budget\s*(?:hai|mera|ka)?\s*(\d{3,6})/i);
-  if(m)return'Rs.'+(m[1]||m[2]||m[3]);
-  if(/1000|1500|2000|3000|5000|8000|10000/i.test(t))return t.match(/\d{4,5}/)[0];
-  return'';
-}
+  var banks = {
 
-// Smart follow-up based on what we know
-function smartFollowUp(intent){
-  if(hasPaid)return;
-  var followUps=[];
+    greet: hi ? [
+      'Namaste. Main Priya hoon — Real Meet ki personal assistant.<br><br>Jo bhi jaanna ho — service, profiles, pricing, booking — openly poochhen. Yahan sab bilkul private aur confidential hai.<br><br>Aapka naam bata sakte hain?',
+      'Real Meet mein swagat hai. Main Priya hoon.<br><br>Koi bhi sawaal ho — seedha poochhen. Koi judgment nahi.<br><br><span style="font-size:0.76rem;color:#9490b5;">College Girl &nbsp;&middot;&nbsp; Office Girl &nbsp;&middot;&nbsp; Corporate &nbsp;&middot;&nbsp; Widow &nbsp;&middot;&nbsp; Russian — All India available</span>',
+      'Hello. Real Meet service ke baare mein guide karne ke liye hoon. Kya help kar sakti hoon?'
+    ] : [
+      'Welcome to Real Meet. I\'m Priya — your personal assistant.<br><br>Ask anything about our services, profiles, pricing, or booking. Everything here is completely private.',
+      'Hello, I\'m Priya from Real Meet.<br><br>No judgment here — ask freely.<br><br><span style="font-size:0.76rem;color:#9490b5;">College Girl &nbsp;&middot;&nbsp; Office Girl &nbsp;&middot;&nbsp; Corporate &nbsp;&middot;&nbsp; Widow &nbsp;&middot;&nbsp; Russian — All India available</span>',
+      'Hi, I\'m Priya. How can I help you today?'
+    ],
 
-  if(!lead.name&&msgCount>=2&&!ctx.askedName){
-    ctx.askedName=true;
-    followUps.push({
-      delay:4000,
-      msg:'Waise — aapka naam kya hai? Personally address karna achha lagta hai!'
-    });
-  } else if(!lead.city&&msgCount>=1&&!ctx.askedCity&&['service','profile','price','agree'].indexOf(intent)>-1){
-    ctx.askedCity=true;
-    followUps.push({
-      delay:4200,
-      msg:'Aap kis city mein hain? Seedha wahan ki availability confirm kar sakti hoon!'
-    });
-  } else if(!lead.budget&&msgCount>=3&&!ctx.askedBudget&&['price','profile','booking'].indexOf(intent)>-1){
-    ctx.askedBudget=true;
-    followUps.push({
-      delay:4000,
-      msg:'Budget roughly kitna sochh rakha hai? Us hisaab se best option suggest kar sakti hoon.'
-    });
-  }
+    number: hi ? [
+      'Personal number sirf &#8377;49 booking ke baad share hota hai.<br><br>Mam ke paas bahut requests aate hain — personal time sirf genuine clients ke liye reserve hai. &#8377;49 pay karein, aur 2 minute mein Mam personally call ya WhatsApp karengi. Uske baad direct contact permanent rehta hai.',
+      '&#8377;49 ke baad Mam ka personal number turant milega — permanently. Process: Pay &#8377;49 &#8594; 2 min mein Mam contact &#8594; Direct connection. Simple.',
+      'Number abhi publicly nahi de sakti — lekin &#8377;49 ke baad seedha Mam ka personal contact aapke paas hoga.'
+    ] : [
+      'Mam\'s personal number is shared after &#8377;49 booking only.<br><br>Mam receives many requests — personal time is reserved for genuine clients. Pay &#8377;49 and Mam will personally call or WhatsApp you within 2 minutes. After that, direct contact stays permanent.',
+      'After &#8377;49, Mam\'s personal number is yours permanently. Process: Pay &#8377;49 &#8594; Mam contacts in 2 min &#8594; Direct connection.',
+      'Can\'t share the number publicly — but after &#8377;49, you\'ll have Mam\'s personal contact directly.'
+    ],
 
-  // Context-aware nudge based on last intent
-  var nudges={
-    profile: 'Profiles clear ho gayi? Rs.49 pay karo aur Mam real photos directly WhatsApp pe bhejti hain — dekh ke decide karo!',
-    price:   lead.budget
-      ? 'Aapke '+lead.budget+' ke budget mein achha option milega. Rs.49 pay karo aur Mam best deal confirm kar deti hain!'
-      : 'Rs.49 pay karo — Mam aapke exact budget mein best match batayengi. Koi hidden cost nahi.',
-    city:    lead.city
-      ? lead.city+' mein available hain. Same-day bhi possible hai. Rs.49 pay karo aur aaj ki booking confirm karo!'
-      : 'Jo bhi city ho — hum available hain. Rs.49 pay karo aur Mam 2 minute mein confirm kar deti hain.',
-    safety:  'Ek baar try karo — Rs.49 ka risk hi kya hai? Pasand na aaye toh koi force nahi.',
-    service: 'Kaunsi service prefer karoge — home visit ya hotel? Bata do toh specific detail de sakti hoon.',
-    booking: 'Bilkul! Abhi Rs.49 pay karo — Mam se seedha baat ho jaayegi.',
-    default: 'Rs.49 pay karo aur Mam se directly baat karo — woh 2 minute mein contact karengi.',
+    service: hi ? [
+      'Real Meet kya provide karta hai, clearly bata deti hoon:<br><br><strong>Home Visit</strong> — Staff aapke ghar, PG ya apartment pe aayegi<br><strong>Hotel Service</strong> — Kisi bhi hotel room mein, koi bhi city<br><strong>Full Body Massage</strong> — Professional relaxation service<br><strong>Private Meeting</strong> — One-to-one discreet personal meeting<br><br>Available 24 ghante, 7 din, poori India mein. Koi hidden charge nahi.',
+      'Service summary:<br><br>Home visit, hotel service, private meeting, massage — sab available.<br>Staff: College, Office, Corporate, Widow, Mature, Russian — age 20 se 45 tak.<br>All India &nbsp;&middot;&nbsp; Cash on service &nbsp;&middot;&nbsp; Identity 100% private'
+    ] : [
+      'What Real Meet provides, clearly:<br><br><strong>Home Visit</strong> — Staff comes to your home, PG, or apartment<br><strong>Hotel Service</strong> — Any hotel room, any city<br><strong>Full Body Massage</strong> — Professional relaxation service<br><strong>Private Meeting</strong> — One-to-one discreet personal meeting<br><br>Available 24 hours, 7 days, all over India. No hidden charges.',
+      'Service summary:<br><br>Home visit, hotel service, private meeting, massage — all available.<br>Staff: College, Office, Corporate, Widow, Mature, Russian — ages 20 to 45.<br>All India &nbsp;&middot;&nbsp; Cash on service &nbsp;&middot;&nbsp; Identity 100% private'
+    ],
+
+    profile: hi ? [
+      'Profile types ki poori detail:<br><br><strong>College Girl</strong> — Age 20&#8211;24 &nbsp;&middot;&nbsp; &#8377;1,500 se<br><strong>Office / Job Girl</strong> — Age 24&#8211;30 &nbsp;&middot;&nbsp; &#8377;2,000 se<br><strong>Corporate</strong> — Age 26&#8211;35 &nbsp;&middot;&nbsp; &#8377;3,000 se<br><strong>Widow / Single</strong> — Age 28&#8211;40 &nbsp;&middot;&nbsp; &#8377;2,000 se<br><strong>Mature</strong> — Age 35&#8211;45 &nbsp;&middot;&nbsp; &#8377;1,500 se<br><strong>Russian / Exotic</strong> — &#8377;5,000 se<br><br>Sab verified hain. Real photos &#8377;49 ke baad WhatsApp pe milte hain.',
+      'Kaunsi type prefer karenge?<br><br>Young — College / Office (20&#8211;28)<br>Professional — Corporate (25&#8211;35)<br>Mature — Widow / Mature (30&#8211;45)<br>Exotic — Russian<br><br>Category batao — seedha relevant detail bata deti hoon.',
+      'Photos aur full details &#8377;49 ke baad Mam personally WhatsApp pe share karengi. Aap dekh ke decide karo — koi pressure nahi.'
+    ] : [
+      'Full profile details:<br><br><strong>College Girl</strong> — Age 20&#8211;24 &nbsp;&middot;&nbsp; From &#8377;1,500<br><strong>Office / Job Girl</strong> — Age 24&#8211;30 &nbsp;&middot;&nbsp; From &#8377;2,000<br><strong>Corporate</strong> — Age 26&#8211;35 &nbsp;&middot;&nbsp; From &#8377;3,000<br><strong>Widow / Single</strong> — Age 28&#8211;40 &nbsp;&middot;&nbsp; From &#8377;2,000<br><strong>Mature</strong> — Age 35&#8211;45 &nbsp;&middot;&nbsp; From &#8377;1,500<br><strong>Russian / Exotic</strong> — From &#8377;5,000<br><br>All profiles verified. Real photos shared on WhatsApp after &#8377;49.',
+      'Which type do you prefer?<br><br>Young — College / Office (20&#8211;28)<br>Professional — Corporate (25&#8211;35)<br>Mature — Widow / Mature (30&#8211;45)<br>Exotic — Russian<br><br>Tell me the category — I\'ll share relevant details.',
+      'Full photos and details shared by Mam on WhatsApp after &#8377;49. You decide after seeing — no pressure.'
+    ],
+
+    price: hi ? [
+      'Rates clearly bata deti hoon:<br><br>1 hour — &#8377;1,500 se<br>2 hour — &#8377;2,500 se<br>3 hour — &#8377;3,500 se<br>Full evening — &#8377;5,000 se<br>Full night — &#8377;8,000 se<br><br>Russian / Exotic premium category hai — &#8377;5,000 se. &#8377;49 sirf consultation ke liye — baaki sab cash on service.',
+      '&#8377;49 sirf call access ke liye hai — service ki poori payment cash in hand hoti hai.<br><br>Rate profile aur duration pe depend karta hai. Budget batao — best option suggest kar sakti hoon.',
+      'Starting rate &#8377;1,500 (1 hour). Premium packages &#8377;15,000+ tak bhi hain. Mam call pe aapke budget mein best match dhundh deti hain.'
+    ] : [
+      'Rates clearly:<br><br>1 hour — From &#8377;1,500<br>2 hours — From &#8377;2,500<br>3 hours — From &#8377;3,500<br>Full evening — From &#8377;5,000<br>Full night — From &#8377;8,000<br><br>Russian / Exotic is premium category — from &#8377;5,000. &#8377;49 is only for consultation — rest all cash on service.',
+      '&#8377;49 is only for call access — full service payment is cash in hand.<br><br>Rate depends on profile and duration. Share your budget — I\'ll suggest the best option.',
+      'Starting rate &#8377;1,500 for 1 hour. Premium packages go up to &#8377;15,000+. Mam finds the best match for your budget on call.'
+    ],
+
+    city: hi ? [
+      'Poori India mein service available hai — metro se tier-2, tier-3 cities tak.<br><br>Aapki city batao — main seedha availability confirm kar deti hoon. Same-day booking bhi possible hai zyaadatar cities mein.',
+      'All India coverage hai — Delhi, Mumbai, Jaipur, Surat, Bangalore, Hyderabad, Chennai, Kolkata, Lucknow, Patna, Bhopal aur hazaron aur cities.<br><br>Aapki city?'
+    ] : [
+      'Service available all over India — metros, tier-2, and tier-3 cities.<br><br>Tell me your city — I\'ll confirm availability. Same-day booking possible in most cities.',
+      'All India coverage — Delhi, Mumbai, Jaipur, Surat, Bangalore, Hyderabad, Chennai, Kolkata, Lucknow, Patna, Bhopal and hundreds more cities.<br><br>Which city are you in?'
+    ],
+
+    delhi: hi ? [
+      'Delhi NCR mein hamari service fully active hai — Delhi, Noida, Gurgaon, Faridabad, Ghaziabad sab cover hote hain.<br><br>Same-day booking possible hai. &#8377;49 pay karein aur Mam exact area aur timing confirm kar deti hain.'
+    ] : [
+      'Our service is fully active in Delhi NCR — Delhi, Noida, Gurgaon, Faridabad, Ghaziabad all covered.<br><br>Same-day booking possible. Pay &#8377;49 and Mam confirms exact area and timing.'
+    ],
+
+    rajasthan: hi ? [
+      'Rajasthan mein available hain — Jaipur, Jodhpur, Udaipur, Kota, Ajmer, Bikaner, Alwar aur aur cities.<br><br>&#8377;49 pay karein aur Mam aapki exact city mein availability confirm kar deti hain.'
+    ] : [
+      'Available in Rajasthan — Jaipur, Jodhpur, Udaipur, Kota, Ajmer, Bikaner, Alwar and more.<br><br>Pay &#8377;49 and Mam confirms availability in your exact city.'
+    ],
+
+    gujarat: hi ? [
+      'Gujarat mein available hain — Surat, Ahmedabad, Vadodara, Rajkot, Gandhinagar sab cover hote hain.<br><br>&#8377;49 pay karein aur Mam confirm kar deti hain.'
+    ] : [
+      'Available in Gujarat — Surat, Ahmedabad, Vadodara, Rajkot, Gandhinagar all covered.<br><br>Pay &#8377;49 and Mam will confirm.'
+    ],
+
+    mumbai: hi ? [
+      'Maharashtra mein available hain — Mumbai, Pune, Nagpur, Nashik, Thane, Aurangabad sab cover hote hain.<br><br>&#8377;49 pay karein aur Mam confirm kar deti hain.'
+    ] : [
+      'Available in Maharashtra — Mumbai, Pune, Nagpur, Nashik, Thane, Aurangabad all covered.<br><br>Pay &#8377;49 and Mam will confirm.'
+    ],
+
+    up: hi ? [
+      'Uttar Pradesh mein haan available hain — Lucknow, Kanpur, Agra, Varanasi, Prayagraj, Meerut, Noida, Mathura, Bareilly, Gorakhpur aur aur bhi.<br><br>&#8377;49 pay karein aur Mam aapki city confirm kar deti hain.'
+    ] : [
+      'Available in Uttar Pradesh — Lucknow, Kanpur, Agra, Varanasi, Prayagraj, Meerut, Noida, Mathura, Bareilly, Gorakhpur and more.<br><br>Pay &#8377;49 and Mam confirms your city.'
+    ],
+
+    mp: hi ? [
+      'Madhya Pradesh mein available hain — Bhopal, Indore, Gwalior, Jabalpur, Ujjain, Rewa aur aur cities.<br><br>&#8377;49 pay karein aur Mam confirm kar deti hain.'
+    ] : [
+      'Available in Madhya Pradesh — Bhopal, Indore, Gwalior, Jabalpur, Ujjain, Rewa and more.<br><br>Pay &#8377;49 and Mam will confirm.'
+    ],
+
+    south: hi ? [
+      'South India mein fully available hain — Bangalore, Hyderabad, Chennai, Kochi, Coimbatore, Mysore, Madurai aur bahut cities.<br><br>&#8377;49 pay karein aur Mam aapki city mein availability confirm kar deti hain.'
+    ] : [
+      'Fully available in South India — Bangalore, Hyderabad, Chennai, Kochi, Coimbatore, Mysore, Madurai and many more cities.<br><br>Pay &#8377;49 and Mam confirms availability in your city.'
+    ],
+
+    east: hi ? [
+      'East India mein available hain — Kolkata, Patna, Ranchi, Jamshedpur, Bhubaneswar, Guwahati aur aur cities.<br><br>&#8377;49 pay karein aur Mam confirm kar deti hain.'
+    ] : [
+      'Available in East India — Kolkata, Patna, Ranchi, Jamshedpur, Bhubaneswar, Guwahati and more.<br><br>Pay &#8377;49 and Mam will confirm.'
+    ],
+
+    north: hi ? [
+      'North India mein available hain — Chandigarh, Amritsar, Ludhiana, Dehradun, Shimla, Jammu aur aur cities.<br><br>&#8377;49 pay karein aur Mam confirm kar deti hain.'
+    ] : [
+      'Available in North India — Chandigarh, Amritsar, Ludhiana, Dehradun, Shimla, Jammu and more.<br><br>Pay &#8377;49 and Mam will confirm.'
+    ],
+
+    hotel: hi ? [
+      'Hotel service bilkul available hai — kisi bhi hotel mein, koi bhi star rating, kisi bhi city mein.<br><br>Aapko sirf room book karna hai. Staff discreetly aayegi, koi notice nahi karega.<br><br>&#8377;49 pay karein aur Mam sab arrange kar deti hain.',
+      'Haan, hotel room mein service available hai. 3 star, 4 star, 5 star — koi bhi. City aap decide karo.'
+    ] : [
+      'Hotel service fully available — any hotel, any star rating, any city.<br><br>You just book the room. Staff arrives discreetly — no one notices.<br><br>Pay &#8377;49 and Mam handles all arrangements.',
+      'Yes, in-room hotel service available. 3 star, 4 star, 5 star — any. You decide the city.'
+    ],
+
+    home: hi ? [
+      'Home visit hamari speciality hai — aapko kahin jaana nahi padta.<br><br>Staff aapke ghar, PG, flat ya apartment pe aayegi. Completely discreet.<br><br>&#8377;49 pay karein aur Mam se timing fix karein.',
+      'Haan, ghar pe aayengi hamari staff. &#8377;49 &#8594; Mam contact &#8594; Address aur timing set.'
+    ] : [
+      'Home visit is our speciality — you don\'t need to go anywhere.<br><br>Staff comes to your home, PG, flat, or apartment. Completely discreet.<br><br>Pay &#8377;49 and fix timing with Mam.',
+      'Yes, staff will come to you. &#8377;49 &#8594; Mam contacts &#8594; Address and timing set.'
+    ],
+
+    safety: hi ? [
+      'Safe hai — main confidently bol sakti hoon.<br><br>Aapki identity kabhi record nahi hoti. Location aap choose karte ho. Staff discreetly aati hai. Baaki payment cash on service — koi bada financial risk nahi.<br><br>2+ saal ki service, 10,000+ repeat clients. Agar genuine nahi hote, yeh possible nahi hota.',
+      '&#8377;49 mein kya risk hai? Sirf ek cup chai ki kimat. Baaki sab cash on service — agar satisfy nahi, payment nahi dena. Guarantee hai hamare saath.'
+    ] : [
+      'Completely safe — I can say that with confidence.<br><br>Your identity is never recorded. You choose the location. Staff arrives discreetly. Remaining payment is cash on service — no major financial risk.<br><br>2+ years of service, 10,000+ repeat clients. This wouldn\'t be possible if we weren\'t genuine.',
+      'What\'s the risk with &#8377;49? It\'s the price of a cup of tea. Rest is cash on service — if not satisfied, simply don\'t pay further.'
+    ],
+
+    cash: hi ? [
+      'Process bilkul clear:<br><br>Step 1 — &#8377;49 abhi pay karein (call aur WhatsApp access ke liye)<br>Step 2 — Mam 2 minute mein contact karengi, profile choose karo, timing fix karo<br>Step 3 — Service ke waqt poori payment cash in hand<br><br>Koi bada advance nahi. Koi hidden charge nahi.'
+    ] : [
+      'Process is completely clear:<br><br>Step 1 — Pay &#8377;49 now (for call and WhatsApp access)<br>Step 2 — Mam contacts within 2 minutes, choose profile, fix timing<br>Step 3 — Full payment cash in hand at time of service<br><br>No big advance. No hidden charges.'
+    ],
+
+    timing: hi ? [
+      'Timing aap decide karte ho — morning, evening, raat — 24 ghante available hain.<br><br>Same-day booking zyaadatar cases mein possible hai. &#8377;49 pay karein aur Mam se seedha timing confirm karein.',
+      'Koi bhi time ho — hum available hain. Exact slot Mam call pe 2 minute mein confirm kar deti hain.'
+    ] : [
+      'You decide the timing — morning, evening, night — available 24 hours.<br><br>Same-day booking possible in most cases. Pay &#8377;49 and confirm timing directly with Mam.',
+      'Any time works — we\'re available. Exact slot confirmed by Mam on call within 2 minutes.'
+    ],
+
+    duration: hi ? [
+      'Duration options:<br><br>1 hour — &#8377;1,500 se<br>2 hour — &#8377;2,500 se<br>3 hour — &#8377;3,500 se<br>Full evening — &#8377;5,000 se<br>Full night — &#8377;8,000 se<br><br>Kaunsa option prefer karenge?'
+    ] : [
+      'Duration options:<br><br>1 hour — From &#8377;1,500<br>2 hours — From &#8377;2,500<br>3 hours — From &#8377;3,500<br>Full evening — From &#8377;5,000<br>Full night — From &#8377;8,000<br><br>Which option suits you?'
+    ],
+
+    privacy: hi ? [
+      'Privacy ke baare mein certain rehne ki zaroorat hai:<br><br>Aapki identity kabhi record nahi hoti. Koi data save nahi hota. Location aap choose karte ho. Staff discreetly aati hai. Koi nahi jaanta.<br><br>Yahi wajah hai clients baar baar aate hain.',
+      '100% private service. Koi record nahi, koi trace nahi.'
+    ] : [
+      'You can be certain about privacy:<br><br>Identity never recorded. No data saved. You choose the location. Staff arrives discreetly. No one finds out.<br><br>This is why clients return repeatedly.',
+      '100% private service. No records, no traces.'
+    ],
+
+    discount: hi ? [
+      'Discount ke baare mein Mam seedha guide kar sakti hain — first-time clients ke liye sometimes special arrangement hoti hai.<br><br>&#8377;49 pay karein aur Mam se directly poochhen — woh best deal dene ki koshish karti hain.'
+    ] : [
+      'Mam can guide you directly on discounts — sometimes special arrangements for first-time clients.<br><br>Pay &#8377;49 and ask Mam directly — she\'ll try to give you the best deal.'
+    ],
+
+    two: hi ? [
+      'Do girls ka arrangement bhi possible hai kuch cases mein.<br><br>Exact availability aur rate Mam call pe clearly bata sakti hain. &#8377;49 pay karein aur directly poochhen.'
+    ] : [
+      'Arrangement with two girls is possible in some cases.<br><br>Exact availability and rate — Mam will tell you clearly on call. Pay &#8377;49 and ask directly.'
+    ],
+
+    night: hi ? [
+      'Full night service available hai.<br><br>Rate profile aur arrangement pe depend karta hai — &#8377;8,000 se start. &#8377;49 pay karein aur Mam call pe poora package clearly explain karengi.'
+    ] : [
+      'Full night service is available.<br><br>Rate depends on profile and arrangement — starting &#8377;8,000. Pay &#8377;49 and Mam will explain the full package clearly on call.'
+    ],
+
+    booking: hi ? [
+      'Booking process simple hai:<br><br>&#8377;49 pay karein &#8594; Mam 2 minute mein contact karengi &#8594; WhatsApp pe real photos milenge &#8594; Profile choose karein &#8594; Timing aur location confirm &#8594; Cash on service<br><br>Total 10 minute. Same-day bhi possible hai.',
+      'Ek step — &#8377;49 pay karein aur Mam directly contact karengi. Baaki sab unse seedha set ho jaayega.'
+    ] : [
+      'Booking process:<br><br>Pay &#8377;49 &#8594; Mam contacts in 2 min &#8594; Real photos on WhatsApp &#8594; Choose profile &#8594; Confirm timing and location &#8594; Cash on service<br><br>Total: 10 minutes. Same-day possible.',
+      'One step — pay &#8377;49 and Mam will contact you directly. Everything else gets set with her.'
+    ],
+
+    tg: hi ? [
+      'Haan, Telegram pe bhi hain — '+TG_LNK+'<br><br>Call ya WhatsApp pe instant personal response milta hai. &#8377;49 pay karein aur Mam 2 minute mein directly contact karengi.'
+    ] : [
+      'Yes, on Telegram too — '+TG_LNK+'<br><br>Call or WhatsApp gives instant personal response. Pay &#8377;49 and Mam contacts directly within 2 minutes.'
+    ],
+
+    paid: hi ? [
+      'Payment confirm ho gayi.<br><br>Agar Mam ka response aane mein koi delay ho toh Telegram pe screenshot bhej dein — '+TG_LNK+'<br><br>2 minute mein connect ho jaayenge.'
+    ] : [
+      'Payment confirmed.<br><br>If there\'s any delay in Mam\'s response, send the screenshot on Telegram — '+TG_LNK+'<br><br>You\'ll be connected within 2 minutes.'
+    ],
+
+    negative: hi ? [
+      'Koi baat nahi — jab bhi ready hon, main 24/7 yahan hoon.',
+      'Bilkul theek hai. Jab mann kare wapas aana. &#8377;49 mein Mam ka personal number, real photos, baaki cash on service — jab ready hon.'
+    ] : [
+      'No problem — I\'m here 24/7 whenever you\'re ready.',
+      'Completely fine. Come back whenever you like. &#8377;49 gets you Mam\'s personal number, real photos, rest cash on service — whenever you\'re ready.'
+    ],
+
+    thanks: hi ? [
+      'Koi baat nahi. Koi bhi sawaal ho toh poochhen.',
+      '24/7 available hoon — jab chahein poochhen.'
+    ] : [
+      'You\'re welcome. Feel free to ask anything.',
+      'Available 24/7 — ask anytime.'
+    ],
+
+    out: hi ? [
+      'Yeh topic mere scope se bahar hai. Real Meet service ke baare mein koi bhi sawaal ho — service, profiles, pricing, booking — yahan poochhen.',
+      'Is baare mein help nahi kar sakti. Real Meet se related kuch jaanna ho toh batao.'
+    ] : [
+      'That topic is outside my scope. For anything about Real Meet — services, profiles, pricing, booking — ask me here.',
+      'Can\'t help with that. For Real Meet related queries, I\'m here.'
+    ],
+
+    dflt: hi ? [
+      'Yeh cheez Mam call pe bahut achhe se explain kar sakti hain — aapki situation ke hisaab se personally guide karengi.<br><br>&#8377;49 pay karein aur 2 minute mein Mam ka number seedha aapke paas aayega.',
+      'Main sirf Real Meet service se related help kar sakti hoon — service, profiles, pricing, booking. Kuch bhi poochhen ya Telegram pe '+TG_LNK+' pe reach karein.',
+      'Is baare mein Mam seedha better bata sakti hain. Ek baar baat karo — 5 minute mein sab clear ho jaata hai.'
+    ] : [
+      'Mam can explain this much better on call — she\'ll personally guide you based on your situation.<br><br>Pay &#8377;49 and Mam\'s number reaches you directly within 2 minutes.',
+      'I can only help with Real Meet service questions — services, profiles, pricing, booking. Ask anything or reach us on Telegram — '+TG_LNK,
+      'Mam can explain this more clearly. One direct conversation — everything becomes clear in 5 minutes.'
+    ],
   };
 
-  if(followUps.length===0&&msgCount%4===0){
-    var nudge=nudges[intent]||nudges['default'];
-    followUps.push({delay:5000,msg:nudge});
-  }
+  var pool = banks[k] || banks['dflt'];
+  return pickR(k, pool);
+}
 
-  followUps.forEach(function(f){
-    setTimeout(function(){
-      if(hasPaid)return;
-      showTyping(function(){appendBot(f.msg);},800);
-    },f.delay);
+// =============================================
+// RESPOND LOGIC
+// =============================================
+
+var QR_MAP = {
+  hi: {
+    greet:    ['Service kya hai?', 'Profile types?', 'Rate kya hai?', 'City mein available?', 'Booking karni hai'],
+    service:  ['Profile types?', 'Rate kya hai?', 'Home visit?', 'Hotel service?', 'Book karein'],
+    profile:  ['Rate kya hai?', 'College Girl', 'Mature chahiye', 'Russian chahiye', 'Book karein'],
+    price:    ['1 hour ka rate?', 'Full night?', 'Russian rate?', 'Book karein'],
+    city:     ['Delhi mein?', 'Mumbai?', 'Jaipur?', 'Surat?', 'Meri city?'],
+    safety:   ['Photos real hain?', 'Privacy?', 'Kya guarantee hai?', 'Book karein'],
+    negative: ['Rate samjhao', 'Profiles batao', 'Book karein'],
+    booking:  ['Process kya hai?', 'Same-day possible?', 'Abhi book karein'],
+  },
+  en: {
+    greet:    ['What services?', 'Profile types?', 'Rates?', 'Available in my city?', 'Book now'],
+    service:  ['Profile types?', 'Rates?', 'Home visit?', 'Hotel service?', 'Book now'],
+    profile:  ['Rates?', 'College Girl', 'Mature', 'Russian', 'Book now'],
+    price:    ['1 hour rate?', 'Full night?', 'Russian rate?', 'Book now'],
+    city:     ['Delhi?', 'Mumbai?', 'Jaipur?', 'Surat?', 'My city?'],
+    safety:   ['Are photos real?', 'Privacy?', 'Guarantee?', 'Book now'],
+    negative: ['Explain rates', 'Show profiles', 'Book now'],
+    booking:  ['What\'s the process?', 'Same-day possible?', 'Book now'],
+  }
+};
+
+var PAY_ALWAYS = ['number','booking','cash','profile','night','two','discount'];
+var PAY_NEVER  = ['negative','thanks','out','greet','tg','paid'];
+
+function respond(text) {
+  var n = tryName(text); if (n && !lead.name) lead.name = n;
+  msgCount++;
+
+  var intent = detect(text);
+  var reply  = getReply(intent);
+  var qrs    = (QR_MAP[currentLang] || QR_MAP.hi)[intent] || null;
+
+  appendBot(reply, 0, function() {
+    if (qrs) setQR(qrs, 600);
+
+    var skipPay = PAY_NEVER.indexOf(intent) > -1;
+    var forcePay = PAY_ALWAYS.indexOf(intent) > -1;
+
+    if (!skipPay && (forcePay || msgCount >= 2) && !shownPay) {
+      setTimeout(function() { addPayCard(); }, 2600);
+    }
+
+    // Natural follow-up after greet
+    if (intent === 'greet') {
+      setTimeout(function() {
+        if (!askedCity) {
+          askedCity = true;
+          appendBot(currentLang === 'hi'
+            ? 'Waise — aap kis city se hain? Taaki availability seedha confirm kar sakun.'
+            : 'By the way — which city are you from? So I can confirm availability for you.', 0);
+        }
+      }, 4000);
+    }
   });
 }
 
-// ─── Respond function ─────────────────────────
-function respond(text){
-  msgCount++;
-
-  // Extract context
-  var nm=tryName(text); if(nm&&!lead.name){lead.name=nm;}
-  var ct=tryCity(text); if(ct&&!lead.city){lead.city=ct;}
-  var bg=tryBudget(text); if(bg&&!lead.budget){lead.budget=bg;}
-
-  var intent=detect(text);
-
-  // Track consecutive same intent
-  if(intent===ctx.lastIntent){ctx.consecutive++;}else{ctx.consecutive=0;}
-  ctx.lastIntent=intent;
-
-  var pool=R[intent]||R['default'];
-  var reply=pick(intent,pool);
-
-  // Personalize reply with name/city if known
-  if(lead.name) reply=reply.replace(/aap\b/g,lead.name+' ji').replace(/Aap\b/,lead.name+' ji');
-  if(lead.city) reply=reply.replace(/aapki city/gi,lead.city);
-
-  var delay=text.length<5?800:1200;
-
-  // Intents where payment card NOT shown immediately
-  var noPay=['greet','name_q','name_tell','thanks','outscope','tg','paid'];
-
-  showTyping(function(){
-    appendBot(reply);
-
-    if(noPay.indexOf(intent)===-1&&!hasPaid){
-      showPay(2500);
-    }
-
-    // Smart follow-up questions
-    smartFollowUp(intent);
-
-    // Every 3rd message reminder if no pay yet
-    if(!hasPaid&&msgCount>2&&msgCount%3===0&&noPay.indexOf(intent)>-1){
-      setTimeout(function(){
-        if(hasPaid)return;
-        var reminders=[
-          'Bas Rs.49 pay karo — Mam 2 minute mein directly contact karengi. Real photos, booking, sab kuch sorted!',
-          'Abhi tak hesitate kar rahe ho? Rs.49 mein kya risk hai — try karo ek baar!',
-          (lead.name?lead.name+' ji, ':'')+' ek step aur — Rs.49 pay karo aur Mam seedha aapko call karengi.',
-        ];
-        var r=reminders[msgCount%reminders.length];
-        showTyping(function(){appendBot(r);showPay(1500);},1000);
-      },3500);
-    }
-
-  },delay);
-}
-
-// ─── RMBot API ────────────────────────────────
-window.RMBot={
-  send:function(){
-    if(!inputEl)return;
-    var t=inputEl.value.trim();
-    if(!t)return;
-    inputEl.value='';
-    appendUser(t);
-    respond(t);
+// =============================================
+// PUBLIC API
+// =============================================
+window.RMBot = {
+  qr: function(t) { clearQR(); appendUser(t); respond(t); },
+  send: function() {
+    var inp = document.getElementById('chatInput');
+    var t = inp ? inp.value.trim() : '';
+    if (!t) return;
+    inp.value = '';
+    appendUser(t); respond(t);
   },
-  pay:function(){
-    if(hasPaid){
-      window.open('https://wa.me/'+WA+'?text='+encodeURIComponent('Hi! Maine Rs.49 pay kar diya. Mam se connect karna hai.'),'_blank');
-      return;
-    }
-    lead.outcome='Clicked Pay Rs.49';
-    submitLead();
-    var msg='Hi! Maine Rs.49 pay kar diya.'
-      +(lead.name?' Naam: '+lead.name:'')
-      +(lead.city?' City: '+lead.city:'')
-      +' Mam se connect karna hai aur profiles dekhni hain.';
-    if(typeof openPaymentModal==='function'){
-      closeFreeChat();
-      openPaymentModal('whatsapp','https://wa.me/'+WA+'?text='+encodeURIComponent(msg));
-    } else {
-      window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(msg),'_blank');
-    }
-    hasPaid=true;
+  pay: function() {
+    lead.outcome = 'Clicked Pay';
+    saveLead(); closeFreeChat();
+    var msg = 'Hi! Maine Rs.49 pay kar diya. Mam se connect karna hai.'
+      + (lead.name ? ' Name: '+lead.name : '');
+    openPaymentModal('whatsapp', 'https://wa.me/'+WA_NUM+'?text='+encodeURIComponent(msg));
   }
 };
 
-function submitLead(){
-  try{
-    var f=document.getElementById('leadForm');
-    if(!f)return;
-    document.getElementById('lf_subject').value='Real Meet Lead — '+(lead.city||'City unknown');
-    document.getElementById('lf_chat').value=lead.lines.slice(-30).join('\n');
-    f.submit();
-  }catch(e){}
+function saveLead() {
+  try {
+    document.getElementById('lf_name').value    = lead.name || 'Unknown';
+    document.getElementById('lf_city').value    = lead.city || '—';
+    document.getElementById('lf_outcome').value = lead.outcome || 'Chat';
+    document.getElementById('lf_chat').value    = lead.lines.slice(-20).join('\n');
+    document.getElementById('lf_time').value    = new Date().toLocaleString('en-IN');
+    document.getElementById('leadForm').submit();
+  } catch(e) {}
 }
 
-// ─── Open / Close ─────────────────────────────
+var opened=false;
+
 window.openFreeChat=function(){
-  msgBox=document.getElementById('chatMessages');
-  inputEl=document.getElementById('chatInput');
+  shownPay=false; msgCount=0; askedCity=false; askedProfile=false;
   var overlay=document.getElementById('chatWidgetOverlay');
-  if(overlay)overlay.classList.add('open');
+  overlay.classList.add('open');
+  // Full screen on mobile
+  var widget=document.getElementById('chatWidget');
+  if(widget){
+    widget.style.height='100%';
+    widget.style.maxHeight='100%';
+    widget.style.borderRadius='0';
+  }
   if(!opened){
     opened=true;
+    msgBox=document.getElementById('chatMessages');
+    inputEl=document.getElementById('chatInput');
     setTimeout(function(){
-      showTyping(function(){
-        appendBot('Namaste! Main Priya hoon — Real Meet ki personal assistant.<br><br>Koi bhi sawaal ho seedha poochhen — service, profiles, rate ya booking. Yahan sab 100% private hai.<br><br>Apna naam batao toh personally help karungi!');
-      },800);
-      // Show pay card after 8 seconds on first open
-      setTimeout(function(){
-        if(!hasPaid){showPay(0);}
-      },8000);
-    },400);
+      appendBot(currentLang==='en'
+        ? 'Welcome to Real Meet. I\'m Priya — your personal assistant.<br><br>Ask anything about our services, profiles, pricing, or booking. Everything here is completely private and confidential.<br><br><span style="font-size:0.75rem;color:#9490b5;">College Girl &nbsp;&middot;&nbsp; Office Girl &nbsp;&middot;&nbsp; Corporate &nbsp;&middot;&nbsp; Widow &nbsp;&middot;&nbsp; Russian &nbsp;&middot;&nbsp; All India available</span>'
+        : 'Namaste. Main Priya hoon — Real Meet ki personal assistant.<br><br>Service, profiles, pricing, booking — jo bhi jaanna ho, openly poochhen. Yahan sab bilkul private aur confidential hai.<br><br><span style="font-size:0.75rem;color:#9490b5;">College Girl &nbsp;&middot;&nbsp; Office Girl &nbsp;&middot;&nbsp; Corporate &nbsp;&middot;&nbsp; Widow &nbsp;&middot;&nbsp; Russian &nbsp;&middot;&nbsp; All India available</span>'
+      , 0, function() {
+        setQR(currentLang==='en'
+          ? ['What services?','Profile types?','Rates?','Available in my city?','Book now']
+          : ['Service kya hai?','Profile types?','Rate kya hai?','City mein available?','Booking karni hai']
+        , 600);
+      });
+    }, 500);
   }
 };
 
 window.closeFreeChat=function(){
   var overlay=document.getElementById('chatWidgetOverlay');
-  if(overlay)overlay.classList.remove('open');
-  if(lead.lines.length>1&&!lead.outcome){
-    lead.outcome='Chat without action';
-    submitLead();
+  overlay.classList.remove('open');
+  if(lead.lines.length>2&&!lead.outcome){
+    lead.outcome='Chat without booking'; saveLead();
   }
+};
+
+// Close overlay on backdrop click
+(function(){ var ov=document.getElementById('chatWidgetOverlay'); if(ov) ov.addEventListener('click',function(e){
+  if(e.target===this) closeFreeChat();
+}); })();
+
+// ─── Homepage button lead tracking ───────────
+// Intercept call buttons to also submit lead
+(function(){
+  function hookBtn(id, label){
+    var el=document.getElementById(id);
+    if(!el) return;
+    el.addEventListener('click',function(){ submitCallLead(label); }, true);
+  }
+  hookBtn('mainCTA','WhatsApp CTA');
+  hookBtn('bottomCTA','WhatsApp Bottom');
+  hookBtn('mainCallCTA','Call Button');
+  hookBtn('bottomCallCTA','Call Bottom');
+  hookBtn('floatCallBtn','Float Call');
+})();
+
+// ─── Payment back / crash fix ────────────────
+// If Razorpay modal closes (back button), restore page properly
+window.addEventListener('popstate',function(){
+  try {
+    var pm=document.getElementById('paymentModal');
+    if(pm) pm.style.display='none';
+    var ml=document.getElementById('modalLoadingContent');
+    var mm=document.getElementById('modalMainContent');
+    if(ml) ml.style.display='none';
+    if(mm) mm.style.display='block';
+    document.body.style.overflow='';
+    document.body.style.position='';
+  } catch(e){}
+});
+
+// Prevent page crash when Razorpay iframe closes
+window.addEventListener('message',function(e){
+  try {
+    if(e.data && (e.data.source==='razorpay'||e.data.razorpay)){
+      // Razorpay event — make sure body stays scrollable
+      setTimeout(function(){ document.body.style.overflow=''; },500);
+    }
+  } catch(e2){}
+});
+
+// After payment success → also send lead then open WA
+var _origSuccess=window.showSuccessPage;
+window.showSuccessPage=function(){
+  hasPaid=true;
+  submitLead('PAID Rs49');
+  if(typeof _origSuccess==='function') _origSuccess();
+  var msg='Hi! Maine Rs49 pay kar diya ✅ Mam se connect karna hai'
+    +(lead.name?' | '+lead.name:'')
+    +(lead.city?' | '+lead.city:'');
+  setTimeout(function(){
+    window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(msg),'_blank');
+  },1200);
 };
 
 document.addEventListener('DOMContentLoaded',function(){
