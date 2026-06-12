@@ -1462,11 +1462,25 @@
     function handleWAClick(e) {
       e.preventDefault();
       const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('*REAL MEET SERVICE* - I need real meeting details on call')}`;
+      // Agar already paid hai to seedha WhatsApp open karo
+      try {
+        if (localStorage.getItem(PAID_KEY) === 'yes') {
+          window.open(waUrl, '_blank');
+          return;
+        }
+      } catch(e2) {}
       openPaymentModal('whatsapp', waUrl);
     }
     
         function handleCallClick(e) {
       if(e) e.preventDefault();
+      // Agar already paid hai to seedha call karo
+      try {
+        if (localStorage.getItem(PAID_KEY) === 'yes') {
+          window.location.href = 'tel:+919217507608';
+          return;
+        }
+      } catch(e2) {}
       openPaymentModal('call', 'tel:+919217507608');
     }
     
@@ -2216,6 +2230,17 @@ window.closeFreeChat=function(){
   if(e.target===this) closeFreeChat();
 }); })();
 
+// ─── submitCallLead / submitLead — safe wrappers ───
+function submitCallLead(label) {
+  try {
+    if (lead) { lead.outcome = lead.outcome || label; }
+    saveLead(label);
+  } catch(e) {}
+}
+function submitLead(label) {
+  submitCallLead(label);
+}
+
 // ─── Homepage button lead tracking ───────────
 // Intercept call buttons to also submit lead
 (function(){
@@ -2273,6 +2298,24 @@ window.showSuccessPage=function(){
 document.addEventListener('DOMContentLoaded',function(){
   msgBox=document.getElementById('chatMessages');
   inputEl=document.getElementById('chatInput');
+
+  // Agar already paid hai to seedha success page dikha do
+  try {
+    if (localStorage.getItem('rm_paid_v1') === 'yes') {
+      var pm = document.getElementById('paymentModal');
+      if (pm) pm.style.display = 'none';
+      document.getElementById('successPage').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+
+      // Sab CTA buttons hide karo ya change karo
+      ['mainCTA','bottomCTA','mainCallCTA','bottomCallCTA','floatCallBtn'].forEach(function(id){
+        var el = document.getElementById(id);
+        if (!el) return;
+        el.style.background = '#1e1b4b';
+        el.innerHTML = el.innerHTML; // keep as is, click directly opens WA/call now
+      });
+    }
+  } catch(e) {}
 });
 
 })();
