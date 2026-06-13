@@ -1305,11 +1305,11 @@
     <button onclick="document.getElementById('successPage').style.display='none';document.body.style.overflow='';" style="position:absolute;top:20px;right:20px;background:rgba(233,30,140,0.1);border:1px solid rgba(233,30,140,0.2);border-radius:50%;width:36px;height:36px;font-size:1rem;cursor:pointer;color:#e91e8c;display:flex;align-items:center;justify-content:center;">✕</button>
     <div class="success-check-big">✓</div>
     <div class="success-title">Payment <em>Done!</em></div>
-    <p class="success-sub">Access confirmed! Call karein ya WhatsApp karein — turant reply milega.</p>
+    <p class="success-sub">Access confirmed! Call or WhatsApp — instant reply guaranteed.</p>
     <div class="success-number-box">
-      <div class="success-number-label">Mam ka Direct Number</div>
+      <div class="success-number-label">Direct Contact Number</div>
       <div class="success-number">+91 92175 07608</div>
-      <div style="font-size:0.65rem;color:#9490b5;margin-top:6px;">Call ya WhatsApp — dono available</div>
+      <div style="font-size:0.65rem;color:#9490b5;margin-top:6px;">Call or WhatsApp — both available</div>
     </div>
     <div class="success-btns">
       <a class="btn-success-call" href="tel:+919217507608">
@@ -1432,10 +1432,7 @@
           contact: "9000000000"
         },
         handler: function(response) {
-          try {
-            fbq('track', 'Purchase', { value: 49, currency: 'INR', content_name: 'Real Meet Access' });
-            fbq('track', 'Lead', { content_name: 'Real Meet Paid', content_category: 'Payment Success', currency: 'INR', value: 49 });
-          } catch(err) {}
+          // Pixel purchase tracking removed
           markAsPaid();
           document.getElementById('paymentModal').style.display = 'none';
           showSuccessPage();
