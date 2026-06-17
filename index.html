@@ -139,6 +139,13 @@
       animation: pulse 2s ease-in-out infinite;
     }
     @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+    @keyframes miniPayPulse {
+      0%   { transform: scale(1);    box-shadow: 0 2px 14px rgba(31,184,85,0.4), 0 0 0 0 rgba(31,184,85,0.5); }
+      50%  { transform: scale(1.035); box-shadow: 0 2px 18px rgba(31,184,85,0.55), 0 0 0 8px rgba(31,184,85,0.12); }
+      100% { transform: scale(1);    box-shadow: 0 2px 14px rgba(31,184,85,0.4), 0 0 0 0 rgba(31,184,85,0.5); }
+    }
+    .mini-pay-btn:hover { filter: brightness(1.08); }
+    .mini-pay-btn:active { transform: scale(0.95) !important; }
 
     .hero {
       position: relative; z-index:1;
@@ -1727,6 +1734,18 @@ function addPayCard() {
   shownPay = true;
 }
 
+// Chhota button — har bot reply ke baad ye dikhega
+function addMiniPayBtn() {
+  var hi = currentLang === 'hi';
+  var w = document.createElement('div');
+  w.style.cssText = 'display:flex;flex-direction:column;align-items:flex-start;margin-bottom:4px;width:100%';
+  w.innerHTML = '<button onclick="RMBot.pay()" class="mini-pay-btn" style="margin-top:2px;padding:11px 18px;background:linear-gradient(135deg,#1fb855,#15a647);color:#fff;border:none;border-radius:10px;font-weight:700;font-size:0.82rem;cursor:pointer;letter-spacing:0.02em;display:flex;align-items:center;gap:8px;box-shadow:0 2px 14px rgba(31,184,85,0.4);animation:miniPayPulse 1.6s infinite;">'
+    + '<span style="background:rgba(255,255,255,0.25);font-size:0.6rem;padding:2px 7px;border-radius:100px;letter-spacing:0.04em;">&#8377;49</span>'
+    + (hi ? 'Mam se Abhi Baat Karein' : 'Talk to Mam Now')
+    + '</button>';
+  msgBox.appendChild(w); scrollB();
+}
+
 // =============================================
 // INTENT DETECTION
 // =============================================
@@ -2071,8 +2090,14 @@ function respond(text) {
     var skipPay = PAY_NEVER.indexOf(intent) > -1;
     var forcePay = PAY_ALWAYS.indexOf(intent) > -1;
 
-    if (!skipPay && (forcePay || msgCount >= 2) && !shownPay) {
-      setTimeout(function() { addPayCard(); }, 2600);
+    if (!skipPay) {
+      if ((forcePay || msgCount >= 2) && !shownPay) {
+        // Pehli baar — bada full card
+        setTimeout(function() { addPayCard(); }, 2600);
+      } else if (shownPay) {
+        // Uske baad har reply ke saath chhota button
+        setTimeout(function() { addMiniPayBtn(); }, 2200);
+      }
     }
 
     // Natural follow-up after greet
